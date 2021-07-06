@@ -16,6 +16,7 @@ import com.sample.app.SimpleRestClient;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
 
 public class HelloWorldTest {
 
@@ -77,7 +78,7 @@ public class HelloWorldTest {
 
 	}
 
-	@Test()
+	@Test
 	public void delayResponseTime() throws IOException {
 		try (MockWebServer mockWebServer = new MockWebServer();) {
 			mockWebServer.start(1234);
@@ -100,4 +101,30 @@ public class HelloWorldTest {
 		}
 	}
 
+	@Test
+	public void validateRequestBody() throws IOException, InterruptedException {
+		try (MockWebServer mockWebServer = new MockWebServer();) {
+			mockWebServer.start(1234);
+
+			mockWebServer.enqueue(new MockResponse().setBody("Hello World"));
+
+			HttpUrl baseUrl = mockWebServer.url("/v1/welcome");
+
+			SimpleRestClient simpleRestClient = new SimpleRestClient(baseUrl.toString());
+			simpleRestClient.postAndIgnore();
+
+			RecordedRequest recordedRequest = mockWebServer.takeRequest();
+			assertEquals("POST", recordedRequest.getMethod());
+			assertEquals("name=Krishna&password=password&mailId=abcdef%40abcdef.com",
+					recordedRequest.getBody().readUtf8());
+			assertEquals("application/x-www-form-urlencoded; charset=UTF-8", recordedRequest.getHeader("Content-Type"));
+			
+			HttpUrl httpUrl = recordedRequest.getRequestUrl();
+			assertEquals("http://localhost:1234/v1/welcome?appName=chatserver", httpUrl.toString());
+
+			mockWebServer.shutdown();
+		}
+	}
+
 }
+

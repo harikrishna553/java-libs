@@ -4,15 +4,23 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 
 public class SimpleRestClient {
 
@@ -56,6 +64,22 @@ public class SimpleRestClient {
 
 	}
 
+	public void postAndIgnore() throws ClientProtocolException, IOException {
+		List<NameValuePair> formparams = new ArrayList<NameValuePair>();
+		formparams.add(new BasicNameValuePair("name", "Krishna"));
+		formparams.add(new BasicNameValuePair("password", "password"));
+		formparams.add(new BasicNameValuePair("mailId", "abcdef@abcdef.com"));
+		UrlEncodedFormEntity requestBody = new UrlEncodedFormEntity(formparams, Consts.UTF_8);
+
+		HttpPost httppost = new HttpPost(url + "?appName=chatserver");
+		httppost.setEntity(requestBody);
+
+		try (CloseableHttpClient httpclient = HttpClientBuilder.create().build();) {
+			httpclient.execute(httppost);
+		}
+
+	}
+
 	public static String getResponseAsString(InputStream is) throws IOException {
 		try (InputStreamReader isReader = new InputStreamReader(is)) {
 			BufferedReader reader = new BufferedReader(isReader);
@@ -77,4 +101,5 @@ public class SimpleRestClient {
 		return getResponseAsString(httpEntity.getContent());
 
 	}
+
 }
