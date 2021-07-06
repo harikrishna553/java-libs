@@ -3,7 +3,9 @@ package mockwebserver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.junit.jupiter.api.Test;
 
 import com.sample.app.SimpleRestClient;
@@ -45,4 +47,32 @@ public class HelloWorldTest {
 
 	}
 
+	@Test
+	public void urlRedirection() throws IOException {
+		try (MockWebServer mockWebServer = new MockWebServer();) {
+			mockWebServer.start(1234);
+
+			mockWebServer.enqueue(new MockResponse().setResponseCode(HttpURLConnection.HTTP_MOVED_TEMP)
+					.addHeader("Location: " + mockWebServer.url("/new-path")).setBody("This page has moved!"));
+
+			mockWebServer.enqueue(new MockResponse().setBody("This is the new location!"));
+
+			HttpUrl baseUrl = mockWebServer.url("/v1/welcome");
+
+			SimpleRestClient simpleRestClient = new SimpleRestClient(baseUrl.toString());
+
+			CloseableHttpResponse httpResponse = simpleRestClient.getClosebaleResponse();
+
+			int statusCode = httpResponse.getStatusLine().getStatusCode();
+			String body = SimpleRestClient.getResponseAsString(httpResponse);
+
+			assertEquals(200, statusCode);
+			assertEquals("This is the new location!", body);
+
+			mockWebServer.shutdown();
+		}
+
+	}
+
 }
+

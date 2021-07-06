@@ -9,6 +9,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
@@ -24,18 +25,20 @@ public class SimpleRestClient {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 
 		HttpGet httpget = new HttpGet(url);
-		CloseableHttpResponse response = httpclient.execute(httpget);
-
-		HttpEntity httpEntity = response.getEntity();
-
-		InputStream is = httpEntity.getContent();
-		String str = getBody(is);
-
-		return str;
+		return getResponseAsString(httpclient.execute(httpget));
 
 	}
 
-	public static String getBody(InputStream is) throws IOException {
+	public CloseableHttpResponse getClosebaleResponse() throws ClientProtocolException, IOException {
+
+		HttpRequestBase httpget = new HttpGet(url);
+
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		return httpclient.execute(httpget);
+
+	}
+
+	public static String getResponseAsString(InputStream is) throws IOException {
 		try (InputStreamReader isReader = new InputStreamReader(is)) {
 			BufferedReader reader = new BufferedReader(isReader);
 			StringBuffer sb = new StringBuffer();
@@ -46,6 +49,14 @@ public class SimpleRestClient {
 
 			return sb.toString();
 		}
+
+	}
+
+	public static String getResponseAsString(CloseableHttpResponse closeableHttpResponse)
+			throws UnsupportedOperationException, IOException {
+
+		HttpEntity httpEntity = closeableHttpResponse.getEntity();
+		return getResponseAsString(httpEntity.getContent());
 
 	}
 }
