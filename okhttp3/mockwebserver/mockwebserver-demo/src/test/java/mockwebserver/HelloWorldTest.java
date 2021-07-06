@@ -1,9 +1,12 @@
 package mockwebserver;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.junit.jupiter.api.Test;
@@ -74,5 +77,27 @@ public class HelloWorldTest {
 
 	}
 
-}
+	@Test()
+	public void delayResponseTime() throws IOException {
+		try (MockWebServer mockWebServer = new MockWebServer();) {
+			mockWebServer.start(1234);
 
+			mockWebServer.enqueue(new MockResponse().setBody("Hello World").setBodyDelay(5, TimeUnit.SECONDS));
+
+			HttpUrl baseUrl = mockWebServer.url("/v1/welcome");
+
+			SimpleRestClient simpleRestClient = new SimpleRestClient(baseUrl.toString());
+
+			Throwable exception = assertThrows(SocketTimeoutException.class, () -> {
+				String response = simpleRestClient.maxConnTimeOut(2);
+
+				assertEquals("Hello World", response);
+			});
+
+			assertEquals("Read timed out", exception.getMessage());
+
+			mockWebServer.shutdown();
+		}
+	}
+
+}

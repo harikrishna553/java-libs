@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -35,6 +36,23 @@ public class SimpleRestClient {
 
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		return httpclient.execute(httpget);
+
+	}
+
+	public String maxConnTimeOut(int noOfSeconds) throws ClientProtocolException, IOException {
+		RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
+		requestConfigBuilder.setConnectTimeout(noOfSeconds * 1000);
+		requestConfigBuilder.setConnectionRequestTimeout(noOfSeconds * 1000);
+		requestConfigBuilder.setSocketTimeout(noOfSeconds * 1000);
+		RequestConfig requestConfig = requestConfigBuilder.build();
+
+		HttpRequestBase httpget = new HttpGet(url);
+		httpget.setConfig(requestConfig);
+
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		CloseableHttpResponse httpResponse = httpclient.execute(httpget);
+
+		return getResponseAsString(httpResponse);
 
 	}
 
