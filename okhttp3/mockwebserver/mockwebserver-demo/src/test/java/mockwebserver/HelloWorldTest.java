@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import com.sample.app.SimpleRestClient;
 
 import okhttp3.HttpUrl;
+import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -118,7 +119,7 @@ public class HelloWorldTest {
 			assertEquals("name=Krishna&password=password&mailId=abcdef%40abcdef.com",
 					recordedRequest.getBody().readUtf8());
 			assertEquals("application/x-www-form-urlencoded; charset=UTF-8", recordedRequest.getHeader("Content-Type"));
-			
+
 			HttpUrl httpUrl = recordedRequest.getRequestUrl();
 			assertEquals("http://localhost:1234/v1/welcome?appName=chatserver", httpUrl.toString());
 
@@ -126,5 +127,38 @@ public class HelloWorldTest {
 		}
 	}
 
-}
+	@Test
+	public void customizeResponses() throws IOException, InterruptedException {
+		String json = "{\"org\": \"abc_org\", \"location\": \"India\"}";
 
+		try (MockWebServer mockWebServer = new MockWebServer();) {
+			mockWebServer.start(1234);
+
+			Dispatcher dispatcher = new Dispatcher() {
+
+				@Override
+				public MockResponse dispatch(RecordedRequest request) throws InterruptedException {
+
+					switch (request.getPath()) {
+					case "/v1/welcome1":
+						return new MockResponse().setResponseCode(200).setBody("Good Morning");
+					case "/v1/app-details":
+						return new MockResponse().setResponseCode(200).setBody("version=9");
+					case "/v1/owner":
+						return new MockResponse().setResponseCode(200).setBody(json);
+					}
+					return new MockResponse().setResponseCode(404);
+				}
+			};
+			mockWebServer.setDispatcher(dispatcher);
+
+			SimpleRestClient simpleRestClient = new SimpleRestClient("http://localhost:1234/v1/app-details");
+			String resp = simpleRestClient.getRequest();
+
+			assertEquals("version=9", resp);
+
+			mockWebServer.shutdown();
+		}
+	}
+
+}

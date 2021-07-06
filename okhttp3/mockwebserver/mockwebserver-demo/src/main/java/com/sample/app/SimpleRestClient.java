@@ -80,6 +80,7 @@ public class SimpleRestClient {
 
 	}
 
+
 	public static String getResponseAsString(InputStream is) throws IOException {
 		try (InputStreamReader isReader = new InputStreamReader(is)) {
 			BufferedReader reader = new BufferedReader(isReader);
