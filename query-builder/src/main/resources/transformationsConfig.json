@@ -1,0 +1,7 @@
+{
+	"keyAndClassMap": {
+		"MERGES" : "com.sample.app.transformation.impl.MergeTransformationImpl",
+		"LOWERS" : "com.sample.app.transformation.impl.LowerTransformationImpl",
+		"REVERSE" : "com.sample.app.transformation.impl.ReverseTransformationImpl"
+	}
+}
