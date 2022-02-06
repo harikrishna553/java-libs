@@ -7,6 +7,7 @@ import org.dozer.DozerBeanMapper;
 
 import com.sample.app.model.ProcessState;
 
+
 public class EnumMappingDemo {
 	public static void main(String[] args) throws IOException {
 
