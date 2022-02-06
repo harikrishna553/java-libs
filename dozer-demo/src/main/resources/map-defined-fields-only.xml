@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+      http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping wildcard="false">
+		<class-a>com.sample.app.model.Employee</class-a>
+		<class-b>com.sample.app.model.Person</class-b>
+
+		<field>
+			<a>fName</a>
+			<b>firstName</b>
+		</field>
+
+	</mapping>
+
+</mappings>

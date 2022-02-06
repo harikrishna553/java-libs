@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+      http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping>
+		<class-a>com.sample.app.model.Product1</class-a>
+		<class-b>com.sample.app.model.Product2</class-b>
+
+		<field>
+			<a>manufacturingDate</a>
+			<b date-format="MM/dd/yyyy HH:mm:ss:SS">dateString</b>
+		</field>
+
+	</mapping>
+
+</mappings>
