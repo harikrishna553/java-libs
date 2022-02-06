@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+      http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<configuration>
+		<date-format>MM/dd/yyyy HH:mm:ss:SS</date-format>
+	</configuration>
+
+	<mapping>
+		<class-a>com.sample.app.model.Product3</class-a>
+		<class-b>com.sample.app.model.Product4</class-b>
+
+		<field>
+			<a>manufacturingDate</a>
+			<b>manufacturingDateString</b>
+		</field>
+
+		<field>
+			<a>expiryDate</a>
+			<b>expiryDateString</b>
+		</field>
+
+	</mapping>
+
+	<mapping>
+		<class-a>com.sample.app.model.Product1</class-a>
+		<class-b>com.sample.app.model.Product2</class-b>
+
+		<field>
+			<a>manufacturingDate</a>
+			<b>dateString</b>
+		</field>
+
+	</mapping>
+
+</mappings>
