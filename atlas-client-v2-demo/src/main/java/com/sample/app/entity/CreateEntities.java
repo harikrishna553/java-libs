@@ -1,4 +1,4 @@
-package com.sample.app.attributes;
+package com.sample.app.entity;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -13,26 +13,24 @@ import org.apache.atlas.model.typedef.AtlasStructDef.AtlasAttributeDef;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-public class AttributeDefaultValue {
+public class CreateEntities {
 
-	private static final String TYPE_NAME = "DemoType6";
+	private static final String TYPE_NAME = "DemoType7";
 
 	private static void createType(AtlasClientV2 atlasClient) throws AtlasServiceException {
 		AtlasAttributeDef attributeDef1 = new AtlasAttributeDef();
-		attributeDef1.setName("x");
+		attributeDef1.setName("a");
 		attributeDef1.setTypeName("int");
+		attributeDef1.setCardinality(AtlasAttributeDef.Cardinality.SINGLE);
 		attributeDef1.setIsIndexable(true);
 		attributeDef1.setIsUnique(false);
-		attributeDef1.setDefaultValue("1");
-		attributeDef1.setIsOptional(true);
-	
+
 		AtlasAttributeDef attributeDef2 = new AtlasAttributeDef();
-		attributeDef2.setName("y");
+		attributeDef2.setName("b");
 		attributeDef2.setTypeName("int");
+		attributeDef2.setCardinality(AtlasAttributeDef.Cardinality.SINGLE);
 		attributeDef2.setIsIndexable(true);
 		attributeDef2.setIsUnique(false);
-		attributeDef2.setDefaultValue("2");
-		attributeDef2.setIsOptional(true);
 
 		AtlasEntityDef atlasEntityDef = new AtlasEntityDef();
 		atlasEntityDef.setName(TYPE_NAME);
@@ -54,20 +52,25 @@ public class AttributeDefaultValue {
 
 	private static void createEntity(AtlasClientV2 atlasClient) throws AtlasServiceException {
 
-		AtlasEntity atlasEntity = new AtlasEntity();
+		// Defining entity1
+		AtlasEntity atlasEntity1 = new AtlasEntity();
+		atlasEntity1.setTypeName(TYPE_NAME);
+		atlasEntity1.setAttribute("a", 10);
+		atlasEntity1.setAttribute("b", 20);
+		atlasEntity1.setAttribute("qualifiedName", "CreateEntities_DEMO1");
+		atlasEntity1.setAttribute("name", "CreateEntities_DEMO1");
 
-		atlasEntity.setTypeName(TYPE_NAME);
+		// Defining entity2
+		AtlasEntity atlasEntity2 = new AtlasEntity();
+		atlasEntity2.setTypeName(TYPE_NAME);
+		atlasEntity2.setAttribute("a", 11);
+		atlasEntity2.setAttribute("b", 21);
+		atlasEntity2.setAttribute("qualifiedName", "CreateEntities_DEMO2");
+		atlasEntity2.setAttribute("name", "CreateEntities_DEMO2");
 
-		atlasEntity.setAttribute("x", 123);
-
-		// Following are the mandatory attributes
-		atlasEntity.setAttribute("qualifiedName", "AttributeDefaultValue_DEMO1");
-		atlasEntity.setAttribute("name", "AttributeDefaultValue_DEMO1");
-
-		AtlasEntity.AtlasEntityWithExtInfo atlasEntityWithExtInfo = new AtlasEntity.AtlasEntityWithExtInfo();
-		atlasEntityWithExtInfo.setEntity(atlasEntity);
-
-		atlasClient.createEntity(atlasEntityWithExtInfo);
+		AtlasEntity.AtlasEntitiesWithExtInfo entitesToCreate = new AtlasEntity.AtlasEntitiesWithExtInfo();
+		entitesToCreate.setEntities(Arrays.asList(atlasEntity1, atlasEntity2));
+		atlasClient.createEntities(entitesToCreate);
 	}
 
 	public static void main(String[] args) throws AtlasServiceException, JsonProcessingException {

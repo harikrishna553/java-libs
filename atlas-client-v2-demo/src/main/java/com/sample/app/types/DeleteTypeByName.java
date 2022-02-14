@@ -10,7 +10,7 @@ public class DeleteTypeByName {
 		AtlasClientV2 atlasClient = new AtlasClientV2(new String[] { "http://localhost:21000" },
 				new String[] { "admin", "admin" });
 
-		String typeToDelete = "DemoType1";
+		String typeToDelete = "DemoType6";
 
 		boolean isTypeExists = atlasClient.typeWithNameExists(typeToDelete);
 		System.out.println("Is type with name '" + typeToDelete + "' exists : " + isTypeExists);
