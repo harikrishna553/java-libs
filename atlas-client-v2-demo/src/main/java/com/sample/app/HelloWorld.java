@@ -2,6 +2,8 @@ package com.sample.app;
 
 import java.util.List;
 
+import javax.ws.rs.core.Cookie;
+
 import org.apache.atlas.AtlasClientV2;
 import org.apache.atlas.AtlasServiceException;
 import org.apache.atlas.model.SearchFilter;
@@ -13,6 +15,9 @@ public class HelloWorld {
 	public static void main(String[] args) throws AtlasServiceException {
 		AtlasClientV2 atlasClient = new AtlasClientV2(new String[] { "http://localhost:21000" },
 				new String[] { "admin", "admin" });
+		
+		Cookie cookie = new Cookie("token", "Bearer ......");
+		atlasClient.setCookie(cookie);
 
 		SearchFilter searchFilter = new SearchFilter();
 
