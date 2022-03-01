@@ -90,6 +90,7 @@ public class FacetedSearchDemo {
 				"get all the entities that contain string 'sales'");
 		
 		
+		
 	}
 
 }
