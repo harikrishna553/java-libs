@@ -7,6 +7,16 @@ public class Employee {
 	private Integer empAge;
 	private String empCity;
 
+	public Employee() {
+	}
+
+	public Employee(Integer empId, String empName, Integer empAge, String empCity) {
+		this.empId = empId;
+		this.empName = empName;
+		this.empAge = empAge;
+		this.empCity = empCity;
+	}
+
 	public Integer getEmpId() {
 		return empId;
 	}
