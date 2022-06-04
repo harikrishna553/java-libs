@@ -1,8 +1,9 @@
 package com.sample.app.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Order {
+public class Order implements Serializable {
 	private Integer id;
 	private Integer customerId;
 	private Date orderDate;
@@ -39,6 +40,11 @@ public class Order {
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", customerId=" + customerId + ", orderDate=" + orderDate + "]";
 	}
 
 }

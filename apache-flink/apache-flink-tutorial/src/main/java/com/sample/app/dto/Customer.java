@@ -1,6 +1,8 @@
 package com.sample.app.dto;
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer implements Serializable {
 
 	private Integer id;
 	private String name;
@@ -38,5 +40,12 @@ public class Customer {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", country=" + country + "]";
+	}
+	
+	
 
 }
