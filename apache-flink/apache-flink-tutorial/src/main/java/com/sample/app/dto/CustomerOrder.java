@@ -8,6 +8,7 @@ public class CustomerOrder {
 	private Integer orderId;
 	private Date orderDate;
 	private String customerName;
+	private String country;
 
 	public Integer getCustomerId() {
 		return customerId;
@@ -41,10 +42,18 @@ public class CustomerOrder {
 		this.customerName = customerName;
 	}
 
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	@Override
 	public String toString() {
 		return "CustomerOrder [customerId=" + customerId + ", orderId=" + orderId + ", orderDate=" + orderDate
-				+ ", customerName=" + customerName + "]";
+				+ ", customerName=" + customerName + ", country=" + country + "]";
 	}
 
 }
