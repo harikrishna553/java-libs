@@ -1,0 +1,24 @@
+<config xmlns='http://www.ehcache.org/v3'>
+
+	<cache alias="empCache1">
+		<key-type>java.lang.Long</key-type>
+		<value-type>java.lang.String</value-type>
+		<resources>
+			<heap unit="entries">3000</heap>
+			<offheap unit="MB">10</offheap>
+		</resources>
+	</cache>
+
+	<cache-template name="myDefaults">
+		<key-type>java.lang.Long</key-type>
+		<value-type>java.lang.String</value-type>
+		<heap unit="entries">200</heap>
+	</cache-template>
+
+	<cache alias="empCache2" uses-template="myDefaults">
+		<key-type>java.lang.Integer</key-type>
+	</cache>
+
+	<cache alias="empCache3" uses-template="myDefaults" />
+
+</config>
