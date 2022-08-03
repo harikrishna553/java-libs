@@ -16,10 +16,12 @@ public class StatesDemo {
 	
 	@State(Scope.Benchmark)
 	public static class BenchmarkState {
+		
 	}
 
 	@State(Scope.Thread)
 	public static class ThreadState {
+		
 	}
 
 	@Benchmark
