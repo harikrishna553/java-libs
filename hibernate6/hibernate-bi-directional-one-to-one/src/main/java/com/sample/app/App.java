@@ -56,14 +56,14 @@ public class App {
 			Employee persistedEmployee = session.find(Employee.class, 1);
 
 			EmployeeDetails empDetails1 = new EmployeeDetails(123, "Aerospace", persistedEmployee);
+			persistedEmployee.setEmployeeDetails(empDetails1);
 			session.persist(empDetails1);
 			session.flush();
 			session.getTransaction().commit();
 
-			List<EmployeeDetails> employeesDetail = loadAllData(EmployeeDetails.class, session);
-			for (EmployeeDetails employeeDetails : employeesDetail) {
-				System.out.println(employeeDetails.getEmp());
-				System.out.println(employeeDetails);
+			List<Employee> employees = loadAllData(Employee.class, session);
+			for (Employee emp1 : employees) {
+				System.out.println(emp1);
 			}
 
 		}

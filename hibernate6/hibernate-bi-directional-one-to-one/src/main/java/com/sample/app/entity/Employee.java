@@ -1,7 +1,11 @@
 package com.sample.app.entity;
 
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -14,7 +18,8 @@ public class Employee {
 
 	private String name;
 
-	@OneToOne(mappedBy = "emp", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(mappedBy = "emp", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@LazyToOne(LazyToOneOption.NO_PROXY)
 	private EmployeeDetails employeeDetails;
 
 	public Employee() {
@@ -51,7 +56,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + "]";
+		return "Employee [id=" + id + ", name=" + name + ", employeeDetails=" + employeeDetails + "]";
 	}
 
 }
