@@ -1,0 +1,8 @@
+emp.firstName = "Ram"
+emp.lastName = "Gurram"
+
+emp."website location" = "https://self-learning-java-tutorial.blogspot.com/"
+
+emp.address.city = "Bangalore"
+emp.address.country = "India"
+

@@ -1,0 +1,10 @@
+primes = [2, 3, 5, 7]
+
+hobbies = ["Playing Cricket", "Blogging"]
+
+points = [ { a = 1, b = 2 },
+           { a = 3, b = 5, c = 7 },
+           { a = 11, b = 13, c = 17, d = 19 } ]
+           
+mixedType = [true, false, 2.3, "Hello"]
+

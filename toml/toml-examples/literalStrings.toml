@@ -1,0 +1,4 @@
+path1  = 'C:\Users\krishna\Documents'
+path2 = '\\Users\krishna$\\\t\'
+quotedStr   = 'Book name is "self learning Java"'
+regexEx    = '<\c\i*\d*>'

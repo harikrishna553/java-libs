@@ -1,0 +1,10 @@
+# infinity
+a = inf  # positive infinity
+b = +inf # positive infinity
+c = -inf # negative infinity
+
+# not a number
+d = nan  # encoding is implementation-specific
+e = +nan # same as `nan`
+f = -nan # actual encoding is implementation-specific
+

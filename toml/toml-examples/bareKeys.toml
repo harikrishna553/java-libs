@@ -1,0 +1,5 @@
+bareKey1 = 10
+bare_key2 = true
+bare-key3 = "Hello"
+1234 = "number can be a key"
+_- = "I too a barekey"

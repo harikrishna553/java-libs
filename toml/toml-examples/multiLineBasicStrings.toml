@@ -1,0 +1,16 @@
+str1 = """
+I am Krishna
+and
+I am from India"""
+
+str2 = """
+I am Krishna \
+
+
+
+and \
+I am from India"""
+
+str3 = """
+This is Krishna's book \
+and the book name is "Self learning Java"."""

@@ -1,0 +1,17 @@
+[[employees]]
+  firstName = "Krishna"
+  lastName = "G"
+  address.city= "Hyderabad"
+  address.country = "India"
+
+[[employees]]
+  firstName = "Ram"
+  lastName = "Majety"
+    age = 34
+
+[[employees]]
+  firstName = "Ram"
+  lastName = "Majety"
+    age = 34
+    address = {city = "Bangalore", "country" = "India"}
+

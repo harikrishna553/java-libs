@@ -1,0 +1,3 @@
+binary1 = 0b1111111
+oct1 = 0o177
+hex1 = 0x7F

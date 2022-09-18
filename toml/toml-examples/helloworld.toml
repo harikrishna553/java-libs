@@ -1,0 +1,52 @@
+str = "I am a string"
+
+int1 = 123
+
+float1 = 1.23
+
+boolean1 = true
+boolean2 = false
+
+# Offset Date time
+offsetDateTime1 = 2022-06-06T08:32:00Z
+
+# Local Date time
+localDateTime1 = 2022-06-06T08:32:00Z
+
+# Local Date
+#localDate1 = 2022-06-06
+
+# Local time
+#localTime1= 08:32:00
+
+# Arrays
+primesArray = [2, 3, 5, 7]
+daysArray = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+nestedArray = [[2, 3], [5, 7, 11]]
+#mixedTypesArray = [2, 3, {app : "Chat Server"}]
+
+# Tables
+[table1]
+k1 = "v1"
+k2 = "v2"
+k3 = "v3"
+
+[table2]
+k4 = "v4"
+k5 = "v5"
+
+# Inline tables
+point = {x = 1, y = 100, title = "point demo object"}
+
+# array of tables
+[[names]]
+firstName = "Krishna"
+lastName = "G"
+
+[[names]]  # empty table within the array
+
+[[names]]
+firstName = "Ram"
+lastName = "Majety"
+age = 34
+

@@ -1,0 +1,15 @@
+[complexTable]
+a = 10
+
+[complexTable."point.coordinates"]
+x = 10
+y = 20
+
+[complexTable."3dpoint.coordinates"]
+demo1.x = 10
+demo1.y = 20
+demo1.z = 30
+demo2.x = 11
+demo2.y = 12
+demo2.z = 13
+

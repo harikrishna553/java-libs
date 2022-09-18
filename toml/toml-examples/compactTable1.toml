@@ -1,0 +1,2 @@
+employee = { firstName = "Lakshmana Rao", lastName = "Gurram", age = 34, address = {city = "Bangalore", street = "Chowdeswari", country = "Bangaore"}}
+

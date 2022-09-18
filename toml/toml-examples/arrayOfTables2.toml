@@ -1,0 +1,31 @@
+[[employees]]
+  firstName = "Krishna"
+  lastName = "G"
+ 
+ [[employees.workExperience]]
+  organization = "ABC Corp"
+    experience = 4.3
+ [[employees.workExperience]]
+  organization = "XYZ Corp"
+    experience = 1.8
+ [[employees.workExperience]]
+  organization = "Demo Corp"
+    experience = 10.8
+  
+ [[employees]]
+  firstName = "Ram"
+  lastName = "Majety"
+  
+ [[employees.addresses]]
+ city = "Bangalore"
+ country = "India"
+ street = "Chowdeswari"
+ isPermanentAddress = true
+ 
+[[employees.workExperience]]
+  organization = "ACD Corp"
+    experience = 3.5
+[[employees.workExperience]]
+  organization = "DEF Corp"
+    experience = 7.11
+
