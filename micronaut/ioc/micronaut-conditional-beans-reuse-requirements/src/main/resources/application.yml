@@ -1,0 +1,9 @@
+logger:
+  levels:
+    io.netty: ERROR
+    io.micronaut: ERROR
+    
+datasource:
+  url: my-datasource.com
+  port: 12345
+  username: krishna
