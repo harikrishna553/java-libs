@@ -1,0 +1,10 @@
+logger:
+  levels:
+    io.netty: ERROR
+    io.micronaut: ERROR
+
+micronaut:
+  executors:
+    scheduled:
+      type: scheduled
+      core-pool-size: 30
