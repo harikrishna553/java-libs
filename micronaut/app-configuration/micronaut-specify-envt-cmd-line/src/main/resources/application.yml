@@ -1,0 +1,8 @@
+logger:
+  levels:
+    io.netty: ERROR
+    io.micronaut: ERROR
+    
+a1: default-a1
+a2: default-a2
+a3: default-a3
