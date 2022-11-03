@@ -1,0 +1,7 @@
+logger:
+  levels:
+    io.netty: ERROR
+    io.micronaut: ERROR
+    
+appName: chat server
+version: 1.2.34
