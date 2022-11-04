@@ -1,0 +1,7 @@
+logger:
+  levels:
+    io.netty: ERROR
+    io.micronaut: ERROR
+    
+a1: dev-a1
+a2: dev-a2
