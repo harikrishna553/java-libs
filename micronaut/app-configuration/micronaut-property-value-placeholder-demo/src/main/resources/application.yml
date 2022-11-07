@@ -1,0 +1,3 @@
+appName: Chat Server
+appVersion: 1.23.456
+appDescription: ${appName} is used to send and receive messages from other users. Right now this app is at ${appVersion} 
