@@ -1,0 +1,7 @@
+appVersion: 1.23.456
+appDescription: ${appName:"my chat server"} is used to send and receive messages from other users. Right now this app is at ${appVersion} 
+
+devUrl: https://dev.my-chat-server.com
+appUrls: "dev: ${devUrl:`https://dev-default-my-chat-server.com`}, 
+          qa : ${qaUrl: `https://qa-default-my-chat-server.com`},
+          prod : ${prodUrl: `https://prod-default-my-chat-server.com`}"
