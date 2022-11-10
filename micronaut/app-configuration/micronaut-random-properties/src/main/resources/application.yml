@@ -1,0 +1,13 @@
+randomPort: ${random.port}
+
+randomInt1: ${random.int}
+randomInt2: ${random.integer}
+randomLong: ${random.long}
+randomFloat: ${random.float}
+
+randomShortUUID: ${random.shortuuid}
+randomUUID1: ${random.uuid}
+randomUUID2: ${random.uuid2}
+
+randomIntRange1: ${random.int[5,10]}
+randomIntRange2: ${random.int(100)}
