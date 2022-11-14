@@ -1,0 +1,4 @@
+my:
+  app:
+    sleepTime: 15s
+    connectionTimeout: 5m

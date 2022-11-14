@@ -1,0 +1,4 @@
+my:
+  app:
+    version: 1.23.45
+    description:  application send and receive messages.
