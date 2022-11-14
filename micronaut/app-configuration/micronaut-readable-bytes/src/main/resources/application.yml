@@ -1,0 +1,6 @@
+my:
+  app:
+    tenMB: 10mb
+    tenKB: 10kb
+    tenGB: 10gb
+    
