@@ -1,0 +1,11 @@
+spring:   
+  datasource:
+    communicationtimeout: 6000
+    jpa:
+      hibernate:
+        ddl-auto: none
+    hikari:
+      connection-timeout: 3000
+      idle-timeout: 40000
+      max-lifetime: 10000
+      maximum-pool-size: 5
