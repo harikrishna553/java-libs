@@ -1,0 +1,14 @@
+app:   
+  datasource:
+    - name : devSource
+      connection-timeout: 3000
+      max-lifetime: 4000
+      maximum-pool-size: 5
+    - name : qaSource
+      connection-timeout: 5000
+      max-lifetime: 6000
+      maximum-pool-size: 6
+    - name : prodSource
+      connection-timeout: 7000
+      max-lifetime: 8000
+      maximum-pool-size: 7
