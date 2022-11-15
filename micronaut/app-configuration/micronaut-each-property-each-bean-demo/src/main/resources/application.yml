@@ -1,0 +1,17 @@
+app:   
+  datasource:
+    devSource:
+      connection-timeout: 3000
+      max-lifetime: 4000
+      maximum-pool-size: 5
+      url: jdbc:mysql://localhost/dev
+    qaSource:
+      connection-timeout: 5000
+      max-lifetime: 6000
+      maximum-pool-size: 6
+      url: jdbc:mysql://localhost/qa
+    prodSource:
+      connection-timeout: 7000
+      max-lifetime: 8000
+      maximum-pool-size: 7
+      url: jdbc:mysql://localhost/prod
