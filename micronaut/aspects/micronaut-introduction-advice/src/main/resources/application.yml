@@ -1,0 +1,7 @@
+logger:
+  levels:
+    io.netty: ERROR
+    io.micronaut: ERROR
+    
+runningEnvironment: local
+appName: chat server
