@@ -14,6 +14,14 @@ public class HelloController {
 	@Get(value = "/even-numbers", produces = MediaType.TEXT_PLAIN)
 	public String evenNumbers(@Nullable @QueryValue("from") Integer from, @Nullable @QueryValue("to") Integer to) {
 
+		if (from == null || from < 0) {
+			from = 0;
+		}
+
+		if (to == null || to < 0) {
+			to = from + 10;
+		}
+
 		final StringJoiner stringJoiner = new StringJoiner(",");
 
 		for (int i = from; i < to; i += 2) {
@@ -23,3 +31,4 @@ public class HelloController {
 		return stringJoiner.toString();
 	}
 }
+
