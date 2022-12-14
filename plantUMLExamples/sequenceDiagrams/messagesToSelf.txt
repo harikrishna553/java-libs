@@ -1,0 +1,9 @@
+@startuml
+
+' Participants definition
+participant p1
+
+p1->p1: "I am sending first event to my self"
+p1->p1: "I am sending second event to my self"
+
+@enduml

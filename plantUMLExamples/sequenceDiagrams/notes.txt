@@ -1,0 +1,14 @@
+@startuml
+
+Client -> LoginServer: Enter user name
+Client -> LoginServer: Enter password
+note left: Input from the user \n should be taken by client
+
+Client -> LoginServer: Submit the form 
+note right: User details are validated \n against login server
+
+LoginServer -> ADServer: Check the credentials
+ADServer -> LoginServer: Login Successful
+LoginServer -> Client: Login Successful
+
+@enduml

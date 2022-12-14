@@ -1,0 +1,13 @@
+@startuml
+
+' Participants definition
+participant first order 4
+participant third order 2
+participant second order 3
+participant fourth order 1
+
+fourth->first: "I am 3km ahead"
+fourth->second: "I am 2km ahead"
+fourth->third: "I am 1km ahead"
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+
+skinparam responseMessageBelowArrow true
+
+p1 ->x p2: I denote a lost message
+p1 -/ p2: Denote bottom part of the arrow
+p1 -\ p2: Denote top part of the arrow
+p1 ->> p2: Repeat or thin drawing
+p1 -// p2: thin drawing the bottom part
+p1 -\\ p2: thin drawing the top part
+p1 --> p2: Dotted arrow
+p1 ->o p2: Add a o to arrow head
+p1 <->: bidirectional arrow
+p1 -> p2: Normal arrow
+
+@enduml

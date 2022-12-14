@@ -1,0 +1,21 @@
+@startuml
+
+title "newpage keyword demo"
+header "Demo App"
+footer %page% of %lastpage%
+
+p1 -> p2 : msg1
+p1 -> p2 : msg2
+p1 -> p2 : msg3
+
+newpage
+p1 -> p2 : msg4
+p1 -> p2 : msg5
+p1 -> p2 : msg6
+
+newpage "This is last page"
+p1 -> p2 : msg7
+p1 -> p2 : msg8
+p1 -> p2 : msg9
+
+@enduml

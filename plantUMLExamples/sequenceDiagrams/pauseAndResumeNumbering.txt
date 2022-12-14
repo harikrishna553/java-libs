@@ -1,0 +1,16 @@
+@startuml
+
+autonumber
+p1 -> p2: message1
+p1 <- p2: message2
+p1 -> p2: message3
+
+autonumber stop
+p1 <- p2: message4
+p1-> p2: message5
+
+autonumber resume
+p1 <- p2: message6
+p1-> p2: message7
+
+@enduml

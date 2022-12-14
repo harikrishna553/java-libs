@@ -1,0 +1,19 @@
+@startuml
+
+' Participants definition
+participant participant1 as p1
+actor actor1 as actr1
+boundary boundary1 as bndry1
+control control1 as con1
+entity entity1 as ent1
+database database1 as db1
+collections collections1 as col1
+
+p1 -> actr1 : To actor
+p1 -> bndry1 : To boundary
+p1 -> con1 : To control
+p1 -> ent1 : To entity
+p1 -> db1 : To database
+p1 -> col1 : To collections
+
+@enduml

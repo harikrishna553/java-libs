@@ -1,0 +1,34 @@
+@startuml
+
+title "User login flow"
+header "User login"
+footer %page% of %lastpage%
+
+Client -> LoginServer: Enter user name
+Client -> LoginServer: Enter password
+Client -> LoginServer: Submit the form 
+LoginServer -> ADServer: Check the credentials
+
+alt#green #lightblue login successful
+	ADServer -> LoginServer: Login Successful
+	LoginServer -> Client: Login Successful
+
+else Server not accessible
+
+	group#silver "Retry to connect the server" [Login retry]
+		loop #00FFF8 "three times"
+			LoginServer -> ADServer: Check the credentials
+		end
+	end
+
+else #gold username is not exists
+	ADServer -> LoginServer: Username not found
+	LoginServer -> Client: User is not registered with the website
+
+else #red invalid credentials
+	ADServer -> LoginServer: Credentials mismatch
+	LoginServer -> Client: Invalid username or password
+
+end
+
+@enduml

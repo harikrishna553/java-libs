@@ -1,0 +1,6 @@
+@startuml
+
+p1 -[#red]> p2: message 1
+p1 -[#0000FF]> p2: message 1
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+
+autonumber 5 "<b>[000]"
+p1 -> p2: msg1
+p1 <- p2: msg2
+
+autonumber 9 "<b>(<u>[000]</u>)"
+p1 -> p2: msg3
+p1 <- p2: msg4
+
+autonumber 23 "<b>(<u>[###]</u>)"
+p1 -> p2: msg5
+p1 <- p2: msg6
+
+autonumber 30 "<font color=red><b>Message 0 "
+p1 -> p2: msg7
+p1 -> p2: msg8
+
+@enduml

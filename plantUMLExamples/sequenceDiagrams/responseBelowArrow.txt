@@ -1,0 +1,9 @@
+@startuml
+
+skinparam responseMessageBelowArrow true
+
+p1->p2: Hello
+p1<-p2: Hi, How are you
+p1->p2: I am fine, thank you
+
+@enduml

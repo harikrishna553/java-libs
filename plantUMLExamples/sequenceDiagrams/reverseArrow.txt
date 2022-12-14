@@ -1,0 +1,8 @@
+@startuml
+Client -> LoginServer: Enter user name
+Client -> LoginServer: Enter password
+Client -> LoginServer: Submit the form 
+LoginServer -> ADServer: Check the credentials
+LoginServer <- ADServer: Login Successful
+Client <- LoginServer: Login Successful
+@enduml

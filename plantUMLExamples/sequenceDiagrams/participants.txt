@@ -1,0 +1,19 @@
+@startuml
+
+' Participants definition
+participant participant1
+actor actor1
+boundary boundary1
+control control1
+entity entity1
+database database1
+collections collections1
+
+participant1 -> actor1 : To actor
+participant1 -> boundary1 : To boundary
+participant1 -> control1 : To control
+participant1 -> entity1 : To entity
+participant1 -> database1 : To database
+participant1 -> collections1 : To collections
+
+@enduml

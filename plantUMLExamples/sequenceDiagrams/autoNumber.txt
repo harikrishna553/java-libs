@@ -1,0 +1,8 @@
+@startuml
+
+autonumber
+p1 -> p2: Hi
+p1 <- p2: Hello
+p1 -> p2: Where are you
+
+@enduml
