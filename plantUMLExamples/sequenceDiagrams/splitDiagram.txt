@@ -1,0 +1,18 @@
+@startuml
+
+title SSL communication
+
+==Share public keys==
+client -> server: Client Hello
+client <- server: Server send its public key
+client -> server: Cient send its public key
+
+== Cipher exchange ==
+client <- server: Server send cipher
+
+== Data transfer and connection close ==
+client <-> server: Data exchange
+client -> server: Close the connection
+
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+
+title SSL communication
+
+participant client
+participant server
+
+ref over client, server : Two entities in SSL communication
+
+client -> server: Client Hello
+client <- server: Server send its public key
+client -> server: Cient send its public key
+client <- server: Server send cipher
+client <-> server: Data exchange
+
+ref over client: initiate close
+client -> server: Close the connection
+
+
+@enduml

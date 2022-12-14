@@ -1,0 +1,18 @@
+@startuml
+
+participant Client
+participant LoginServer
+participant ADServer
+
+note over Client: Client read the credentials from user
+/ note over LoginServer: LoginServer read the credentials from client \n and check with ADServer
+/ note over ADServer: ADServer validate the credentials
+
+Client -> LoginServer: Enter user name
+Client -> LoginServer: Enter password
+Client -> LoginServer: Submit the form 
+LoginServer -> ADServer: Check the credentials
+ADServer -> LoginServer: Login Successful
+LoginServer -> Client: Login Successful
+
+@enduml

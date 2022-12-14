@@ -1,0 +1,31 @@
+@startuml
+
+participant Client
+participant LoginServer
+participant ADServer
+
+hnote left of Client #aqua
+Client is responsible
+to collect user credentials
+end note
+
+rnote right of ADServer #gold
+Responsible to validate 
+user credentials
+end note
+
+note over LoginServer #lightblue
+Collect user credentials 
+from client and
+validate them 
+with ADServer
+end note
+
+Client -> LoginServer: Enter user name
+Client -> LoginServer: Enter password
+Client -> LoginServer: Submit the form 
+LoginServer -> ADServer: Check the credentials
+ADServer -> LoginServer: Login Successful
+LoginServer -> Client: Login Successful
+
+@enduml

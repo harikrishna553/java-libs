@@ -1,0 +1,37 @@
+@startuml
+
+client -> server: sending creol message
+
+note left
+  This is **bold**
+  This is //italics//
+  This is ""monospaced""
+  This is --stricken-out--
+  This is __underlined__
+  This is ~~wave-underlined~~
+
+  * Bullet list
+  * Second item
+    ** Sub item
+
+  # Numbered list
+  # Second item
+    ## Sub item
+
+  Horizontal line
+  ----
+  = Extra-large heading
+  == Large heading
+  === Medium heading
+  ==== Small heading
+
+  ---
+  Table example
+  ---
+  |s.no  |= name |= age |
+  | 1 | Krishna  | 33   |
+  | 2 | Ram      | 34   |
+
+end note
+
+@enduml
