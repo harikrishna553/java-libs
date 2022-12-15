@@ -1,0 +1,19 @@
+@startuml
+
+!pragma teoz true
+
+{job1_start} client -> server : submit job1 details to the server
+server -> database : Request for job1 confiuration
+database -> server : Send job1 configuration
+{job1_end} server -> client : finish
+{job1_start} <-> {job1_end} : took 5 minutes
+
+||100||
+
+{job2_start} client -> server : submit job2 details to the server
+server -> database : Request for job2 confiuration
+database -> server : Send job2 configuration
+{job2_end} server -> client : finish
+{job2_start} <-> {job2_end} : took 10 minutes
+
+@enduml

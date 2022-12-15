@@ -1,0 +1,16 @@
+@startuml
+
+' Participants definition
+actor client #green
+
+box Internal Service #gold
+participant server #445566
+database database as db1 #00FFFF
+end box
+
+client -> server : Submit the job
+server -> database: Request the job configuration
+database -> server: Send job configuration
+server -> client: Send job execution status
+
+@enduml

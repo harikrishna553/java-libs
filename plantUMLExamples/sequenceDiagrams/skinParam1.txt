@@ -1,0 +1,28 @@
+@startuml
+
+hide footbox
+
+skinparam sequenceArrowThickness 3
+skinparam roundcorner 25
+skinparam maxmessagesize 50
+skinparam sequenceParticipant underline
+skinparam arrowColor #FF0000
+skinparam actorBorderColor #00FF00
+skinparam lifeLineBorderColor blue
+skinparam lifeLineBackgroundColor #A9DCDF
+skinparam participantBorderColor #0000FF
+skinparam participantBackgroundColor DodgerBlue
+skinparam participantFontName Impact
+skinparam participantFontSize 13
+skinparam participantFontColor #A9DCDF
+skinparam actorBackgroundColor aqua
+skinparam actorFontColor #00FFFF
+skinparam actorFontSize 13
+skinparam actorFontName Aapex
+
+client -> server : Submit the job
+server -> database: Request the job configuration
+database -> server: Send job configuration
+server -> client: Send job execution status
+
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+
+participant clientStub <<Generated>>
+participant server <<Tested>>
+
+clientStub -> server : Send request
+server -> clientStub : Send response
+
+@enduml

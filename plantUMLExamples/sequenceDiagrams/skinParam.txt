@@ -1,0 +1,15 @@
+@startuml
+
+hide footbox
+
+skinparam sequenceArrowThickness 3
+skinparam roundcorner 25
+skinparam maxmessagesize 50
+skinparam sequenceParticipant underline
+
+client -> server : Submit the job
+server -> database: Request the job configuration
+database -> server: Send job configuration
+server -> client: Send job execution status
+
+@enduml

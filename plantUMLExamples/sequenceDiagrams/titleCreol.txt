@@ -1,0 +1,12 @@
+@startuml
+
+title __Simple__ **client server communication** example
+
+participant client
+participant server
+
+client -> server : Send request
+server -> client : Send response
+client -> server: close connection
+
+@enduml
