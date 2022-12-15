@@ -1,0 +1,9 @@
+@startuml
+
+title Job Scheduler
+
+client -> sys1 : Submit the task
+activate sys1 #lightgreen
+return Send the result
+
+@enduml

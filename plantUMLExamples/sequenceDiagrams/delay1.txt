@@ -1,0 +1,9 @@
+@startuml
+
+title Job Scheduler
+
+client -> server: Submit the job
+...
+client <- server: Server send the response after job completion
+
+@enduml

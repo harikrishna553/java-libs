@@ -1,0 +1,20 @@
+@startuml
+
+title Job Scheduler
+
+client -> sys1 : Submit the task
+activate sys1 #lightgreen
+
+sys1 -> sys1 : Transform the data
+activate sys1 #DarkSalmon
+deactivate sys1
+
+sys1 -> sys2 : Submit the subtask t1 to sys2
+activate sys2 #lightgreen
+sys2 -> sys1 : Share the task result
+deactivate sys2
+
+sys1 -> client: Share the task result
+deactivate sys1
+
+@enduml

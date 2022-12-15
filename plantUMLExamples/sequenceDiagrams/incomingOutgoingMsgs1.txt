@@ -1,0 +1,22 @@
+@startuml
+
+[o-> A: Input received
+activate A
+
+A -> A: transform the data
+A -> A: Apply business logic
+
+A o->o] : Send the response to external device
+deactivate A
+
+
+[x--> A: Input received
+activate A
+
+A -> A: transform the data
+A -> A: Apply business logic
+
+A x-->o] : Send the response to external device
+deactivate A
+
+@enduml

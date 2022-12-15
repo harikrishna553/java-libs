@@ -1,0 +1,13 @@
+@startuml
+
+title Job Scheduler
+
+sys1 -> sys2: M1
+sys1 <- sys2: M2
+|||
+sys1 -> sys2: M3
+sys1 <- sys2: M4
+||100||
+sys1 -> sys2: M5
+
+@enduml

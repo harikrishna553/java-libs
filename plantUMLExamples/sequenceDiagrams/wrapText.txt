@@ -1,0 +1,11 @@
+@startuml
+
+title Job Scheduler
+
+skinparam maxMessageSize 60
+
+client -> server: Client take the input from user and submit the job
+... 5 minutes later...
+client <- server: Server read the data from client, execute the job and publish the results
+
+@enduml

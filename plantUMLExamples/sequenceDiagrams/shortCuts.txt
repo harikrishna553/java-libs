@@ -1,0 +1,18 @@
+@startuml
+
+title Job Scheduler
+
+client -> sys1 ++ #lightgreen: Submit the task
+
+sys1 -> sys2 ++ #lightgreen: Submit the subtask t1 to sys2
+
+sys1 -> sys3 ** #lightgreen: Submit the subtask t2 to sys3
+
+sys2 -> sys4 ++ #lightgreen: Submit the subtask t1.1 to sys4
+sys2 <- sys4 !!: Share the t1.1 task result
+
+sys1 <- sys3 -- : Share the t2 task result
+
+sys1 -> client: Share the task result
+
+@enduml

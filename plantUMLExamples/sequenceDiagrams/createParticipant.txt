@@ -1,0 +1,13 @@
+@startuml
+
+sys1 -> sys2: M1
+
+create sys3
+sys1 -> sys3: M2
+
+sys1 -> sys4: M3
+
+create sys5
+sys1 -> sys5: M4
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+
+title Job Scheduler
+
+client -> sys1 : Submit the task
+activate sys1
+
+sys1 -> sys2 : Submit the subtask t1 to sys2
+activate sys2
+
+sys1 -> sys3 : Submit the subtask t2 to sys3
+activate sys3
+
+sys2 -> sys4 : Submit the subtask t1.1 to sys4
+activate sys4
+sys4 -> sys2 : Share the t1.1 task result
+destroy sys4
+
+sys3 -> sys1 : Share the t2 task result
+deactivate sys3
+ 
+deactivate sys2
+
+sys1 -> client: Share the task result
+deactivate sys1
+
+@enduml
