@@ -1,0 +1,14 @@
+@startuml
+
+hide unlinked
+
+participant sys1
+participant sys2
+participant sys3
+participant sys4
+
+sys1 -> sys2: M1
+sys1 <- sys2: M2
+sys1 -> sys2: M3
+
+@endum
