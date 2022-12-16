@@ -1,0 +1,33 @@
+@startuml
+
+title "Class Composition"
+
+class Human
+
+Class Brain
+class Lungs
+class Liver
+class Heart
+class Stomach
+class Kidney
+class Bladder
+
+class Frontal
+class Parietal
+class Temporal
+class Occipital
+
+Human *-- Brain
+Human *-- Lungs
+Human *-- Liver
+Human *-- Heart
+Human *-- Stomach
+Human *-- Kidney
+Human *-- Bladder
+
+Brain *-- Frontal
+Brain *-- Parietal
+Brain *-- Temporal
+Brain *-- Occipital
+
+@enduml

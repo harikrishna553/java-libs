@@ -1,0 +1,32 @@
+@startuml
+
+title "Class Aggregation"
+
+class Car
+
+Class Engine
+class Transmission
+class Battery
+class Alternator
+class Radiator
+class Brakes
+class FuelTank
+
+class Piston
+class Flywheel
+class Gasket
+
+Car o-- Engine
+Car o-- Transmission
+Car o-- Battery
+Car o-- Alternator
+Car o-- Radiator
+Car o-- Brakes
+Car o-- Engine
+Car o-- FuelTank
+
+Engine o-- Piston
+Engine o-- Flywheel
+Engine o-- Gasket
+
+@enduml

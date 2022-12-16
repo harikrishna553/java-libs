@@ -1,0 +1,26 @@
+@startuml
+
+title "Class Inheritance or extension"
+
+abstract class Mammal
+
+Class Dog
+class BullDog
+class Poodle
+class Beagle
+
+class Cat
+class PersianCat
+class Ragdoll
+
+Mammal <|-- Cat
+Mammal <|-- Dog
+
+Dog <|-- BullDog
+Dog <|-- Poodle
+Dog <|-- Beagle
+
+Cat <|-- PersianCat
+Cat <|-- Ragdoll
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+
+interface MyInterface
+
+abstract MyAbstractClass1
+abstract class MyAbstractClass2
+
+class MyClass
+
+entity MyEntity
+
+enum MyEnum
+
+annotation MyAnnotation
+
+circle MyCircle
+() MyCircleShortForm
+
+diamond MyDiamond
+<> MyDiamondShortForm
+
+@enduml
