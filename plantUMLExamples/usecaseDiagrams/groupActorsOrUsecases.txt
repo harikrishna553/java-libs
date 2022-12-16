@@ -1,0 +1,46 @@
+@startuml
+
+skinparam actorStyle Hollow
+
+actor passenger
+actor bank
+
+package admins {
+	actor superAdmin
+	actor admin
+}
+
+usecase "Validate Card details" as VCD
+
+package passengerUsecases{
+	usecase Login
+	usecase "Check for availability" as CFA
+	usecase "Book tiket" as BT
+	usecase Payment
+	usecase "Check Flight Status" as CFS
+}
+
+package adminUsecases{
+	usecase "Update Flight Schedule" as UFS
+	usecase "Cancel Ticket" as CT
+}
+
+passenger --> Login
+passenger --> CFA
+passenger --> BT
+passenger --> Payment
+passenger --> CT
+passenger --> CFS
+
+admin --> UFS
+admin --> CT
+
+superAdmin --> UFS
+superAdmin --> CT
+
+bank --> VCD
+
+Payment --> VCD
+
+
+@enduml

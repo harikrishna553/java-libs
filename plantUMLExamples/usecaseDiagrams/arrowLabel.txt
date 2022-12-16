@@ -1,0 +1,19 @@
+@startuml
+
+actor passenger
+
+usecase Login
+usecase "Check for availability" as CFA
+usecase "Book ticket" as BT
+usecase Payment
+usecase "Check Flight Status" as CFS
+usecase "Cancel Ticket" as CT
+
+passenger --> Login : user login
+passenger --> CFA : Check for ticket availability
+passenger --> BT 
+passenger --> Payment
+passenger --> CT
+passenger --> CFS
+
+@enduml

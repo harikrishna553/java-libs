@@ -1,0 +1,12 @@
+@startuml
+
+actor client << Machine or Human >>
+actor server << Application >>
+
+usecase "Login to the system" as login
+usecase "Validate client credentials" as VCC
+
+client -> login
+server -> VCC
+
+@enduml

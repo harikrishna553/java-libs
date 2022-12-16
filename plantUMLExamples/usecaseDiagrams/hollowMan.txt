@@ -1,0 +1,33 @@
+@startuml
+
+skinparam actorStyle Hollow
+
+actor passenger
+actor admin
+actor bank
+
+usecase Login
+usecase "Check for availability" as CFA
+usecase "Book tiket" as BT
+usecase Payment
+usecase "Cancel Ticket" as CT
+usecase "Check Flight Status" as CFS
+usecase "Update Flight Schedule" as UFS
+usecase "Validate Card details" as VCD
+
+passenger --> Login
+passenger --> CFA
+passenger --> BT
+passenger --> Payment
+passenger --> CT
+passenger --> CFS
+
+admin --> UFS
+admin --> CT
+
+bank --> VCD
+
+Payment --> VCD
+
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+
+actor passenger
+
+usecase Login as "
+	..Login..
+	User enter his/her login id and password
+	Upon successful validation of credentials
+	user will be taken to home page
+	--
+	dummy1
+	==
+	dummy2
+	__
+	dummy3
+"
+usecase "Book tiket" as BT
+usecase Payment
+
+passenger --> Login
+passenger --> BT
+passenger --> Payment
+
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+
+usecase usecase1
+usecase usecase2
+usecase usecase3
+usecase usecase4
+
+usecase1 <|-- usecase2
+usecase1 <|-- usecase3
+usecase3 <|-- usecase4
+
+@enduml

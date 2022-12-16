@@ -1,0 +1,10 @@
+@startuml
+:actor1:
+:actor2: as act1
+
+actor actor3
+actor actor4 as act4
+
+"actor5"
+"actor6" as act6
+@enduml

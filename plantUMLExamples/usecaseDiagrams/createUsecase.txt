@@ -1,0 +1,11 @@
+@startuml
+
+(Login)
+
+(Check tickets availability) as CTA
+
+usecase (Book Ticket)
+
+usecase (Print ticket) as PT
+
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+
+skinparam actorStyle Hollow
+
+actor passenger
+actor bank
+actor superAdmin
+actor admin
+
+admin <|-- superAdmin
+
+usecase "Validate Card details" as VCD
+usecase Login
+usecase "Check for availability" as CFA
+usecase "Book tiket" as BT
+usecase Payment
+usecase "Check Flight Status" as CFS
+usecase "Update Flight Schedule" as UFS
+usecase "Cancel Ticket" as CT
+
+note left of passenger : Represent a passenger
+note right of superAdmin : Super admin can onboard other admins
+note top of (Login) : User can login with otp, username/password
+note bottom of (UFS) : Admin or super admin can update the flight schedule
+
+passenger --> Login
+passenger --> CFA
+passenger --> BT
+passenger --> Payment
+passenger --> CT
+passenger --> CFS
+
+admin --> UFS
+admin --> CT
+
+bank --> VCD
+
+Payment --> VCD
+
+
+@enduml

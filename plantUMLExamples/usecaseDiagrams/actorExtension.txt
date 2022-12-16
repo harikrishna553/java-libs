@@ -1,0 +1,31 @@
+@startuml
+
+actor passenger
+actor superAdmin
+actor admin
+
+passenger <|-- admin
+admin <|-- superAdmin
+
+usecase "Validate Card details" as VCD
+usecase Login
+usecase "Book tiket" as BT
+usecase "Check Flight Status" as CFS
+usecase "Update Flight Schedule" as UFS
+usecase "Cancel Ticket" as CT
+usecase "Onboard new admin" as ONA
+
+passenger --> Login
+passenger --> BT
+passenger --> CT
+passenger --> CFS
+
+admin --> UFS
+admin --> CT
+
+superAdmin --> UFS
+superAdmin --> CT
+superAdmin --> ONA
+
+
+@enduml
