@@ -1,0 +1,15 @@
+@startuml
+
+actor user
+
+usecase "use case 1" as UC1
+usecase "use case 2" as UC2
+usecase "use case 3" as UC3
+usecase "use case 4" as UC4
+
+user -left-> (UC1)
+user -right-> (UC2)
+user -up-> (UC3)
+user -down-> (UC4)
+
+@enduml

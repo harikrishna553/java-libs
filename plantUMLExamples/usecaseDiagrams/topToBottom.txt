@@ -1,0 +1,18 @@
+@startuml
+
+' This is the default behavior
+top to bottom direction
+
+actor user1
+
+usecase "use case 1" as UC1
+usecase "use case 2" as UC2
+usecase "use case 3" as UC3
+usecase "use case 4" as UC4
+
+user1 --> (UC1)
+user1 --> (UC2)
+user1 --> (UC3)
+user1 --> (UC4)
+
+@enduml

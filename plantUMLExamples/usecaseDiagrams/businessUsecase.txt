@@ -1,0 +1,8 @@
+@startuml
+
+(business use case 1)/
+(business use case 2)/ as (UC2)
+usecase/ "business use case 3"
+usecase/ (business use case 4) as UC4
+
+@enduml

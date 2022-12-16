@@ -1,0 +1,30 @@
+@startuml
+
+left to right direction
+
+skinparam usecase {
+	BackgroundColor DarkSeaGreen
+	BackgroundColor<< UC2 >> red
+	BackgroundColor<< UC1 >> lightblue
+
+	BorderColor DarkSlateGray
+
+	ArrowColor Olive
+	ActorBorderColor black
+	ActorFontName Courier
+}
+
+actor user1 << Human >>
+actor user2
+
+usecase "use case 1" as UC1 << UC1 >>
+usecase "use case 2" as UC2 << UC2 >>
+usecase "use case 3" as UC3
+usecase "use case 4" as UC4
+
+user1 --> (UC1)
+user1 --> (UC2)
+user1 --> (UC3)
+user1 --> (UC4)
+
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+
+:actor1:/
+:actor2:/ as act2
+actor/ actor3
+actor/ :actor4: as act4
+
+@enduml

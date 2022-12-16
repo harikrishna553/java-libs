@@ -1,0 +1,10 @@
+@startuml
+
+actor actor1
+
+actor1 --> (usecase1) : normal
+actor1 --> (usecase2) #line:red;line.dashed;text:red : red dashed
+actor1 --> (usecase3) #green;line.bold;text:green : green bold
+actor1 --> (usecase4) #blue;line.dotted;text:blue : blue dotted
+
+@enduml

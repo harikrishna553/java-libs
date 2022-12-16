@@ -1,0 +1,9 @@
+@startuml
+
+actor actor1
+actor actor2 #pink;line:red;line.bold;text:gold
+
+usecase usecase1 #aliceblue;line:green;line.dashed;text:red
+usecase usecase2 #gold;line:blue;line.dotted;text:green
+
+@enduml

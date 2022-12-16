@@ -1,0 +1,11 @@
+@startuml
+
+actor user
+
+usecase "use case 1" as UC1
+usecase "use case 2" as UC2
+
+user ..> (UC1)
+user ..> (UC2)
+
+@enduml

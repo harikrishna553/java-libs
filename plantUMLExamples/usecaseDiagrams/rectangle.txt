@@ -1,0 +1,18 @@
+@startuml
+
+left to right direction
+
+skinparam packageStyle rectangle
+
+actor customer as C1
+
+rectangle checkout {
+   C1 -- (checkout)
+   (checkout) -> (payment) : pay the money
+   (payment) -> (notify user)
+}
+
+C1 -> (Login)
+C1 -> (Logout)
+
+@enduml
