@@ -1,0 +1,21 @@
+@startuml
+
+	package "java.lang" #lightblue {
+		interface Appendable
+		interface AutoCloseable
+		interface Cloneable
+
+		class Boolean
+		class System
+		class Object
+	}
+
+	package "java.util" #F0F0F0{
+		interface Collection<E>
+		interface List<E>
+
+		class ArrayList<E> implements List
+		Object <|-- ArrayList
+	}
+	
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+	
+	namespace java.lang #00FFFF {
+		class System
+		class Boolean
+		class Object
+	}
+
+	class java.lang.Double
+	class java.lang.Integer
+
+	namespace java.util #gold{
+		class Set
+	}
+
+	java.lang.Object <|-- java.util.Set
+
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+
+	class java.lang.Object
+	class java.lang.System
+
+	class java.util.Set
+	class java.util.HashSet
+
+	java.util.Set <|-- java.util.HashSet
+
+@enduml

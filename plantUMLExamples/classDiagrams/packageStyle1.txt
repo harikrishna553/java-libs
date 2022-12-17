@@ -1,0 +1,28 @@
+@startuml
+	scale 1000 width
+
+	package "java.lang" <<Node>> {
+		class Class1
+	}
+
+	package "java.util" <<Rectangle>> {
+		class Class2
+	}
+
+	package "java.awt" <<Folder>> {
+		class Class3
+	}
+
+	package "javax.swing" <<Frame>> {
+		class Class4
+	}
+
+	package "java.net" <<Cloud>> {
+		class Class5
+	}
+
+	package "javax.json" <<Database>> {
+		class Class6
+	}
+
+@enduml

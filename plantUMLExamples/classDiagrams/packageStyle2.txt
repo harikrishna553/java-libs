@@ -1,0 +1,34 @@
+@startuml
+	scale 1000 width
+
+	skinparam packageStyle Node
+	package "java.lang" {
+		class Class1
+	}
+
+	skinparam packageStyle Rectangle
+	package "java.util" {
+		class Class2
+	}
+
+	skinparam packageStyle Folder
+	package "java.awt" {
+		class Class3
+	}
+
+	skinparam packageStyle Frame
+	package "javax.swing" {
+		class Class4
+	}
+
+	skinparam packageStyle Cloud
+	package "java.net" {
+		class Class5
+	}
+
+	skinparam packageStyle Database
+	package "javax.json" {
+		class Class6
+	}
+
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+
+	interface MyInterface1<< (S, #FF7700) stereoType1>>
+	class MyClass1 << (T, red) >>
+	abstract class MyAbstractClass1 << (U, green) >>
+	enum MyEnum1 << (V, aqua) >>
+	
+@enduml

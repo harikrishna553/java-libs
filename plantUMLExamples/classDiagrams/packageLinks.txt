@@ -1,0 +1,24 @@
+@startuml
+	scale 600 width
+
+	package "java.nio" as nio {
+		class Class1
+	}
+
+	package "java.nio.channels" as nioChannels {
+		class Class2
+	}
+
+	package "java.nio.file" as nioFile {
+		class Class3
+	}
+
+	package "java.nio.file.spi" as nioFileSpi {
+		class Class4
+	}
+	
+	nio +-- nioChannels
+	nio +-- nioFile
+	nioFile +-- nioFileSpi
+
+@enduml

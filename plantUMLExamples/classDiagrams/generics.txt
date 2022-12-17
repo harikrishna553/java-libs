@@ -1,0 +1,23 @@
+@startuml
+	 
+	class List<T> {
+		int size()
+		T ele()
+	}
+
+	interface Comparator<T> {
+		+ boolean equals(Object obj)
+	} 
+
+	class Employee{
+
+	}
+
+	class Set<? extends Employee> {
+		int size()
+	}
+
+	Set *- Employee
+
+
+@enduml
