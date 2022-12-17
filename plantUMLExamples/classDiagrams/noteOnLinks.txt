@@ -1,0 +1,32 @@
+@startuml
+
+class List
+class AbstractList
+class ArrayList
+class LinkedList
+class Serializable
+
+List <|.. AbstractList 
+note on link #red: note that is red color
+
+AbstractList <|-- ArrayList
+note left on link #00FF00 
+	note that is green color
+end note
+
+AbstractList <|-- LinkedList
+note right on link #gold 
+	note that is gold color
+end note
+
+Serializable <|.. ArrayList
+note top on link #lightblue  
+	note that is lightblue color
+end note
+
+Serializable <|.. LinkedList
+note bottom on link #aqua  
+	note that is aqua color
+end note
+
+@enduml

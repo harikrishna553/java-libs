@@ -1,0 +1,11 @@
+@startuml
+
+class "My new class 1" as CLS1
+abstract class "My new abstract class 1" as CLS2
+interface "My new interface 1" as INTF1
+enum "My enum 1" as ENUM1
+
+INTF1 <|.. CLS2
+CLS2 <|-- CLS1
+
+@enduml

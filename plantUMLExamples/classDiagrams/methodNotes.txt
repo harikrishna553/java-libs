@@ -1,0 +1,38 @@
+@startuml
+
+class Double{
+
+	' public static fields
+	+{static} double POSITIVE_INFINITY = 1.0 / 0.0
+
+	' private instace fields
+	-double val
+
+	' public static method
+	+{static} Double valueOf(String s)
+
+	' public instance methods
+	+boolean isInfinite()
+	+String toString()
+}
+
+note right of Double::POSITIVE_INFINITY
+	A constant holding the 
+	positive infinity of type double.
+end note
+
+note right of Double::val
+	actual primitive value
+end note
+
+note left of Double::valueOf
+	Returns a Double instance representing 
+	the specified string value
+end note
+
+note right of Double::isInfinite
+	Returns true if this Double value is infinitely 
+	large in magnitude, false otherwise.
+end note
+
+@enduml

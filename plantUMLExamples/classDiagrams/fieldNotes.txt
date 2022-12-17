@@ -1,0 +1,35 @@
+@startuml
+
+class Double{
+
+	'public static fields
+	+{static} double POSITIVE_INFINITY = 1.0 / 0.0
+	+{static} double NEGATIVE_INFINITY = -1.0 / 0.0
+	+{static} double NaN = 0.0d / 0.0
+	+{static} double MAX_VALUE = 0x1.fffffffffffffP+1023
+
+	- double val
+}
+
+note right of Double::POSITIVE_INFINITY
+	A constant holding the 
+	positive infinity of type double.
+end note
+
+note left of Double::NEGATIVE_INFINITY
+	A constant holding the negative infinity of type double.
+end note
+
+note right of Double::NaN
+	A constant holding a Not-a-Number (NaN) value of type double.
+end note
+
+note left of Double::MAX_VALUE
+	A constant holding the largest positive finite value of type double
+end note
+
+note right of Double::val
+	actual primitive values
+end note
+
+@enduml

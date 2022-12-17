@@ -1,0 +1,22 @@
+@startuml
+
+interface Serializable{}
+abstract class AbstractList {}
+
+class Employee{
+	int id
+	String name
+	int age
+
+	String aboutMe()
+}
+
+class Manager{
+	int noOfReportees
+}
+
+Serializable <|.. Employee
+Employee <|-- Manager
+
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+
+interface Interface1
+interface Interface2
+
+class Class1
+class Class2
+
+abstract class AbstractClass1
+abstract class AbstractClass2
+
+enum Enum1
+enum Enum2
+
+remove Interface2
+remove Class1
+remove AbstractClass1
+remove Enum2
+
+@enduml

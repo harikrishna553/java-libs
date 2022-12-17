@@ -1,0 +1,19 @@
+@startuml
+
+hide members
+
+class Employee{
+	int id
+	String name
+	int age
+
+	String aboutMe()
+}
+
+class Manager{
+	int noOfReportees
+}
+
+Employee <|-- Manager
+
+@enduml

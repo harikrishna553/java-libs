@@ -1,0 +1,18 @@
+@startuml
+
+class ArithmeticUtil{
+
+	' public static fields
+	+{static} int sum(int a, int b)
+	+{static} int sum(int a, int b, int c)
+}
+
+note right of ArithmeticUtil::"sum(int a, int b)"
+	Return sum of a and b
+end note
+
+note left of ArithmeticUtil::"sum(int a, int b, int c)"
+	Return sum of a, b and c
+end note
+
+@enduml

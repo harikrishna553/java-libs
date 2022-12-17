@@ -1,0 +1,24 @@
+@startuml
+
+hide stereotype
+show Employee stereotype
+
+interface Serializable <<Marker>>{}
+abstract class AbstractList <<Serializable>> {}
+
+class Employee <<Serializable>>{
+	int id
+	String name
+	int age
+
+	String aboutMe()
+}
+
+class Manager <<Serializable>>{
+	int noOfReportees
+}
+
+Serializable <|.. Employee
+Employee <|-- Manager
+
+@enduml

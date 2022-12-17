@@ -1,0 +1,27 @@
+@startuml
+
+interface List{
+	+ int size()
+	+ void clear()
+}
+
+abstract class AbstractList{
+	# int modCount	
+}
+class ArrayList
+class LinkedList
+class Serializable
+
+enum TimeUnit {
+	DAYS
+	HOURS
+	MINUTES
+}
+
+List <|.. AbstractList 
+AbstractList <|-- ArrayList
+AbstractList <|-- LinkedList
+Serializable <|.. ArrayList
+Serializable <|.. LinkedList
+
+@enduml
