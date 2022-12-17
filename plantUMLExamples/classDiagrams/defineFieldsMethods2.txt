@@ -1,0 +1,23 @@
+@startuml
+
+class Object {
+	Object clone()
+	boolean equals(Object obj)
+}
+
+interface List{
+	void add(E e)
+	void add(int index, E element)
+	void clear()
+	Object[] toArray()
+}
+
+class ArrayList{
+	MAX_LIST_SIZE : {static} Long = 1234567
+}
+
+List <|-- ArrayList
+Object <|-- ArrayList
+
+@enduml
+

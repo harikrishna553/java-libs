@@ -1,0 +1,17 @@
+@startuml
+
+class Double{
+
+	'public static fields
+	+{static} double POSITIVE_INFINITY = 1.0 / 0.0
+	+{static} double NEGATIVE_INFINITY = -1.0 / 0.0
+	+{static} double NaN = 0.0d / 0.0
+	+{static} double MAX_VALUE = 0x1.fffffffffffffP+1023
+	+{static} double MIN_NORMAL = 0x1.0p-1022
+	+{static} double MIN_VALUE = 0x0.0000000000001P-1022
+
+	'Private instace fields
+	-double value
+}
+
+@enduml

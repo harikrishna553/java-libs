@@ -1,0 +1,12 @@
+@startuml
+
+title "Class Composition"
+
+class Person
+class Address
+class Car
+
+Person --> Address : lives at >
+Car --> Person : < owns
+
+@enduml

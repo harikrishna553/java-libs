@@ -1,0 +1,35 @@
+@startuml
+
+interface List{
+	
+}
+
+abstract class AbstractList implements List{
+	
+}
+
+interface Serializable{
+	
+}
+
+class ArrayList extends AbstractList implements Serializable{
+	
+}
+
+note top of List 
+An <b>ordered collection</b> (also known as a <i>sequence</i>). 
+The user of this interface has precise control 
+over where in the list each element is inserted.
+end note
+
+note left of AbstractList
+This class provides a skeletal <b><font color="#FF0000"> implementation of the List interface </font></b> 
+to minimize the effort required to implement this interface backed by 
+a <u>random access</u> data store (such as an array).
+end note
+
+
+note right of ArrayList : <size:35> Resizable-array </size> implementation \n of the List interface
+note bottom of Serializable : Serializability of a class is enabled \n by the class implementing this
+
+@enduml

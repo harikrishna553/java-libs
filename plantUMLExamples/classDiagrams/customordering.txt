@@ -1,0 +1,32 @@
+@startuml
+
+class Employee{
+	-- public static fields --
+	+ {static} AtomicInteger TOTAL_EMPLOYEE_COUNT
+
+	.. private instance fields ..
+	- Integer id
+	- String name
+	- Integer age
+
+	== public static methods ==
+	+ {static} List<Employee> list(Employee... emps)
+
+	__ public instance getter methods __
+	+ Integer getId()
+	+ String getName()
+	+ Integer getAge()
+
+	__ public instance setter methods __
+	+ void setId(Integer id)
+	+ void setName(String name)
+	+ void setAge(Integer age)
+
+	__ public utility methods __
+	+ String aboutMe()
+
+	.. private instance methods ..
+	- String lowerName()
+}
+
+@enduml

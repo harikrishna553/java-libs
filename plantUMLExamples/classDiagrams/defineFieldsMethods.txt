@@ -1,0 +1,20 @@
+@startuml
+
+class Object
+Object : Object clone()
+Object : boolean equals(Object obj)
+
+interface List
+List : add(E e)
+List : add(int index, E element)
+List : clear()
+List : Object[] toArray()
+
+class ArrayList
+ArrayList : {static} Long MAX_LIST_SIZE = 1234567
+
+List <|-- ArrayList
+Object <|-- ArrayList
+
+@enduml
+

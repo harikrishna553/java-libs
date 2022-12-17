@@ -1,0 +1,17 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class MyClass{
+	-field1
+	#field2
+	~field3
+	+field4
+
+	-method1()
+	#method2()
+	~method3()
+	+method4()
+}
+
+@enduml

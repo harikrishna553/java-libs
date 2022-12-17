@@ -1,0 +1,20 @@
+@startuml
+
+enum Gender << enum >> {
+	MALE
+	FEMALE
+}
+
+class OrderService << highly_available >> {
+	
+}
+
+class WebClient <<generate_stub>>{
+	
+}
+
+class Person <<Metaclass>>{
+	
+}
+
+@enduml

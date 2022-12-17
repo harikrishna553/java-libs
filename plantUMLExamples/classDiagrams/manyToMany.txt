@@ -1,0 +1,10 @@
+@startuml
+
+title "Class Composition"
+
+class Student
+class Course
+
+Student "0..*" -- "1..*" Course
+
+@enduml

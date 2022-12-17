@@ -1,0 +1,30 @@
+@startuml
+
+interface List{
+	
+}
+note top: An ordered collection 
+
+
+abstract class AbstractList{
+	
+}
+note left: implements List interface
+
+
+interface Serializable{
+	
+}
+note bottom : Serializability of a class is enabled \n by the class implementing this
+
+
+class ArrayList{
+	
+}
+note right: Resizable-array implementation \n of the List interface
+
+List <|.. AbstractList
+AbstractList <|-- ArrayList
+Serializable <|.. ArrayList
+
+@enduml
