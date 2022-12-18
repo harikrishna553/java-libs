@@ -1,0 +1,15 @@
+@startuml
+
+set namespaceSeparator ..
+
+namespace java..lang #00FFFF {
+	class System
+	class Boolean
+	class Object
+}
+
+namespace java..util #gold{
+	class Set
+}
+
+@enduml

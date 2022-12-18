@@ -1,0 +1,9 @@
+@startuml
+
+class MyClass
+
+MyInterface1 ()- MyClass
+MyInterface2 ()-- MyClass
+MyClass -() MyInterface3
+
+@enduml
