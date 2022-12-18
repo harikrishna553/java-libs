@@ -1,0 +1,17 @@
+@startuml
+
+together {
+	interface Appendable
+	interface Cloneable
+
+        class System
+}
+
+together {
+	interface Collection<E>
+	interface List<E>
+
+	class ArrayList<E> implements List
+}
+
+@enduml

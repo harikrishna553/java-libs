@@ -1,0 +1,18 @@
+@startuml
+
+class Class1
+class Class2
+Class3 : [bold]
+Class4 : [dashed]
+Class5 : [dotted]
+Class6 : [hidden]
+Class7 : [plain]
+
+Class1 --> Class2
+Class1 -[bold]-> Class3 : [bold]
+Class1 -[dashed]-> Class4 : [dashed]
+Class1 -[dotted]-> Class5 : [dotted]
+Class1 -[hidden]-> Class6 : [hidden]
+Class1 -[plain]-> Class7 : [plain]
+
+@enduml

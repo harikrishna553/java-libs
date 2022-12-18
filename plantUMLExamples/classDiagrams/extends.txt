@@ -1,0 +1,19 @@
+@startuml
+
+interface List{
+
+}
+
+class AbstractList implements List{
+
+}
+
+class ArrayList extends AbstractList{
+
+}
+
+class LinkedList extends AbstractList{
+
+}
+	
+@enduml

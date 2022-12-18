@@ -1,0 +1,8 @@
+@startuml
+
+Class1 --> Class2
+Class1 --> Class3  #line:red;line.bold;text:red : red and bold
+Class1 --> Class4 #line:blue;line.dashed;text:blue  : blue and dashed
+Class1 --> Class5 #line:00ff00;line.dotted;text:green : green and dotted
+
+@enduml

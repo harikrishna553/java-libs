@@ -1,0 +1,18 @@
+@startuml
+
+skinparam backgroundcolor white/red
+skinparam classBackgroundColor gold|CornflowerBlue
+
+class Class1
+
+class Class2 #red-green
+
+note left of Class2 #LightBlue\9932CC
+sample note
+end note
+
+package "java.util" #YellowGreen/DimGray {
+	class Dummy
+}
+
+@enduml

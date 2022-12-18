@@ -1,0 +1,10 @@
+@startuml
+
+left to right direction
+
+Human -left-> Brain
+Human -right-> Lungs
+Human -up-> Liver
+Human -down-> Heart
+
+@enduml

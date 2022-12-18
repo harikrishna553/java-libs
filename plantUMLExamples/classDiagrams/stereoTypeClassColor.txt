@@ -1,0 +1,32 @@
+@startuml
+
+skinparam class {
+	BackgroundColor LightBlue
+	ArrowColor Tomato
+	BorderColor SpringGreen
+	BackgroundColor<<Animal>> #FFF0F0
+    BorderColor<<Animal>> Red
+}
+
+abstract class Mammal
+
+Class Dog <<Animal>>
+class BullDog
+class Poodle
+class Beagle
+
+class Cat  <<Animal>>
+class PersianCat
+class Ragdoll
+
+Mammal <|-- Cat
+Mammal <|-- Dog
+
+Dog <|-- BullDog
+Dog <|-- Poodle
+Dog <|-- Beagle
+
+Cat <|-- PersianCat
+Cat <|-- Ragdoll
+
+@enduml

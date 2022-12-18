@@ -1,0 +1,13 @@
+@startuml
+
+class Class1
+class Class2
+
+Class1 --> Class2
+Class1 -[#red,bold]-> Class3
+Class1 -[#blue,dashed]-> Class4
+Class1 -[#green,dotted]-> Class5 
+Class1 -[#0000ff,hidden]-> Class6
+Class1 -[#gold,plain]-> Class7
+
+@enduml

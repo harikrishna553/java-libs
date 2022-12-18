@@ -1,0 +1,13 @@
+@startuml
+
+abstract AbstactList
+annotation Documented #pink;line:red;line.bold;text:red
+class ArrayList #aliceblue;line:green;line.dashed;text:green
+interface List #gold;line:blue;line.dotted;text:blue
+
+class DahsedClass #line.dashed:palegreen
+class DottedClass #line.dotted:blue
+class BoldClass #line.bold
+class ColorGradientClass #back:lightgreen|red;header:blue/red
+
+@enduml

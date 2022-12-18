@@ -1,0 +1,20 @@
+@startuml
+
+class Employee{
+	+int id
+	+String name
+	+int addressId
+}
+
+class Address{
+	+int id
+	+String country
+	+String state
+	+String city
+	+int employeeId
+}
+
+Employee::addressId --> Address::id : foreign key
+Address::employeeId --> Employee::id : foreign key
+
+@enduml

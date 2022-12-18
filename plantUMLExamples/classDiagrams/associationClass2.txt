@@ -1,0 +1,22 @@
+@startuml
+class Person{
+	int id
+	String name
+}
+
+class Address{
+	int id
+	String country
+	String state
+	String city
+	String pin
+}
+
+class PersonAddress{
+	int personId
+	int addressId
+}
+
+Person "0..*" -- "1..*" Address
+(Person, Address) .. PersonAddress
+@enduml
