@@ -1,0 +1,8 @@
+@startuml
+
+object "Parent:Person" as parent
+object "Child:Person" as child
+
+parent <|-- child : Inherit from
+
+@enduml

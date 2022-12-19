@@ -1,0 +1,23 @@
+@startuml
+
+title "Object Association"
+
+map CountryCapitals1 {
+	India => New Delhi
+	Russia => Moscow
+	Germany => Berlin
+}
+
+map "Map **ContryName => CapitalCity**" as CountryCapitals2 {
+	India => New Delhi
+	Russia => Moscow
+	Germany => Berlin
+}
+
+map "map: Map<String, String>" as CountryCapitals3 {
+	India => New Delhi
+	Russia => Moscow
+	Germany => Berlin
+}
+
+@enduml

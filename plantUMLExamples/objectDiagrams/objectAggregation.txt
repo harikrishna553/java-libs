@@ -1,0 +1,32 @@
+@startuml
+
+title "Object Aggregation"
+
+object "My:Car" as myCar
+
+object "My:Engine" as myEngine
+object "My:Transmission" as myTransmission
+object "My:Battery" as myBattery
+object "My:Alternator" as myAlternator
+object "My:Radiator" as myRadiator
+object "My:Brakes" as myBrakes
+object "My:FuelTank" as myFuelTank
+
+object "My:Piston" as myPiston
+object "My:Flywheel" as myFlywheel
+object "My:Gasket" as myGasket
+
+myCar o-- myEngine
+myCar o-- myTransmission
+myCar o-- myBattery
+myCar o-- myAlternator
+myCar o-- myRadiator
+myCar o-- myBrakes
+myCar o-- myEngine
+myCar o-- myFuelTank
+
+myEngine o-- myPiston
+myEngine o-- myFlywheel
+myEngine o-- myGasket
+
+@enduml

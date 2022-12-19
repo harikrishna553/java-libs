@@ -1,0 +1,24 @@
+@startuml
+
+	object "ABC Demo Corporaiton" as corp
+
+	object "HR:Department" as hr
+	object "Finance:Department" as finance
+	object "CampusRecruit:Department" as campusRecruit
+
+	object "Emp1:Employee" as emp1
+	object "Emp1:Employee" as emp2
+	object "Emp1:Employee" as emp3
+	object "Emp1:Employee" as emp4
+
+
+	corp -- hr
+	corp -- finance
+	corp -- campusRecruit
+
+	hr -- emp1
+	hr -- emp2
+	finance -- emp3
+	campusRecruit -- emp4
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+
+object "New Delhi" as newDelhi {
+	population: 32066000
+}
+
+object Moscow {
+	population: 11900000
+}
+
+object Berlin {
+	population: 3640000
+}
+
+map CountryCapitals1 {
+	India *--> newDelhi
+	Russia *--> Moscow
+	Germany *--> Berlin
+}
+
+@enduml

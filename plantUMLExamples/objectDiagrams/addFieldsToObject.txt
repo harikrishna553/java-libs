@@ -1,0 +1,21 @@
+@startuml
+
+title "Object Association"
+
+object "Anand:Manager" as anand
+anand : name = Anand
+anand : age = 45
+
+object "Ravi:Employee" as ravi
+object "Sailu:Employee" as sailu
+
+ravi --> anand : reports to
+sailu --> anand : reports to
+
+object "ChatServer:Project" as chatServer
+chatServer : name = "Chat Server"
+chatServer : description = "applicaiton send and receive messages"
+
+anand ..> chatServer : manages
+
+@enduml

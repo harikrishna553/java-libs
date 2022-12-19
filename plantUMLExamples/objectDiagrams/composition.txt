@@ -1,0 +1,17 @@
+@startuml
+
+title "Object Composition"
+
+object "My:Brain" as brain
+
+object "My:Frontal" as frontal
+object "My:Parietal" as parietal
+object "My:Temporal" as temporal
+object "My:Occipital" as occipital
+
+brain *-- frontal
+brain *-- parietal
+brain *-- temporal
+brain *-- occipital
+
+@enduml
