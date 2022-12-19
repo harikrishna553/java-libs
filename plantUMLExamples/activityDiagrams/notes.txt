@@ -1,0 +1,17 @@
+@startuml
+
+start
+
+:activity1;
+note left: This is activity1
+
+:activity2;
+note right
+	This is activity2 and this note
+	can span across multiple lines and
+	can support <b>HTML</b> tags.
+end note
+
+stop
+
+@enduml

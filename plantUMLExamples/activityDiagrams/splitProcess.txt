@@ -1,0 +1,17 @@
+@startuml
+
+start
+
+split
+	:Task1;
+split again
+	:Task2;
+split again
+	:Task2;
+end split
+
+:Merge Task1, Task2 and Task3 results;
+
+stop
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+
+start
+
+split
+	:Task1;
+	kill
+split again
+	:Task2;
+	detach
+split again
+	:Task3;
+	stop
+split again
+	:Task4;
+	end
+end split
+
+
+@enduml

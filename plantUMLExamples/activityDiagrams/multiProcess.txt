@@ -1,0 +1,23 @@
+@startuml
+
+start
+
+:Read the data from 3 servers parallely;
+fork
+	:Read the data from server 1;
+fork again
+	:Read the data from server 2;
+fork again
+	:Read the data from server 3;
+end fork
+
+:Write the data to destinations parallely;
+fork
+	:Write the data to GCP Bucket;
+fork again
+	:Write the data to HDFC;
+end fork
+
+stop
+
+@enduml
