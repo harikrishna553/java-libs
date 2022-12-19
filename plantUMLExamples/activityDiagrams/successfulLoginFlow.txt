@@ -1,0 +1,17 @@
+
+@startuml
+
+title "User login flow"
+
+start
+
+:User entered correct username and password;
+
+: Validate user credentials;
+
+: Take user to the home page;
+
+stop
+
+@enduml
+

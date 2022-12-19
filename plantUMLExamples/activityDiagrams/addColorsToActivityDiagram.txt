@@ -1,0 +1,22 @@
+@startuml
+
+title "Student grade"
+
+!pragma useVerticalIf on
+start
+
+if (marks < 35) then (yes)
+	#pink :Print 'You are failed';
+elseif (marks < 50) then (yes)
+    #gold:Print 'You are passed and got third class';
+elseif (marks < 60) then (yes)
+    #aqua:Print 'You are passed and got second class';
+elseif (marks < 70) then (yes)
+    #palegreen:Print 'You are passed and got first class';
+else (no case matched)
+    #00ff00:Print 'You are passed and got distinction';
+endif
+
+stop
+
+@enduml

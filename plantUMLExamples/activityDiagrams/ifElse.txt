@@ -1,0 +1,17 @@
+@startuml
+
+title "User login flow"
+
+start
+
+:User enter username and password;
+
+if (credentials are correct) then (yes)
+	: Take user to the home page;
+else (no)
+    : Take user to the login page and **display error message**;
+endif
+
+stop
+
+@enduml

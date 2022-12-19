@@ -1,0 +1,20 @@
+@startuml
+
+!pragma useVerticalIf on
+start
+
+if (database credentials  configured) then (no)
+	#pink :Print 'no database credentias found and exit';
+	stop
+else (yes)
+   if (port 8080 is available) (no)
+     #pink : Print 'Port 8080 is not available and exit';
+     stop
+   else (yes)
+   	 #palegreen : Print 'Initializing the application';
+   endif
+endif
+
+stop
+
+@enduml

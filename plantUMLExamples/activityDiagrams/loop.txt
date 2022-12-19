@@ -1,0 +1,18 @@
+@startuml
+
+title "Print the file data to console"
+
+!pragma useVerticalIf on
+
+start
+
+repeat
+	:read next 1024 bytes from file into the buffer;
+	:print the buffer data to console;
+repeat while (have more data?) is (yes)
+
+->no;
+
+stop
+
+@enduml

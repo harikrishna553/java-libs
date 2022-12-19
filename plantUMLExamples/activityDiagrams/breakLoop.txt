@@ -1,0 +1,28 @@
+@startuml
+
+title "Print the file data to console"
+
+!pragma useVerticalIf on
+
+start
+
+:read maximum bytes (maxBytesToRead) to read from file;
+:set maximumReadCounter=0;
+
+repeat
+	:read next byte from file;
+	:print the byte to console;
+	:increment the maximumReadCounter by 1;
+
+	if(maximumReadCounter >= maxBytesToRead) then (yes)
+		#pink: Print the message'Read maximum bytes' to the console;
+		break
+	endif
+
+repeat while (have more data?) is (yes)
+
+->no;
+
+stop
+
+@enduml
