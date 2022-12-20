@@ -1,0 +1,23 @@
+@startuml
+
+title "interface element"
+
+interface interface1
+interface "my interface 2" as interface2
+() interface3
+() "my interface 4" as interface4
+
+interface interface5 [
+This is interface5, 
+<b>HTML</b> styling is supported
+]
+
+interface interface6 #palegreen;line:blue;line.bold;text:blue[
+This is interface 6
+]
+
+' Use this staement to model the interface as circle
+' Otherwise PlantUML can't deduce it as deployment diagram
+label "\t\t\t\t\t\t\t\t\t<b>interface example</b>"
+
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+
+node node1
+node node2
+node node3
+node node4
+node node5
+node node6
+node node7
+node node8
+node node9
+node node10
+node node11
+node node12
+node node13
+node node14
+node node15
+node node16
+node node17
+node node18
+
+node1 --> node2
+node1 --* node3
+node1 --o node4
+node1 --+ node5
+node1 --# node6
+node1 -->> node7
+
+node8 --0 node9
+node8 --^ node10
+node8 --(0 node11
+
+node12 -0- node13
+node12 -0)- node14
+node12 -(0- node15
+node12 -(0)- node16
+node12 <-0-> node17
+node12 <-(0)-> node18
+
+@enduml

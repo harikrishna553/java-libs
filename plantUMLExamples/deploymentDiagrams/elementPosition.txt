@@ -1,0 +1,24 @@
+@startuml
+
+node node1
+node node2
+node node3
+node node4
+node node5
+node node6
+node node7
+node node8
+node node9
+node node10
+
+node1 -left-> node2
+node1 -right-> node3
+node1 -up-> node4
+node1 -down-> node5
+
+node10 -le-> node6
+node10 -ri-> node7
+node10 -up-> node8
+node10 -do-> node9
+
+@enduml

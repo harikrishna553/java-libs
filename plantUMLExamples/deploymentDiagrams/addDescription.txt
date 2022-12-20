@@ -1,0 +1,25 @@
+@startuml
+
+title "Deployment diagram elements"
+
+actor actor1 #aliceblue;line:blue;line.dotted;text:blue[
+This is actor
+]
+
+node node1 #white;line:green;line.bold;text:green[
+This is node.
+<b>HTML</b> <color:blue>styling</color> supported
+]
+
+database database1 #silver;line:gold;line.dashed;text:blue [
+	This is folder
+	You can use separators -, =, ...
+	----
+	style1
+	=====
+	style2
+	....
+	style3
+]
+
+@enduml

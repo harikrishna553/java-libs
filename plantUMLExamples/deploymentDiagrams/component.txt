@@ -1,0 +1,17 @@
+@startuml
+
+title "component element"
+
+component component1
+component "my component 2" as component2
+
+component component3 [
+This is component3, 
+<b>HTML</b> styling is supported
+]
+
+component component4 #palegreen;line:blue;line.bold;text:blue[
+This is component 4
+]
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+
+node node1
+node node2
+node node3
+node node4
+node node5
+
+node1 -[#red]-> node2 : [red color line]
+node1 -[#00ff00]-> node3  : [green color line]
+node1 -[#blue,dotted]-> node4 : [blue dotted line]
+node1 -[#pink,dashed,thickness=8]-> node5 : [pink dashed line]
+
+@enduml

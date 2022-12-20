@@ -1,0 +1,16 @@
+@startuml
+
+title "actor element"
+
+actor actor1
+
+actor actor2 [
+This is actor2, 
+<b>HTML</b> styling is supported
+]
+
+actor actor3 #palegreen;line:blue;line.dotted;text:blue[
+This is actor 3
+]
+
+@enduml

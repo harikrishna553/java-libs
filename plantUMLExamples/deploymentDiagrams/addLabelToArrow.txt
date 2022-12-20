@@ -1,0 +1,14 @@
+@startuml
+
+node node1
+node node2
+node node3
+node node4
+
+node1 -left-> node2 : [<b>left side</b>]
+node1 -right-> node3 : [right side]
+node1 -up-> node4 : [up side]
+node1 -down-> node5 : [down side]
+
+
+@enduml
