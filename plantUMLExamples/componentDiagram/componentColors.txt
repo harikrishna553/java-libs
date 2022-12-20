@@ -1,40 +1,74 @@
 @startuml
 
-[User]
+skinparam BackgroundColor transparent
 
-package "ATM Machine" {
-	component "Balance Enquiry" as BE #Yellow
-	[Cash Withdrawl] as CE #PaleGreen
-	component [Amount Deposit] #Aqua
-	[Request Loan] #Gold
-	[Transfer Amount] #Silver
+skinparam package {
+	backgroundColor gold 
 }
 
-package "Bank Server"{
-	cloud {
-		[Account Manager] #red
-	}
+skinparam node {
+	borderColor Green
+	backgroundColor Yellow 
 }
 
-package "Loan Server"{
-	cloud {
-		[Loan management system] #LightBlue
-	}
+skinparam component {
+	backgroundColor<<automated>> DarkKhaki
+	backgroundColor<<tested>> Green
+	backgroundColor PaleGreen
 }
 
-[User] --> [BE]
-[User] --> [CE]
-[User] --> [Amount Deposit]
-[User] --> [Request Loan]
-[User] --> [Transfer Amount]
+skinparam database{
+	BackgroundColor Aqua
+}
 
-[BE] --> [Account Manager]
-[CE] --> [Account Manager]
-[Amount Deposit] --> [Account Manager]
-[Transfer Amount] --> [Account Manager]
+skinparam cloud {
+	BackgroundColor #00FF05
+}
 
-[Request Loan] --> [Loan management system]
+skinparam folder {
+	backgroundColor lightblue 
+}
 
-[Loan management system] --> [Account Manager]
+skinparam frame {
+	backgroundColor lightyellow 
+}
+
+package "Package1"{
+	HTTPS --> [Component1]
+	[Component2]
+}
+
+node "node1" {
+	[Component3] <<automated>> as Component3
+	SFTP --> [Component3]
+	[Component4]
+}
+
+cloud "cloud1"{
+	[Component5] <<tested>> as Component5
+	WEBServices --> [Component5]
+	[Component6]
+}
+
+database "databaseServers" {
+	[MySQL]
+	[MongoDB]
+}
+
+folder "userInfoFolder"{
+	[AdminDetails]
+	[UserDetails]
+	[SupportUserDetails]
+}
+
+frame "frame1"{
+  [Component10]
+  [Component11]
+}
+
+[Component1] --> [Component5]
+[Component6] --> [MySQL]
+[Component11] --> [MongoDB]
+[Component3] --> [Component10]
 
 @enduml

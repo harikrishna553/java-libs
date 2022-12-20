@@ -1,0 +1,14 @@
+@startuml
+
+hide @unlinked
+
+component C1
+component C2
+component C3
+component C4
+component C5
+
+[C1] --> [C2]
+[C1] --> [C5]
+
+@enduml
