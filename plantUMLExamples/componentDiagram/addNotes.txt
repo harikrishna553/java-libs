@@ -1,0 +1,28 @@
+@startuml
+
+[Order]
+[Customer]
+[Product]
+
+interface ProductCode
+interface CustomerDetails
+
+[Order] -- CustomerDetails
+CustomerDetails --> [Customer]
+
+[Order] -- ProductCode
+ProductCode --> [Product]
+
+note left of [Order] : Order management system
+
+note right of [Customer] 
+	Customer management system
+	holds customer details
+end note
+
+note bottom of [Product] : product management system
+
+note right of ProductCode: access via https
+note right of CustomerDetails: access via https
+
+@enduml

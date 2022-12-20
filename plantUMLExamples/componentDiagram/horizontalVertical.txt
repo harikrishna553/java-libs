@@ -1,0 +1,6 @@
+@startuml
+
+[Component1] --> [Component2] : Vertical
+[Component1] -> [Component3] : Horizontal
+
+@enduml

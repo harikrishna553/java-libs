@@ -1,0 +1,40 @@
+@startuml
+
+[User]
+
+package "ATM Machine" {
+	component "Balance Enquiry" as BE
+	[Cash Withdrawl] as CE
+	component [Amount Deposit]
+	[Request Loan]
+	[Transfer Amount]
+}
+
+package "Bank Server"{
+	cloud {
+		[Account Manager]
+	}
+}
+
+package "Loan Server"{
+	cloud {
+		[Loan management system]
+	}
+}
+
+[User] --> [BE] : Request Balance
+[User] --> [CE] : Request cash withdrawl
+[User] --> [Amount Deposit] : Deposit Amount
+[User] --> [Request Loan]: request loan
+[User] --> [Transfer Amount] : transfer to other account
+
+[BE] --> [Account Manager]
+[CE] --> [Account Manager]
+[Amount Deposit] --> [Account Manager]
+[Transfer Amount] --> [Account Manager]
+
+[Request Loan] --> [Loan management system]
+
+[Loan management system] --> [Account Manager] : Check account details
+
+@enduml

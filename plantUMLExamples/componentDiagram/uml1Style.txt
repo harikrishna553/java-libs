@@ -1,0 +1,10 @@
+@startuml
+
+skinparam componentStyle uml1
+
+[Component1] -left-> [Component2] : left
+[Component1] -right-> [Component3] : right
+[Component1] -up-> [Component4] : up
+[Component1] -down-> [Component5] : down
+
+@enduml

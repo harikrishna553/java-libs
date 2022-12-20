@@ -1,0 +1,40 @@
+@startuml
+
+[User]
+
+package "ATM Machine" {
+	component "Balance Enquiry" as BE #Yellow
+	[Cash Withdrawl] as CE #PaleGreen
+	component [Amount Deposit] #Aqua
+	[Request Loan] #Gold
+	[Transfer Amount] #Silver
+}
+
+package "Bank Server"{
+	cloud {
+		[Account Manager] #red
+	}
+}
+
+package "Loan Server"{
+	cloud {
+		[Loan management system] #LightBlue
+	}
+}
+
+[User] --> [BE]
+[User] --> [CE]
+[User] --> [Amount Deposit]
+[User] --> [Request Loan]
+[User] --> [Transfer Amount]
+
+[BE] --> [Account Manager]
+[CE] --> [Account Manager]
+[Amount Deposit] --> [Account Manager]
+[Transfer Amount] --> [Account Manager]
+
+[Request Loan] --> [Loan management system]
+
+[Loan management system] --> [Account Manager]
+
+@enduml

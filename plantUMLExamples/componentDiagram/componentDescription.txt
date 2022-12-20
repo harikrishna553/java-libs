@@ -1,0 +1,8 @@
+@startuml
+
+component WebServer #PaleGreen [
+WebServer receive the 
+incoming request process it and 
+send the response to client 
+]
+@enduml

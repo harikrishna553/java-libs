@@ -1,0 +1,16 @@
+@startuml
+
+[Order]
+[Customer]
+[Product]
+
+interface ProductCode
+interface CustomerDetails
+
+[Order] -- CustomerDetails
+CustomerDetails --> [Customer]
+
+[Order] -- ProductCode
+ProductCode --> [Product]
+
+@enduml
