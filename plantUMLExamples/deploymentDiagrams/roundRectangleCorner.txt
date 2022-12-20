@@ -1,0 +1,16 @@
+@startuml
+
+skinparam roundCorner 100
+
+skinparam rectangle {
+	roundCorner<<type1>> 25
+	roundCorner<<type2>> 50
+	roundCorner<<type3>> 75
+}
+
+rectangle "my rectangle1" <<type1>>
+rectangle "my rectangle2" <<type2>>
+rectangle "my rectangle3" <<type3>>
+rectangle "my rectangle4" <<type4>>
+
+@enduml

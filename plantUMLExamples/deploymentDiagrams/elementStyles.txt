@@ -1,0 +1,7 @@
+@startuml
+
+node node1  #aqua;line:red;line.bold;text:red
+cloud cloud1  #gold;line:green;line.dashed;text:blue
+frame frame1  #palegreen;line:blue;line.dotted;text:red
+
+@enduml

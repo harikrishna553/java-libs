@@ -1,0 +1,164 @@
+@startuml
+
+title "Apply styles for elements separately"
+
+<style>
+actor {
+  BackGroundColor #faaaff
+  LineThickness 1
+  LineColor black
+}
+agent {
+  BackGroundColor #fbb5fe
+  LineThickness 1
+  LineColor black
+}
+artifact {
+  BackGroundColor #fcc9fd
+  LineThickness 1
+  LineColor black
+}
+boundary {
+  BackGroundColor #eddbfc
+  LineThickness 1
+  LineColor black
+}
+card {
+  BackGroundColor #eee5fb
+  LineThickness 1
+  LineColor black
+}
+circle {
+  BackGroundColor #eff9fa
+  LineThickness 1
+  LineColor black
+}
+cloud {
+  BackGroundColor #daacff
+  LineThickness 1
+  LineColor black
+}
+collections {
+  BackGroundColor #dbb5fe
+  LineThickness 1
+  LineColor black
+}
+component {
+  BackGroundColor #dcc9fd
+  LineThickness 1
+  LineColor black
+}
+control {
+  BackGroundColor #cdddfc
+  LineThickness 1
+  LineColor black
+}
+database {
+  BackGroundColor #cee5fb
+  LineThickness 1
+  LineColor black
+}
+entity {
+  BackGroundColor #cff9fa
+  LineThickness 1
+  LineColor black
+}
+file {
+  BackGroundColor #baaeff
+  LineThickness 1
+  LineColor black
+}
+folder {
+  BackGroundColor #bbb5fe
+  LineThickness 1
+  LineColor black
+}
+frame {
+  BackGroundColor #bcc9fd
+  LineThickness 1
+  LineColor black
+}
+hexagon {
+  BackGroundColor #addffc
+  LineThickness 1
+  LineColor black
+}
+interface {
+  BackGroundColor #aee5fb
+  LineThickness 1
+  LineColor black
+}
+label {
+  BackGroundColor #aff9fa
+  LineThickness 1
+  LineColor black
+}
+node {
+  BackGroundColor black
+  LineThickness 1
+  LineColor black
+}
+package {
+  BackGroundColor aqua
+  LineThickness 1
+  LineColor black
+}
+person {
+  BackGroundColor PaleGreen
+  LineThickness 1
+  LineColor black
+}
+queue {
+  BackGroundColor blue
+  LineThickness 1
+  LineColor black
+}
+rectangle {
+  BackGroundColor red
+  LineThickness 1
+  LineColor black
+}
+stack {
+  BackGroundColor pink
+  LineThickness 1
+  LineColor black
+}
+storage {
+  BackGroundColor lightblue
+  LineThickness 1
+  LineColor black
+}
+usecase {
+  BackGroundColor lightgreen
+  LineThickness 1
+  LineColor black
+}
+</style>
+
+actor actor1
+agent agent1
+artifact artifact1
+boundary boundary1
+card card1
+circle circle1
+cloud cloud1
+collections collections1
+component component1
+control control1
+database database1
+entity entity1
+file file1
+folder folder1
+frame frame1
+hexagon hexagon1
+interface interface1
+label label1
+node node1
+package package1
+queue queue1
+rectangle rectangle1
+stack stack1
+storage storage1
+usecase usecase1
+
+@enduml
