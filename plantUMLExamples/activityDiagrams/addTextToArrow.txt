@@ -1,0 +1,18 @@
+@startuml
+
+start
+
+:Activity1;
+->This is arrow1 description;
+
+:Activity2;
+->This is arrow2
+multi line description;
+
+:Activity3;
+->This is arrow3
+multi line description;
+
+stop
+
+@enduml

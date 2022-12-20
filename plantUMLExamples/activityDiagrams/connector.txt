@@ -1,0 +1,15 @@
+@startuml
+
+start
+
+:Activity1;
+:Activity2;
+(C)
+kill
+(C)
+:Activity3;
+
+
+stop
+
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+
+skinparam ArrowHeadColor none
+start
+
+:Activity1;
+:Activity2;
+:Activity3;
+
+stop
+
+@enduml

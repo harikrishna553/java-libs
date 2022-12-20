@@ -1,0 +1,21 @@
+@startuml
+
+|#gold|lane1|
+	start
+	:activity1;
+|#palegreen|lane2|
+	:activtiy3;
+	:activtiy4;
+|#aqua|lane3|
+	:activtiy5;
+|lane1|
+:activtiy6;
+:activtiy7;
+|lane3|
+	:activtiy8;
+|lane2|
+	:activtiy9;
+	:activtiy10;
+
+stop
+@enduml

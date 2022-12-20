@@ -1,0 +1,24 @@
+@startuml
+
+start
+
+split
+	:Task1;
+	fork
+		:subTask1;
+	fork again
+		:subTask2;
+		kill
+	fork again
+		:subTask3;
+	end fork
+split again
+	:Task2;
+split again
+	:Task2;
+	detach
+end split
+
+stop
+
+@enduml

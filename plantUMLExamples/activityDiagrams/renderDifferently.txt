@@ -1,0 +1,16 @@
+@startuml
+
+start
+
+:My activity1;
+:My activity2|
+:My activity3<
+:My activity4>
+:My activity5/
+:My activity6\\
+:My activity7]
+:My activity8}
+
+stop
+
+@enduml

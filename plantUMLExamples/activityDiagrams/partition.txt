@@ -1,0 +1,19 @@
+@startuml
+
+start
+
+partition partition1{
+	:activity1;
+	:activity2;
+	:activity3;
+}
+
+partition partition2{
+	:activity4;
+	:activity5;
+	:activity6;
+}
+
+stop
+
+@enduml

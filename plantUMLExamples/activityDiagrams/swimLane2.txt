@@ -1,0 +1,29 @@
+@startuml
+
+|#gold|Customer|
+	start
+	:Insert card;
+	:Enter pin;
+|#palegreen|ATM|
+|#aqua|Bank|
+	if (pin is correct) then (yes)
+		|Customer|
+		:Enter amount;
+
+		|Bank|
+		:Check account balance;
+
+		if (entered amount > balance) then (yes)
+			|Customer|
+			:Insuffecient funds in the account;
+		else (suffecient balance)
+			|ATM|
+			:Give the money to customer;
+			:Show home page screen;
+		endif
+	else (no)
+    	|Customer|
+		:Invalid pin;
+	endif
+stop
+@enduml

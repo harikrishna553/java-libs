@@ -1,0 +1,14 @@
+@startuml
+
+start
+
+:Activity1;
+#aqua:(A)
+:Activity2;
+#gold:(G)
+:Activity3;
+#silver:(S)
+
+stop
+
+@enduml

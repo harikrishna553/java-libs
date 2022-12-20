@@ -1,0 +1,19 @@
+@startuml
+
+start
+
+:Activity1;
+-[#blue]->
+
+:Activity2;
+-[#red,bold]->red and bold color;
+
+:Activity3;
+-[#green,dotted]-> green and dotted;
+
+:Activity4;
+-[#gold,dashed]-> gold and dashed;
+
+stop
+
+@enduml
