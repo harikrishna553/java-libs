@@ -1,0 +1,27 @@
+@startjson
+
+{
+	"id" : 1,
+	"name" : "Krishna",
+	"address" : {
+		"state" : "Karnatka",
+		"city" : "Bnagalore",
+		"country" : "India"
+	},
+	"hobbies" : [
+		"Playing cricket",
+		"blogging"
+	],
+	"emails" : [
+		{
+			"id" : "demo@demo1.com",
+			"type" : "personal"
+		},
+		{
+			"id" : "demo@demo2.com",
+			"type" : "official"
+		}
+	]
+}
+
+@endjson

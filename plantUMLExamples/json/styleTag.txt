@@ -1,0 +1,66 @@
+@startjson
+
+<style>
+jsonDiagram {
+	node {
+		BackGroundColor silver
+		LineColor red
+		FontName Helvetica
+		FontColor blue
+		FontSize 12
+		FontStyle italic
+		RoundCorner 5
+		LineThickness 1
+		LineStyle 10;5
+		separator {
+			LineThickness 0.5
+			LineColor brown
+			LineStyle 1;5
+		}
+	}
+
+	arrow {
+		BackGroundColor lightblue
+		LineColor green
+		LineThickness 2
+		LineStyle 2;5
+	}
+
+	highlight {
+		BackGroundColor green
+		FontColor white
+		FontStyle italic
+	}
+}
+</style>
+
+#highlight "name"
+#highlight "address" / "city"
+#highlight "hobbies" / "1"
+#highlight "emails" / "0" / "id"
+
+{
+	"id" : 1,
+	"name" : "Krishna",
+	"address" : {
+		"state" : "Karnatka",
+		"city" : "Bnagalore",
+		"country" : "India"
+	},
+	"hobbies" : [
+		"Playing cricket",
+		"blogging"
+	],
+	"emails" : [
+		{
+			"id" : "demo@demo1.com",
+			"type" : "personal"
+		},
+		{
+			"id" : "demo@demo2.com",
+			"type" : "official"
+		}
+	]
+}
+
+@endjson

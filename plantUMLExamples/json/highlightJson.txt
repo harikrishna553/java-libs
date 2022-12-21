@@ -1,0 +1,32 @@
+@startjson
+
+#highlight "name"
+#highlight "address" / "city"
+#highlight "hobbies" / "1"
+#highlight "emails" / "0" / "id"
+
+{
+	"id" : 1,
+	"name" : "Krishna",
+	"address" : {
+		"state" : "Karnatka",
+		"city" : "Bnagalore",
+		"country" : "India"
+	},
+	"hobbies" : [
+		"Playing cricket",
+		"blogging"
+	],
+	"emails" : [
+		{
+			"id" : "demo@demo1.com",
+			"type" : "personal"
+		},
+		{
+			"id" : "demo@demo2.com",
+			"type" : "official"
+		}
+	]
+}
+
+@endjson
