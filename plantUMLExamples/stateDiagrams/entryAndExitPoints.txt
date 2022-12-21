@@ -1,0 +1,23 @@
+@startuml
+
+left to right direction
+
+state MyState{
+	state state1
+	state state2
+	state state3
+    state entry1 <<entryPoint>>
+	state entry2 <<entryPoint>>
+	state exit1 <<exitPoint>>
+}
+
+[*] --> entry1
+start --> entry2
+entry1 --> state1
+entry2 --> state2
+state1 --> state3
+state2 --> state3
+state3 --> exit1
+exit1 --> [*]
+
+@enduml

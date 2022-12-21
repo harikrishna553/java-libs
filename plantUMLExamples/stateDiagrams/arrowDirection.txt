@@ -1,0 +1,10 @@
+@startuml
+
+[*] --> state1
+state1 -right-> state2
+state2 -down-> state3
+state3 -left-> state4
+state4 -up-> state5
+state5 -up-> [*]
+
+@enduml

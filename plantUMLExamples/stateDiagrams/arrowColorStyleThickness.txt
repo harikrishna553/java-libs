@@ -1,0 +1,11 @@
+@startuml
+
+
+[*] --> state1
+state1 -[dotted,#blue,thickness=10]-> state2
+state2 -down[dashed,#red,thickness=5]-> state3
+state3 -left[bold,#green,thickness=10]-> state4
+state4 -up[#DD00AA]-> state5
+state5 -up[dotted,#brown]-> [*]
+
+@enduml

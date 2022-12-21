@@ -1,0 +1,22 @@
+@startuml
+
+left to right direction
+
+state "power off" as off #pink
+
+state running #palegreen{
+	state washing 
+	state rinsing
+	state spinning
+
+        off --> [H] : restore power
+}
+
+
+[*] --> washing : start
+washing --> rinsing
+rinsing --> spinning
+running --> off : power cut
+running --> [*] : stop
+
+@enduml

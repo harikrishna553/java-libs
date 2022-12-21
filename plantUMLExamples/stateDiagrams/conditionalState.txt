@@ -1,0 +1,12 @@
+@startuml
+
+state init
+state someCondition <<choice>> 
+state "less utilized resources" as lur
+state "high utilized resources" as hur
+
+init --> someCondition 
+someCondition --> lur : [memory < 500gb]
+someCondition --> hur : [memory >= 500gb]
+
+@enduml

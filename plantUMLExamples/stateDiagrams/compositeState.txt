@@ -1,0 +1,19 @@
+@startuml
+
+state compositeState1 {
+	state subState1 {
+		state s1
+		state s2
+	}
+	state subState2
+}
+
+state state2
+
+[*] --> compositeState1
+s1 --> s2
+s1 --> state2
+subState2 --> subState1
+state2 --> [*]
+
+@enduml
