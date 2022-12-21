@@ -1,0 +1,18 @@
+@startyaml
+
+#highlight "name"
+#highlight "address" / "city"
+#highlight "hobbies" / "1"
+#highlight "emails" / "0" / "id"
+
+id: 1
+name: Krishna
+address:
+  state: Karnatka
+  city: Bnagalore
+  country: India
+hobbies:
+- Playing cricket
+- blogging
+
+@endyaml

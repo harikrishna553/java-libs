@@ -1,0 +1,13 @@
+@startyaml
+
+id: 1
+name: Krishna
+address:
+  state: Karnatka
+  city: Bnagalore
+  country: India
+hobbies:
+- Playing cricket
+- blogging
+
+@endyaml
