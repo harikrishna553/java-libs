@@ -1,0 +1,21 @@
+@startuml
+
+[*] --> state1
+state1 --> state2
+state2 --> state3
+state3 --> state4
+state4 --> state5
+state5 --> [*]
+
+note left of state1 : short note on state1
+
+note right of state2
+long note that can span
+across multiple lines
+end note
+
+note top of state3 : short note on state3
+
+note bottom of state4 : short note on state4
+
+@enduml

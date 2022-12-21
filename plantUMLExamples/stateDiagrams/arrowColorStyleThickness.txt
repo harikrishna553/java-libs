@@ -1,6 +1,5 @@
 @startuml
 
-
 [*] --> state1
 state1 -[dotted,#blue,thickness=10]-> state2
 state2 -down[dashed,#red,thickness=5]-> state3
