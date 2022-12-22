@@ -1,0 +1,19 @@
+@startuml
+
+skinparam titleBorderRoundCorner 25
+skinparam titleBorderThickness 3
+skinparam titleBorderColor blue
+skinparam titleBackgroundColor gold
+
+scale 500*1024
+
+title "Simple user login flow"
+
+Client -> LoginServer: Enter user name
+Client -> LoginServer: Enter password
+Client -> LoginServer: Submit the form 
+LoginServer -> ADServer: Check the credentials
+ADServer -> LoginServer: Login Successful
+LoginServer -> Client: Login Successful
+
+@enduml

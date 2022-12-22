@@ -1,0 +1,6 @@
+@startuml
+
+client --> server: please solve : <latex>\sum_{i=0}^{n-1} (a_i + b_i^2)</latex>
+server --> client: send the response
+
+@enduml

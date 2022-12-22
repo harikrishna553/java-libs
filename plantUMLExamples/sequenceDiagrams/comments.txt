@@ -1,0 +1,20 @@
+@startuml
+
+'-----------------------------------------------------
+' Author : Krishna
+' Date : 22-12-2022
+' Client : Component is responsible to send
+'		   the messages to server
+' LoginServer : Server receive the messages
+'				from client and process
+' ADServer : Responsible to validate User credentials
+'-----------------------------------------------------
+
+Client -> LoginServer: Enter user name
+Client -> LoginServer: Enter password
+Client -> LoginServer: Submit the form 
+LoginServer -> ADServer: Check the credentials
+ADServer -> LoginServer: Login Successful
+LoginServer -> Client: Login Successful
+
+@enduml
