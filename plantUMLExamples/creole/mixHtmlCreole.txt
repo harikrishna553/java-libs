@@ -1,0 +1,15 @@
+@startuml
+
+skinparam NoteFontSize 8
+
+scale 1.5
+
+Client -> Server: Send message
+
+
+note left of Client 
+Client is responsible to send **Messages**
+over <color:#FF0000><b><i>https protocol</i></b></color>
+end note
+
+@enduml

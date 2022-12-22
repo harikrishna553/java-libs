@@ -1,0 +1,29 @@
+@startuml
+
+scale 1.5
+
+skinparam NoteBackgroundColor Wheat
+skinparam NoteBorderColor red
+skinparam NoteBorderThickness 3
+skinparam NoteFontColor black
+skinparam NoteFontName Papyrus
+skinparam NoteFontSize 8
+skinparam NoteFontStyle italic
+skinparam NoteShadowing true
+' skinparam NoteTextAlignment right
+
+Client -> Server: Send message
+
+
+note left of Client 
+# message 1
+# message 2
+## submessage1
+## submessage
+# message 3
+* submessage 1
+* submessage 2
+# message 4
+end note
+
+@enduml

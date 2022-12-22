@@ -1,0 +1,16 @@
+@startuml
+
+scale 1.5
+
+Client -> Server: Client send employees information
+Server -> Client: Server process employees data and send response
+
+
+note left of Client 
+Example of simple employees data
+|= id |= name |= age |
+| <#ff00ff>1 | <#PaleGreen> Krishna | <#PaleVioletRed>34 |
+<#YellowGreen>| 2 | Ram | 43 |
+end note
+
+@enduml

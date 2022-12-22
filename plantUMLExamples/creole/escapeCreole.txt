@@ -1,0 +1,13 @@
+@startuml
+
+scale 1.5
+
+Client -> Server: Send message
+
+
+note left of Client 
+This is **printed in bold**
+This is not ~*~*printed in bold~*~*
+end note
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+
+skinparam NoteFontSize 8
+
+scale 1.5
+
+Client -> Server: Send message
+
+
+note left of Client 
+----
+Line1
+====
+Line 2
+____
+Line 3
+....
+Line4
+end note
+
+@enduml

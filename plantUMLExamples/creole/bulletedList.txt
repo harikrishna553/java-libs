@@ -1,0 +1,23 @@
+@startuml
+
+skinparam NoteBorderThickness 1
+skinparam NoteFontColor black
+skinparam NoteFontName Papyrus
+skinparam NoteFontSize 15
+skinparam NoteFontStyle italic
+
+
+scale 1.5
+
+Client -> Server: Client send employees information
+Server -> Client: Server process employees data and send response
+
+
+note left of Client 
+=Example of simple employees data
+|= id |= name |= age |
+| 1 | Krishna | 34 |
+| 2 | Ram | 43 |
+end note
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+
+skinparam NoteFontSize 8
+
+scale 1.5
+
+Client -> Server: Client Hello
+Server -> Client: Server Hello
+
+
+note left of Client 
+<code>
+public static void main(String args[]){
+     System.out.println("Hello")
+}
+</code>
+end note
+
+@enduml

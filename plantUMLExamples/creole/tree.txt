@@ -1,0 +1,19 @@
+@startuml
+
+scale 1.5
+
+Client -> Server: Client send folder structure
+Server -> Client: Server process the folder
+
+
+note left of Client 
+root
+|_ folder1
+|_ **Secret Folder**
+|_ folder2
+  |_ subfolder1
+  |_ subfolder2
+|_ folder3
+end note
+
+@enduml

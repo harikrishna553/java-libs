@@ -1,0 +1,15 @@
+@startuml
+
+scale 1.5
+
+Client -> Server: Send message
+
+
+note left of Client 
+= Extra Large heading
+== Large heading
+=== Medium heading
+==== Small heading
+end note
+
+@enduml

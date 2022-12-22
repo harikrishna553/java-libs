@@ -1,0 +1,34 @@
+@startuml
+
+scale 1.5
+
+skinparam NoteBackgroundColor Wheat
+skinparam NoteBorderColor red
+skinparam NoteBorderThickness 3
+skinparam NoteFontColor black
+skinparam NoteFontName Papyrus
+skinparam NoteFontSize 12
+' skinparam NoteFontStyle bold
+skinparam NoteShadowing true
+skinparam NoteTextAlignment right
+
+Client -> LoginServer: Enter user name
+Client -> LoginServer: Enter password
+Client -> LoginServer: Submit the form 
+LoginServer -> ADServer: Check the credentials
+ADServer -> LoginServer: Login Successful
+LoginServer -> Client: Login Successful
+
+note left of Client 
+* This is **bold**
+* This is //italics//
+* This is ""monospaced""
+end note
+
+note right of LoginServer 
+# This is --stricken-out--
+# This is __underlined__
+# This is ~~wave-underlined~~
+end note
+
+@enduml
