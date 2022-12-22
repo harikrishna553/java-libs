@@ -1,0 +1,26 @@
+@startuml
+
+<style>
+
+ legend{
+  FontColor #red
+  FontName Papyrus
+  FontSize 24
+  FontStyle italic
+ }
+ 
+</style>
+
+legend top center
+	short legend
+	on center
+end legend
+
+Client -> LoginServer: Enter user name
+Client -> LoginServer: Enter password
+Client -> LoginServer: Submit the form 
+LoginServer -> ADServer: Check the credentials
+ADServer -> LoginServer: Login Successful
+LoginServer -> Client: Login Successful
+
+@enduml

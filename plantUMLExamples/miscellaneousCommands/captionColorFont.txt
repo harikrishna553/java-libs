@@ -1,0 +1,20 @@
+@startuml
+<style>
+caption {
+  FontColor #red
+  FontName Papyrus
+  FontSize 24
+  FontStyle italic
+}
+</style>
+
+caption figure 1 : Login Server
+
+Client -> LoginServer: Enter user name
+Client -> LoginServer: Enter password
+Client -> LoginServer: Submit the form 
+LoginServer -> ADServer: Check the credentials
+ADServer -> LoginServer: Login Successful
+LoginServer -> Client: Login Successful
+
+@enduml

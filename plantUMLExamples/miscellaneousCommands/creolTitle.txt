@@ -1,0 +1,18 @@
+@startuml
+
+title
+# Simple Login Flow example.
+----
+# Client enter //username and password//, submit to the LoginServer
+----
+# LoginServer validate the credentials
+end title
+
+Client -> LoginServer: Enter user name
+Client -> LoginServer: Enter password
+Client -> LoginServer: Submit the form 
+LoginServer -> ADServer: Check the credentials
+ADServer -> LoginServer: Login Successful
+LoginServer -> Client: Login Successful
+
+@enduml
