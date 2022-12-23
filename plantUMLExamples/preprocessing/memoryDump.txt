@@ -1,0 +1,32 @@
+@startuml
+
+!procedure $fib($arg)
+	!dump_memory
+
+	!$a = 0
+	!$b = 1
+	!$counter = 0
+	!$fib = 0
+
+	!while $counter < $arg
+		#DarkSalmon:for the iteration $counter;
+		#palegreen:a=$a, b=$b;
+
+		!$fib = $a + $b
+		!$a = $b
+		!$b = $fib
+
+		#palegreen:fib=$fib;
+
+		!$counter = $counter + 1
+
+	!endwhile
+
+!endprocedure
+
+
+start
+	$fib(5)
+end
+
+@enduml
