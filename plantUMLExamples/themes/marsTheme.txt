@@ -1,0 +1,38 @@
+@startuml
+
+!theme mars
+
+left to right direction
+skinparam roundCorner 50
+
+title "Operating System Process states" 
+
+state New #magenta
+state Ready #palegreen
+state Running #green
+state "Suspend wait" as  SW #FFBA77
+state "Wait / block" as WB #FFDF77
+state "Suspend ready" as SR #FFFF77
+state Termination #red
+
+[*] --> New
+New --> Ready
+
+Ready --> Running : Schedule/dispatch
+Running --> Ready : Priority/time elapse
+
+Running --> Termination : completion
+Running --> WB : I/O Request
+
+WB --> Ready : I/O completion
+WB --> SW : Suspend
+
+SW --> WB : Resume
+SW --> SR : Completed I/O, but still in suspend
+
+SR --> Ready : Resume
+Ready --> SR : Suspend
+
+Termination --> [*]
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+
+skinparam Activity{
+	BackgroundColor LightSeaGreen
+	BarColor Red
+	BorderColor Purple
+	BorderThickness 3
+	DiamondBackgroundColor Sienna
+	DiamondBorderColor Red
+	FontStyle italic
+	FontSize 18
+	FontName Papyrus
+}
+
+start
+
+partition partition1{
+	:activity1;
+	:activity2;
+	:activity3;
+}
+
+partition partition2{
+	:activity4;
+	:activity5;
+	:activity6;
+}
+
+stop
+
+@enduml
