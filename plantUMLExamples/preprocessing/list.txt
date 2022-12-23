@@ -1,0 +1,21 @@
+interface Collection{
+	
+}
+
+interface Iterable {
+	Iterator iterator()
+}
+
+interface List{
+	int size()
+	void clear()
+	boolean add(E e)
+	void add(int index, E element)
+	addAll(Collection<? extends E> c)
+	void clear()
+	boolean contains(Object o)
+}
+
+Collection <|-- List
+Iterable <|-- List
+

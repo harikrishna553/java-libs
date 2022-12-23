@@ -1,0 +1,17 @@
+@startuml
+
+!$radius1 = 2
+!$radius2 = "2.3456"
+!$msg = "Calculate area of circle for the radius : "
+
+!$payload1 = $msg + $radius1
+!$payload2 = $msg + $radius2
+
+Client -> Server: $payload1
+Server -> Client: Send response
+
+Client -> Server: $payload2
+Server -> Client: Send response
+
+
+@enduml

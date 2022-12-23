@@ -1,0 +1,23 @@
+@startuml
+
+!$studentMarks = 25
+
+!if (%false())
+Server -> Client : message1 will not be traansferred
+!else
+Server -> Client : message2 will be traansferred
+!endif
+
+!if (%true())
+Server -> Client : message3 will be traansferred
+!else
+Server -> Client : message4 will not be traansferred
+!endif
+
+!if (%not(10 > 5))
+Server -> Client : message5 will not be traansferred
+!else
+Server -> Client : message6 will be traansferred
+!endif
+
+@enduml

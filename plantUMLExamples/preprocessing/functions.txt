@@ -1,0 +1,18 @@
+@startuml
+
+!function $sum($a, $b)
+	!return $a + $b
+!endfunction
+
+!function $sub($a, $b)
+	!return $a - $b
+!endfunction
+
+
+!$a = 20
+!$b = 5
+
+sys1 -> sys2 : Sum of $a and $b is $sum(20, 5)
+sys1 -> sys2 : Sub of $a and $b is $sub(20, 5)
+
+@enduml

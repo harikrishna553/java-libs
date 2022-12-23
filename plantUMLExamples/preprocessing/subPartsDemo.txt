@@ -1,0 +1,7 @@
+@startuml
+
+S1 --> S5 : local message
+!includesub parts.txt!SubPart1
+S1 --> S6 : local message
+
+@enduml

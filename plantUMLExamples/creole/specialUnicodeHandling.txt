@@ -1,0 +1,14 @@
+@startuml
+
+scale 1.5
+
+Client -> Server: Client send folder structure
+Server -> Client: Server process the folder
+
+
+note left of Client 
+Special chars1: &#8734;
+Special chars1: <U+2606>
+end note
+
+@enduml

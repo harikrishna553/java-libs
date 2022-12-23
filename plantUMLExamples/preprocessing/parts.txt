@@ -1,0 +1,15 @@
+@startuml
+
+!startsub SubPart1
+	S1 -> S2 : SubPart1 msg1
+	S1 -> S3 : SubPart1 msg2
+	S1 -> S4 : SubPart1 msg3
+!endsub
+
+!startsub SubPart2
+	D1 -> D2 : SubPart2 msg1
+	D1 -> D3 : SubPart3 msg2
+	D1 -> D4 : SubPart3 msg3
+!endsub
+
+@enduml

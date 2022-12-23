@@ -1,0 +1,14 @@
+@startuml
+
+!global $counter = 1
+
+!function $sum($a=5, $b=6)
+	!global $counter = $counter + 1
+	!return $a + $b
+!endfunction
+
+sys1 -> sys2 : $counter. sum() is $sum()
+sys1 -> sys2 : $counter. sum(20) is $sum(20)
+sys1 -> sys2 : $counter. sum(20, 30) is $sum(20, 30)
+
+@enduml

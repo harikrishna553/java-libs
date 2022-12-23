@@ -1,0 +1,11 @@
+@startuml
+
+!include list.txt
+
+class ArrayList{
+	
+}
+
+List <|.. ArrayList
+
+@enduml

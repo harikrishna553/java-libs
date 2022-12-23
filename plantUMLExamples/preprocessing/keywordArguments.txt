@@ -1,0 +1,14 @@
+@startuml
+
+!global $counter = 1
+
+!function $sum($a, $b)
+	!global $counter = $counter + 1
+	!return $a + $b
+!endfunction
+
+sys1 -> sys2 : $counter. sum of 5 and 45 is $sum($b=45, $a=5)
+sys1 -> sys2 : $counter. sum of 5 and 45 is $sum($b=45, 5)
+sys1 -> sys2 : $counter. sum of 5 and 45 is $sum(5, 45)
+
+@enduml

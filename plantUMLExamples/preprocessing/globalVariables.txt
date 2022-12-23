@@ -1,0 +1,28 @@
+@startuml
+
+!global $counter = 1
+
+!function $sum($a, $b)
+	!global $counter = $counter + 1
+	!return $a + $b
+!endfunction
+
+!function $sub($a, $b)
+	!global $counter = $counter + 1
+	!return $a - $b
+!endfunction
+
+
+!$a = 20
+!$b = 5
+
+sys1 -> sys2 : $counter. Sum of $a and $b is $sum(20, 5)
+sys1 -> sys2 : $counter. Sub of $a and $b is $sub(20, 5)
+
+!$a = 25
+!$b = 15
+
+sys1 -> sys2 : $counter. Sum of $a and $b is $sum(20, 5)
+sys1 -> sys2 : $counter. Sub of $a and $b is $sub(20, 5)
+
+@enduml

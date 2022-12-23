@@ -1,0 +1,11 @@
+@startuml
+
+!$studentMarks = 25
+
+!if ($studentMarks < 35)
+Server -> Client : Sorry, better luck next time
+!else
+Server -> Client : Hurray, you are passed in the exam
+!endif
+
+@enduml
