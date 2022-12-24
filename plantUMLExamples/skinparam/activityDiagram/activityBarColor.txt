@@ -1,0 +1,27 @@
+@startuml
+
+skinparam ActivityBarColor #Crimson
+
+left to right direction
+
+state init
+
+state process {
+	state fork_state1 <<fork>>
+	fork_state1 --> p1
+	fork_state1 --> p2
+	fork_state1 --> p3
+
+	state join_state1 <<join>>
+	p1 --> join_state1
+	p2 --> join_state1
+	p3 --> join_state1
+}
+
+[*] --> init
+init --> process
+process --> stop
+stop --> [*]
+
+@enduml
+
