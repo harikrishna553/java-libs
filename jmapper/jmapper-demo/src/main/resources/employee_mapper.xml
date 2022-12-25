@@ -1,0 +1,13 @@
+<jmapper>
+	<class name="com.sample.app.xml_config_demo.EmployeeDto">
+		<attribute name="id">
+			<value name="id" />
+		</attribute>
+		<attribute name="empName">
+			<value name="name" />
+		</attribute>
+		<attribute name="empAge">
+			<value name="age" />
+		</attribute>
+	</class>
+</jmapper>

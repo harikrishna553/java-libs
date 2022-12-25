@@ -1,0 +1,39 @@
+<jmapper>
+	<class name="com.sample.app.relational.mapping.config.Employee">
+		<attribute name="id">
+			<value name="id" />
+			<classes>
+				<class
+					name="com.sample.app.relational.mapping.config.EmployeeDto1" />
+				<class
+					name="com.sample.app.relational.mapping.config.EmployeeDto2" />
+			</classes>
+		</attribute>
+
+		<attribute name="name">
+			<attributes>
+				<attribute name="empName" />
+				<attribute name="myName" />
+			</attributes>
+			<classes>
+				<class
+					name="com.sample.app.relational.mapping.config.EmployeeDto1" />
+				<class
+					name="com.sample.app.relational.mapping.config.EmployeeDto2" />
+			</classes>
+		</attribute>
+
+		<attribute name="age">
+			<attributes>
+				<attribute name="empAge" />
+				<attribute name="myAge" />
+			</attributes>
+			<classes>
+				<class
+					name="com.sample.app.relational.mapping.config.EmployeeDto1" />
+				<class
+					name="com.sample.app.relational.mapping.config.EmployeeDto2" />
+			</classes>
+		</attribute>
+	</class>
+</jmapper>

@@ -1,0 +1,10 @@
+<jmapper>
+	<class name="com.sample.app.xml_config_demo.EmployeeDto1">
+		<global>
+			<excluded>
+				<attribute name="empAge" />
+				<attribute name="empHobbies" />
+			</excluded>
+		</global>
+	</class>
+</jmapper>
