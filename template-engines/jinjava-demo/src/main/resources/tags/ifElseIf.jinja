@@ -1,0 +1,14 @@
+{% set marks = 69 %} 
+{% set name = 'Krishna' %} 
+
+{% if marks < 35 %}
+	Sorry {{name}}, you failed in the exam
+{% elif marks < 50 %}
+	Hi {{name}}, Congratulations. You are passed and got third class.
+{% elif marks < 60 %}
+	Hi {{name}}, Congratulations. You are passed and got second class.
+{% elif marks < 70 %}
+	Hi {{name}}, Congratulations. You are passed and got first class.
+{% else %}
+	Hi {{name}}, Congratulations. You are passed and got distinction.
+{% endif %}
