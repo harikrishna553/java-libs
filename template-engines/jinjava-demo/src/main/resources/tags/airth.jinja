@@ -1,0 +1,11 @@
+{% set PI = 3.14 %}
+
+{% macro sum(a, b) %}
+{% set result = a+b %}
+Sum of {{a}} and {{b}} is {{result}}
+{% endmacro %}
+
+{% macro sub(a, b) %}
+{% set result = a-b %}
+Sum of {{a}} and {{b}} is {{result}}
+{% endmacro %}

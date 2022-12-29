@@ -1,0 +1,10 @@
+{% set PI = 3.14 %}
+
+{% macro sum(a, b) %}
+{% set result = a+b %}
+{{result}}
+{% endmacro %}
+
+{% print PI %}
+Calculating sum of 10 and 20 {% print sum(10, 20) %}
+Sum of 10 and 20 : {% print (10 + 20) %}

@@ -1,0 +1,20 @@
+{% set temp = 23 %}
+
+{% ifchanged temp %}
+Variable value  : {{temp}}
+{% endifchanged %}
+
+{% ifchanged temp %}
+Variable value is not changed : {{temp}}
+{% endifchanged %}
+
+Set the value to 24
+
+{% set temp = 24 %}
+{% ifchanged temp %}
+Variable value is changed : {{temp}}
+{% endifchanged %}
+
+{% ifchanged temp %}
+Variable value is not changed : {{temp}}
+{% endifchanged %}
