@@ -1,0 +1,11 @@
+{% set msg1 = '10 > 15' %} 
+{% set msg2 = '10 & 20' %} 
+{% set msg3 = '"10  20"' %} 
+
+msg1 : {{msg1}}, msg2 : {{msg2}}, msg3 : {{msg3}}
+
+{% autoescape %}
+msg1 : {{msg1}}, msg2 : {{msg2}}, msg3 : {{msg3}}
+{% endautoescape %}
+
+msg1 : {{msg1}}, msg2 : {{msg2}}, msg3 : {{msg3}}

@@ -1,0 +1,7 @@
+{% macro sum_of_numbers(a, b) %}
+{% set sum = a+b %}
+Sum of {{a}} and {{b}} is {{sum}}
+{% endmacro %}
+
+{% call sum_of_numbers(10, 20) %} {% endcall %}
+{{sum_of_numbers(30, 40)}} 
