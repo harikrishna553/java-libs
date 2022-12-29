@@ -1,0 +1,8 @@
+{% for number in [2, 3, 5, 7] %}
+    {% if loop.first %}
+    	Even prime number {{ number }} 
+    {% else %}
+    	Number: {{ number }}
+    {% endif %}
+{% endfor %}
+

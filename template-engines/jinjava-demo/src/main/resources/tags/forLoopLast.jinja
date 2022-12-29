@@ -1,0 +1,8 @@
+{% for number in primes %}
+    {% if loop.last %}
+    	This is the last number in the list {{ number }} 
+    {% else %}
+    	Number: {{ number }}
+    {% endif %}
+{% endfor %}
+
