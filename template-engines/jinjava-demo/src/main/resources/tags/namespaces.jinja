@@ -1,0 +1,10 @@
+{% set ns = namespace(sum=0) %}
+
+{% macro sum_of_numbers(items) %}
+	{% for item in items %}
+		{% set ns.sum= ns.sum + item %}
+	{% endfor %}
+{% endmacro %}
+
+{{sum_of_numbers([1, 2, 3, 4, 5])}}
+ Sum of elements is : {{ns.sum}}

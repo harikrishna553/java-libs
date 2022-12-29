@@ -1,0 +1,15 @@
+
+{% macro print_elements(items) %}
+	{% for item in items %}
+		{{item}}
+	{% endfor %}
+{% endmacro %}
+
+{% set elements = [2, 3, 5] %}
+{{print_elements(elements)}}
+
+Add 7, 11 to the existing list
+{{elements.append(7)}}
+{{elements.append(11)}}
+
+{{print_elements(elements)}}
