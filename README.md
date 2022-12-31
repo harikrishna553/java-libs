@@ -1,6 +1,11 @@
 ![Visitor Count](https://profile-counter.glitch.me/harikrishna553/count.svg)
 
 # java-libs
+# Hibernate 6
+|  Project |help link   | 
+|---|---|
+|java-libs/hibernate6/|https://self-learning-java-tutorial.blogspot.com/2022/10/hibernate-6-tutorial.html|
+
 # Maven Projects
 |  Project |help link   | 
 |---|---|
