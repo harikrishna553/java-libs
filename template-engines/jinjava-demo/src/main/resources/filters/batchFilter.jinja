@@ -1,0 +1,11 @@
+{% set ns = namespace(count=1) %}
+
+{%- for items in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]|batch(3, 'no_data') %}
+
+Group {{ns.count}}: 
+ {%- for item in items %}
+ 	item : {{ item }}
+ {%- endfor %}
+{% set ns.count= ns.count + 1 %}
+
+{%- endfor %}
