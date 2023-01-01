@@ -1,0 +1,11 @@
+{% set list = [2, 3, 5, 7] %}
+{% set map = {'a' : 1, 'b': 2} %}
+{% set str1 = 'Hello World' %}
+
+list : {{list}}
+map : {{map}}
+str1 : {{str1}}
+
+list|count : {{ list|count }}
+map|count  : {{ map|count }}
+str1|count  : {{ str1|count }}

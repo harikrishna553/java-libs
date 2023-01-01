@@ -6,11 +6,11 @@ import java.util.Collections;
 import com.hubspot.jinjava.Jinjava;
 import com.sample.app.util.FileUtil;
 
-public class AbsFilterDemo {
+public class BoolFilterIfTagDemo {
 	public static void main(String[] args) throws IOException {
 		final Jinjava jinjava = new Jinjava();
 
-		final String template = FileUtil.resourceAsString("filters/absFilter.jinja");
+		final String template = FileUtil.resourceAsString("filters/boolFilterIfTag.jinja");
 
 		final String finalDocument = jinjava.render(template, Collections.emptyMap()).trim();
 		System.out.println(finalDocument);

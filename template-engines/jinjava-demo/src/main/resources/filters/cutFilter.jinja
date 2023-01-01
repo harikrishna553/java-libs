@@ -1,0 +1,7 @@
+{% set str1 = 'Hello World' %}
+{% set str2 = 'Hello World, World Hello' %}
+
+str1 : {{str1}}
+str2 : {{str2}}
+str1|cut('World') : {{ str1|cut('World') }}
+str2|cut('World') : {{ str2|cut('World') }}
