@@ -1,0 +1,9 @@
+{% set a = 10 %}
+{% set b = 1 %}
+{% set c = false %}
+{% set d = true %}
+
+a : {{ a|default('Returning default value 111', true) }}
+b : {{ b|default('Returning default value 111', true) }}
+c : {{ c|default('Returning default value 111', true) }}
+d : {{ d|default('Returning default value 111', true) }}

@@ -1,0 +1,16 @@
+{% set countryCapitals1 = {'Bhutan' : 'Bhutan', 'Australia' : 'Canberra', 'India' : 'New Delhi', 'France' : 'Paris'} %}
+{% set countryCapitals2 = {'Bhutan' : 'Bhutan', 'Australia' : 'Canberra', 'India' : 'New Delhi', 'France' : 'Paris'} %}
+{% set countryCapitals3 = {'Bhutan' : 'Bhutan', 'Australia' : 'Canberra', 'India' : 'New Delhi', 'France' : 'Paris'} %}
+{% set countryCapitals4 = {'Bhutan' : 'Bhutan', 'Australia' : 'Canberra', 'India' : 'New Delhi', 'France' : 'Paris'} %}
+
+{{countryCapitals1}}
+{% for item in countryCapitals4|dictsort(false, 'value1') %}
+{{item}}
+{% endfor %}
+
+{{countryCapitals1|dictsort}}
+{{countryCapitals2|dictsort(reverse=true)}}
+{{countryCapitals3|dictsort(true)}}
+
+
+{% set countryCapitals1 = {'Bhutan' : 'Bhutan', 'Australia' : 'Canberra', 'India' : 'New Delhi', 'France' : 'Paris'} %} {{countryCapitals1|dictsort}}
