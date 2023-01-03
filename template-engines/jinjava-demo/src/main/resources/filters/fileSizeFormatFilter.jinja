@@ -1,0 +1,17 @@
+{% set a = 1 %}
+{% set b = (1 * 1024) %}
+{% set c = (1 * 1024 * 1024) %}
+{% set d = (1 * 1024 * 1024 * 1024) %}
+{% set e = (1 * 1024 * 1024 * 1024 * 1024) %}
+
+a : {{a}}
+b : {{b}}
+c : {{c}}
+d : {{d}}
+e : {{e}}
+
+a|filesizeformat : {{ a|filesizeformat }}
+b|filesizeformat : {{ b|filesizeformat }}
+c|filesizeformat : {{ c|filesizeformat }}
+d|filesizeformat : {{ d|filesizeformat }}
+e|filesizeformat : {{ e|filesizeformat }}
