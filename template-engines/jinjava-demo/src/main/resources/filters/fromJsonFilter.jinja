@@ -1,0 +1,7 @@
+{% set jsonStr = '{"a":1,"b":2,"c":3}' %}
+{% set obj = jsonStr|fromjson %}
+
+obj : {{ obj }}
+a : {{ obj.a }} 
+b : {{ obj.b }} 
+c : {{ obj.c }} 

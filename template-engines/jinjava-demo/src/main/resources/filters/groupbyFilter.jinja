@@ -1,0 +1,9 @@
+{% for group in emps|groupby('gender') %}
+
+    Group name : {{ group.grouper }}
+    
+    {% for emp in group.list %}
+        {{ emp.id }}. {{ emp.name }}
+    {% endfor %}
+    
+{% endfor %}

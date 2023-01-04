@@ -1,0 +1,10 @@
+{% set str1 = "string1\nstring2\nstring3" %}
+
+Use default indentation
+{{ str1|indent}}
+
+Indenting the string by 2 spaces
+{{ str1|indent(2, true) }}
+
+Indenting the string by 2 spaces except for the first line
+{{ str1|indent(2, false) }}
