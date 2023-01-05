@@ -1,0 +1,13 @@
+{% set num = 10000 %}
+{% set base1 = 10 %}
+{% set base2 = 100 %}
+{% set base3 = 1000 %}
+
+num : {{num}}
+base1 : {{base1}}
+base2 : {{base2}}
+base3 : {{base3}}
+
+num|log(base1) : {{ num|log(base1) }}
+num|log(base2) : {{ num|log(base2) }}
+num|log(base3) : {{ num|log(base3) }}

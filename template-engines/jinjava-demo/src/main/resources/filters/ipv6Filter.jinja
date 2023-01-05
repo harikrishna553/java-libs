@@ -1,0 +1,14 @@
+{% set address1 = '1.2.3.4' %}
+{% set address2 = '1.2.3.4.5' %}
+{% set address3 = '2001:1111:3333:4444:2222:6666:5555:8888' %}
+{% set address4 = 'hello' %}
+
+address1 : {{address1}}
+address2 : {{address2}}
+address3 : {{address3}}
+address4 : {{address4}}
+
+is address1 valid : {{address1|ipv6}}
+is address2 valid : {{address2|ipv6}}
+is address3 valid : {{address3|ipv6}}
+is address4 valid : {{address4|ipv6}}

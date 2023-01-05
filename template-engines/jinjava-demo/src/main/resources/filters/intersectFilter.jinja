@@ -1,0 +1,7 @@
+{% set list1 = [2, 3, 5, 7] %}
+{% set list2 = [1, 2, 4, 7] %}
+
+list1 : {{list1}}
+list2 : {{list2}}
+
+list1|intersect(list2) : {{ list1|intersect(list2) }}

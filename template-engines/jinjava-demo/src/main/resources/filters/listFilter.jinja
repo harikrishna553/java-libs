@@ -1,0 +1,14 @@
+{% set var1 = 2 %}
+{% set var2 = 3 %}
+{% set var3 = 4 %}
+
+{% set list1 = var1|list %}
+{% set list2 = var1|list + var2|list %}
+{% set list3 = var1|list + var2|list + var3|list %}
+
+var1 : {{var1}}
+var2 : {{var2}}
+var3 : {{var3}}
+list1 : {{list1}}
+list2 : {{list2}}
+list3 : {{list3}}
