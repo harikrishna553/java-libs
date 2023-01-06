@@ -1,0 +1,5 @@
+Get all the employee names
+{{ emps|map(attribute='name')|join(', ') }}
+
+Get all the employee names in uppercase
+{{ emps|map(attribute='name')|join(', ')|upper }}
