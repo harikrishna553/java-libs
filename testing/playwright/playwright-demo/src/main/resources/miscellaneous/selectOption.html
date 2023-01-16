@@ -1,0 +1,34 @@
+<html>
+
+<body>
+
+	<h1>Simple select demo</h1>
+
+
+	<form onsubmit="return false;">
+		<label for="colors">Choose a color:</label>
+		<select name="colors" id="favoriteColor">
+			<option value="red">Red</option>
+			<option value="green">Green</option>
+			<option value="yellow">Yellow</option>
+			<option value="blue">blue</option>
+		</select>
+		<br><br>
+		<input type="submit" value="Submit" onclick="display()">
+	</form>
+
+	<p id="result"></p>
+
+	<script>
+		function display() {
+			let e = document.getElementById('favoriteColor');
+			var selectedColor = e.options[e.selectedIndex].text;
+
+			result.innerHTML = `<b>Selected color: <br />${selectedColor}</b>`
+		}
+	</script>
+
+
+</body>
+
+</html>
