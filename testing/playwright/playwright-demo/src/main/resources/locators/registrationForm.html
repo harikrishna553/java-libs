@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+	<h1>User favorite language form</h1>
+
+	<p>Select one of your favorite language and click on submit button</p>
+
+	<form onsubmit="return false;">
+		  <input type="radio" id="java" name="my_fav_language" value="Java">
+		  <label for="java">Java</label><br>
+
+		  <input type="radio" id="javascript" name="my_fav_language" value="JavaScript">
+		  <label for="javascript">JavaScript</label><br>
+
+		  <input type="radio" id="python" name="my_fav_language" value="Python">
+		  <label for="python">Python</label><br><br>
+
+		<input type="submit" value="Submit" onclick="display()">
+	</form>
+
+	<p id="result"></p>
+
+	<script>
+		function display() {
+			let result = document.getElementById("result");
+			let selectedValue = document.querySelector('input[name="my_fav_language"]:checked').value;
+			result.innerHTML = `<b>Your favorite language is :  ${selectedValue}</b>`
+		}
+	</script>
+
+</body>
+
+</html>
