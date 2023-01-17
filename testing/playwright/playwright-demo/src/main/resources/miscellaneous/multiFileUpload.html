@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>File upload example</title>
+
+	<script>
+		function appendFileContent(content) {
+			const node = document.createElement("p");
+			const textnode = document.createTextNode(content);
+			node.appendChild(textnode);
+			document.getElementById("fileContent").appendChild(node);
+		}
+		function readFile(file) {
+			const reader = new FileReader();
+			reader.onload = evt => {
+				appendFileContent(reader.result);
+			};
+			reader.readAsText(file);
+		}
+		function init() {
+			const fileSelector = document.getElementById("myFile");
+			fileSelector.addEventListener("change", event => {
+				const fileList = event.target.files;
+				for (const file of fileList) {
+					readFile(file);
+				}
+			});
+		}
+	</script>
+</head>
+
+<body onload="init()">
+	<p>Click on the "Choose File" button to upload one or files:</p>
+
+	<input type="file" id="myFile" name="filename" multiple />
+
+	<pre id="fileContent"></pre>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>File upload example</title>
+
+	<script>
+		function init() {
+			document.getElementById('myFile').addEventListener('change', handleFileSelect, false);
+		}
+
+		function handleFileSelect(event) {
+			const reader = new FileReader()
+			reader.onload = handleFileLoad;
+			reader.readAsText(event.target.files[0])
+		}
+
+		function handleFileLoad(event) {
+			console.log(event);
+			document.getElementById('fileContent').textContent = event.target.result;
+		}
+	</script>
+</head>
+
+<body onload="init()">
+
+	<p>Click on the "Choose File" button to upload a file:</p>
+
+
+	<input type="file" id="myFile" name="filename">
+
+
+	<pre id="fileContent"></pre>
+
+</body>
+
+</html>
