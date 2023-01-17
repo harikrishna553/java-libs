@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<style>
+		.square {
+			height: 100px;
+			width: 100px;
+			background-color: #555;
+		}
+
+		.circle {
+			height: 50px;
+			width: 50px;
+			background-color: #f00;
+			border-radius: 50%;
+		}
+	</style>
+
+	<script>
+		function allowDrop(event) {
+			event.preventDefault();
+		}
+
+		function dragObject(event) {
+			event.dataTransfer.setData("text", event.target.id);
+		}
+
+		function dropObject(event) {
+			event.preventDefault();
+			var data = event.dataTransfer.getData("text");
+			event.target.appendChild(document.getElementById(data));
+		}
+	</script>
+
+</head>
+
+<body>
+
+	<div id="square" class="square" draggable="true" ondrop="dropObject(event)" ondragover="allowDrop(event)"></div>
+	<br />
+	<div id="circle" class="circle" draggable="true" ondragstart="dragObject(event)" width="336" height="69"></div>
+
+</body>
+
+</html>
