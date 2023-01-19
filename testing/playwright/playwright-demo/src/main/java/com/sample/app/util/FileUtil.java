@@ -6,7 +6,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class FileUtil {
-	
+
 	public static String resourceAsString(String resourceName) throws IOException {
 		ClassLoader classLoader = FileUtil.class.getClassLoader();
 		URL url = classLoader.getResource(resourceName);
