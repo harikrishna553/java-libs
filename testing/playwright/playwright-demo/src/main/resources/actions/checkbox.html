@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+	<h1>User favorite languages form</h1>
+
+	<p>Select your favorite languages and click on submit button</p>
+
+	<form onsubmit="return false;">
+		  <input type="checkbox" id="java" name="my_fav_language" value="Java">
+		  <label for="java">Java</label><br>
+
+		  <input type="checkbox" id="go" name="my_fav_language" value="Go">
+		  <label for="go">Go</label><br>
+
+		  <input type="checkbox" id="python" name="my_fav_language" value="Python">
+		  <label for="python">Python</label><br><br>
+
+		<input type="submit" value="submit" onclick="display()">
+	</form>
+
+	<p id="result"></p>
+
+	<script>
+		function display() {
+			let result = document.getElementById("result");
+			let favoriteLanguages = "<br />";
+
+			var markedCheckbox = document.getElementsByName('my_fav_language');
+
+			for (var checkbox of markedCheckbox) {
+				if (checkbox.checked)
+					favoriteLanguages = favoriteLanguages + "<br />" + checkbox.value;
+			}
+
+
+			result.innerHTML = `<b>Your favourite language are :  ${favoriteLanguages}</b>`
+		}
+	</script>
+
+</body>
+
+</html>

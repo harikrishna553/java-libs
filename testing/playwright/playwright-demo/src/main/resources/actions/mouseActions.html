@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<h2>Mouse events demo</h2>
+
+	<p ondblclick="dbClick()" id="dbClick">Double click me</p>
+	<p onclick="clickMe()" id="click">Click me</p>
+	<p onmouseover="hoverMe()" id="hover">Hover mouse on me</p>
+
+	<p id="mouseButtons">Left, right, middle click me</p>
+
+	<p id="result"></p>
+
+	<script>
+		function dbClick() {
+			document.getElementById("result").innerHTML = "Double click event";
+		}
+
+		function clickMe() {
+			document.getElementById("result").innerHTML = "Single click event";
+		}
+
+		function hoverMe() {
+			document.getElementById("result").innerHTML = "Mouse hover event";
+		}
+
+
+		document.querySelector('#mouseButtons').addEventListener('mouseup', (e) => {
+			let log = document.querySelector('#log');
+			switch (e.button) {
+				case 0:
+					document.getElementById("result").innerHTML = 'Left button clicked.';
+					break;
+				case 1:
+					document.getElementById("result").innerHTML = 'Middle button clicked.';
+					break;
+				case 2:
+					document.getElementById("result").innerHTML = 'Right button clicked.';
+					break;
+				default:
+					document.getElementById("result").innerHTML = `Unknown button code: ${e.button}`;
+			}
+		});
+
+	</script>
+
+</body>
+
+</html>
