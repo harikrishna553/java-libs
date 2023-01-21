@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+	<p>Type any key in the text box to see the key event demos</p>
+
+	Type something here: <input id="demoInputField" />
+
+	<p id="result"></p>
+
+	<script>
+		document.getElementById("demoInputField").addEventListener('keydown', (event) => {
+			var name = event.key;
+			var code = event.code;
+			document.getElementById("result").innerHTML += `Key down '${name}', Key code value: '${code}',<br />\n`;
+		}, false);
+
+		document.getElementById("demoInputField").addEventListener('keyup', (event) => {
+			var name = event.key;
+			var code = event.code;
+			document.getElementById("result").innerHTML += `Key up '${name}', Key code value: '${code}'<br />\n`;
+		}, false);
+
+		document.getElementById("demoInputField").addEventListener('keypress', (event) => {
+			var name = event.key;
+			var code = event.code;
+			document.getElementById("result").innerHTML += `Key press '${name}', Key code value: '${code}'<br />\n`;
+		}, false);
+
+	</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+	Enter your something: <input type="text" id="demo" onfocusout="f1()" onfocusin="f2()" onfocus="f3()">
+
+	<br />
+	<br />
+	<br />
+
+	onfocusout: <p id="result1"></p>
+	onfocusin: <p id="result2"></p>
+	onfocus: <p id="result3"></p>
+
+	<input type="button" id="myButton" value="submit" />
+
+
+	<script>
+		function f1() {
+			let x = document.getElementById("demo");
+			x.value = x.value.toUpperCase();
+			document.getElementById("result1").innerHTML = x.value;
+			document.getElementById("result2").innerHTML = "";
+			document.getElementById("result3").innerHTML = "";
+		}
+
+		function f2() {
+			document.getElementById("result2").innerHTML = "Element is in focus";
+		}
+
+		function f3() {
+			document.getElementById("result3").innerHTML = "Element is in focus";
+
+		}
+	</script>
+
+</body>
+
+</html>
