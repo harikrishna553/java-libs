@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<h1>Blur action demo</h1>
+
+	Enter something: <input type="text" id="myData" onblur="toUpper()">
+
+	<p>When the input field is blurred or out of scope, 'toUpper' function is triggered which transforms the input text
+		to upper case.</p>
+
+	<script>
+		function toUpper() {
+			let x = document.getElementById("myData");
+			x.value = x.value.toUpperCase();
+		}
+	</script>
+
+</body>
+
+</html>
