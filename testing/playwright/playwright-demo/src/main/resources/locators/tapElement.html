@@ -1,0 +1,36 @@
+<html>
+
+<body>
+
+	<h1>Tap element demo</h1>
+
+
+	<form onsubmit="return false;">
+		<label for="colors">Choose a color:</label>
+		<select name="colors" id="favoriteColors" multiple>
+			<option value="red">Red</option>
+			<option value="green">Green</option>
+			<option value="yellow">Yellow</option>
+			<option value="blue">blue</option>
+		</select>
+		<br><br>
+		<input type="submit" value="Submit" onclick="display()">
+	</form>
+
+	<p id="result"></p>
+
+	<script>
+		function display() {
+			let options = document.getElementById('favoriteColors').selectedOptions;
+			let values = Array.from(options).map(({value}) => value);
+			let selectedColors = values.join("-->");
+
+			console.log(values)
+			result.innerHTML = `<b>Selected colors: <br />${selectedColors}</b>`
+		}
+	</script>
+
+
+</body>
+
+</html>

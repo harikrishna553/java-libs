@@ -19,6 +19,14 @@
 			<version>1.28.1</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.deque.html.axe-core/playwright -->
+		<dependency>
+			<groupId>com.deque.html.axe-core</groupId>
+			<artifactId>playwright</artifactId>
+			<version>4.5.1</version>
+		</dependency>
+
+
 		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -26,6 +34,8 @@
 			<version>5.9.2</version>
 			<scope>test</scope>
 		</dependency>
+
+
 
 	</dependencies>
 
