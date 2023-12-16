@@ -59,7 +59,12 @@ public class StorageEngine implements Closeable {
 		randomAccessFile.writeUTF(key);
 		randomAccessFile.writeUTF(value);
 
-		offsetMapForKeys.put(key, offset);
+		if(this.deletePlaceholder.equals(value)) {
+			offsetMapForKeys.remove(key);
+		}else {
+			offsetMapForKeys.put(key, offset);
+		}
+		
 	}
 
 	private void write(Map<String, String> map) throws IOException {
@@ -177,3 +182,4 @@ public class StorageEngine implements Closeable {
 	}
 
 }
+
