@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sample.app</groupId>
+	<artifactId>choco-solver-demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	
+	<properties>
+		<jdk.version>21</jdk.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.choco-solver</groupId>
+			<artifactId>choco-solver</artifactId>
+			<version>4.10.17</version>
+		</dependency>
+
+
+	</dependencies>
+</project>
