@@ -5,6 +5,14 @@
 	<groupId>com.sample.app</groupId>
 	<artifactId>smile-core-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
+	<properties>
+        <!-- Set the Java version to JDK 21 -->
+        <java.version>21</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
+
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/com.github.haifengl/smile-core -->
