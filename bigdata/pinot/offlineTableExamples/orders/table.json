@@ -1,0 +1,31 @@
+{
+  "tableName": "orders",
+  "tableType": "OFFLINE",
+  "segmentsConfig": {
+    "timeColumnName": "order_date",
+    "timeType": "MILLISECONDS",
+    "replication": "1"
+  },
+  "tableIndexConfig": {
+    "loadMode": "MMAP",
+    "invertedIndexColumns": ["order_id", "customer_id", "status"],
+    "rangeIndexColumns": ["total_amount"],
+    "noDictionaryColumns": [],
+    "starTreeIndexConfigs": [],
+    "enableDefaultStarTree": false
+  },
+  "tenants": {
+    "broker": "DefaultTenant",
+    "server": "DefaultTenant"
+  },
+  "metadata": {
+    "customConfigs": {}
+  },
+  "ingestionConfig": {
+    "batchIngestionConfig": {
+      "segmentIngestionType": "APPEND",
+      "segmentIngestionFrequency": "DAILY"
+    }
+  },
+  "schemaName": "orders"
+}

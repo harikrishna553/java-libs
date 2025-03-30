@@ -1,0 +1,37 @@
+[
+  {
+    "order_id": "O1001",
+    "customer_id": "C001",
+    "status": "SHIPPED",
+    "total_amount": 250.75,
+    "order_date": 1711924800000
+  },
+  {
+    "order_id": "O1002",
+    "customer_id": "C002",
+    "status": "PENDING",
+    "total_amount": 100.50,
+    "order_date": 1712001200000
+  },
+  {
+    "order_id": "O1003",
+    "customer_id": "C003",
+    "status": "DELIVERED",
+    "total_amount": 325.00,
+    "order_date": 1712087600000
+  },
+  {
+    "order_id": "ORD-1001",
+    "customer_id": "CUST-001",
+    "status": "COMPLETED",
+    "total_amount": 125.99,
+    "order_date": 1672531200000
+  },
+  {
+    "order_id": "ORD-1002",
+    "customer_id": "CUST-002",
+    "status": "PENDING",
+    "total_amount": 89.50,
+    "order_date": 1672617600000
+  }
+]

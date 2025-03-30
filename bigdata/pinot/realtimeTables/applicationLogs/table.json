@@ -1,0 +1,39 @@
+{
+  "tableName": "application_logs",
+  "tableType": "REALTIME",
+  "segmentsConfig": {
+    "timeColumnName": "log_timestamp",
+    "timeType": "MILLISECONDS",
+    "replication": "1",
+    "schemaName": "application_logs",
+    "segmentPushType": "APPEND"
+  },
+  "tableIndexConfig": {
+    "loadMode": "MMAP",
+    "invertedIndexColumns": ["log_level", "service_name", "host"],
+    "rangeIndexColumns": ["response_time"],
+    "sortedColumn": ["log_timestamp"],
+    "nullHandlingEnabled": true
+  },
+  "tenants": {
+    "broker": "DefaultTenant",
+    "server": "DefaultTenant"
+  },
+  "ingestionConfig": {
+    "streamIngestionConfig": {
+      "streamConfigMaps": [
+        {
+          "streamType": "kafka",
+          "stream.kafka.topic.name": "app-log-events",
+          "stream.kafka.broker.list": "localhost:9092",
+          "stream.kafka.consumer.type": "lowlevel",
+          "stream.kafka.consumer.factory.class.name": "org.apache.pinot.plugin.stream.kafka20.KafkaConsumerFactory",
+          "stream.kafka.decoder.class.name": "org.apache.pinot.plugin.inputformat.json.JSONMessageDecoder",
+          "stream.kafka.consumer.prop.auto.offset.reset": "smallest",
+          "realtime.segment.flush.threshold.time": "600000",
+          "realtime.segment.flush.threshold.rows": "50000"
+        }
+      ]
+    }
+  }
+}

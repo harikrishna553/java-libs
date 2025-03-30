@@ -1,0 +1,37 @@
+{
+  "schemaName": "orders", 
+  "enableColumnBasedNullHandling": false,
+  "dimensionFieldSpecs": [
+    {
+      "name": "order_id",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION"
+    },
+    {
+      "name": "customer_id",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION"
+    },
+    {
+      "name": "status",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION"
+    }
+  ],
+  "metricFieldSpecs": [
+    {
+      "name": "total_amount",
+      "dataType": "DOUBLE",
+      "fieldType": "METRIC"
+    }
+  ],
+  "dateTimeFieldSpecs": [
+    {
+      "name": "order_date",
+      "dataType": "TIMESTAMP",
+      "fieldType": "DATE_TIME",
+      "format": "TIMESTAMP",
+      "granularity": "1:MILLISECONDS"
+    }
+  ]
+}

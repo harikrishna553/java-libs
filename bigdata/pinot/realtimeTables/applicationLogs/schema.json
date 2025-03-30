@@ -1,0 +1,15 @@
+{
+  "schemaName": "application_logs",
+  "enableColumnBasedNullHandling": false,
+  "dimensionFieldSpecs": [
+    { "name": "log_level", "dataType": "STRING", "fieldType": "DIMENSION" },
+    { "name": "service_name", "dataType": "STRING", "fieldType": "DIMENSION" },
+    { "name": "host", "dataType": "STRING", "fieldType": "DIMENSION" }
+  ],
+  "metricFieldSpecs": [
+    { "name": "response_time", "dataType": "DOUBLE", "fieldType": "METRIC" }
+  ],
+  "dateTimeFieldSpecs": [
+    { "name": "log_timestamp", "dataType": "TIMESTAMP", "fieldType": "DATE_TIME", "format": "TIMESTAMP", "granularity": "1:MILLISECONDS" }
+  ]
+}
