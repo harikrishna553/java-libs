@@ -1,0 +1,27 @@
+[
+  {
+    "eventId": "E123",
+    "user": {
+      "id": "U001",
+      "name": "John Doe"
+    },
+    "details": {
+      "category": "sports",
+      "score": 98
+    },
+    "timestamp": 1711790400000
+  },
+  {
+    "eventId": "E124",
+    "user": {
+      "id": "U002",
+      "name": "Jane Smith"
+    },
+    "details": {
+      "category": "music",
+      "score": 85
+    },
+    "timestamp": 1711790700000
+  }
+]
+
