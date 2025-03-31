@@ -1,0 +1,48 @@
+{
+  "schemaName": "EventTable",
+  "enableColumnBasedNullHandling": false,
+  "dimensionFieldSpecs": [
+    {
+      "name": "eventId",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "userId",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "userName",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "category",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    }
+  ],
+  "metricFieldSpecs": [
+    {
+      "name": "score",
+      "dataType": "INT",
+      "fieldType": "METRIC",
+      "notNull": false
+    }
+  ],
+  "dateTimeFieldSpecs": [
+    {
+      "name": "timestamp",
+      "dataType": "LONG",
+      "fieldType": "DATE_TIME",
+      "notNull": false,
+      "format": "1:MILLISECONDS:EPOCH",
+      "granularity": "1:MILLISECONDS"
+    }
+  ]
+}
