@@ -1,0 +1,37 @@
+executionFrameworkSpec:
+  name: "standalone"
+  segmentGenerationJobRunnerClassName: "org.apache.pinot.plugin.ingestion.batch.standalone.SegmentGenerationJobRunner"
+  segmentTarPushJobRunnerClassName: "org.apache.pinot.plugin.ingestion.batch.standalone.SegmentTarPushJobRunner"
+  segmentUriPushJobRunnerClassName: "org.apache.pinot.plugin.ingestion.batch.standalone.SegmentUriPushJobRunner"
+
+pinotFSSpecs:
+  - scheme: "file"
+    className: "org.apache.pinot.spi.filesystem.LocalPinotFS"
+
+jobType: "SegmentCreationAndTarPush"
+
+inputDirURI: "file:///{INPUT_DIRECTORY_PATH}"
+includeFileNamePattern: "glob:**/*.csv"
+outputDirURI: "file:///{OUTPUT_DIRECTORY_PATH}"
+overwriteOutput: true
+
+tableSpec:
+  tableName: "customer_purchases"
+
+pinotClusterSpecs:
+  - controllerURI: "http://localhost:9000"
+
+recordReaderSpec:
+  dataFormat: "csv"
+  className: "org.apache.pinot.plugin.inputformat.csv.CSVRecordReader"
+  configClassName: "org.apache.pinot.plugin.inputformat.csv.CSVRecordReaderConfig"
+  configs:
+    header: "customerId,customerName,purchaseAmount,purchaseDate"
+    delimiter: ","
+    skipHeader: "true"
+
+pushJobSpec:
+  pushAttempts: 3
+  pushRetryIntervalMillis: 1000
+  pushParallelism: 1
+

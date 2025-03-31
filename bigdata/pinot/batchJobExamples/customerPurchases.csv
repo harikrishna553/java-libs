@@ -1,0 +1,4 @@
+customerId,customerName,purchaseAmount,purchaseDate
+C001,John Doe,100.5,1711929600000
+C002,Jane Smith,250.0,1712016000000
+C003,Robert Brown,175.75,1712102400000
