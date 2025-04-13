@@ -1,0 +1,38 @@
+executionFrameworkSpec:
+  name: "spark"
+  segmentGenerationJobRunnerClassName: "org.apache.pinot.plugin.ingestion.batch.spark.SegmentGenerationJobRunner"
+  segmentTarPushJobRunnerClassName: "org.apache.pinot.plugin.ingestion.batch.spark.SegmentTarPushJobRunner"
+  segmentUriPushJobRunnerClassName: "org.apache.pinot.plugin.ingestion.batch.spark.SegmentUriPushJobRunner"
+
+pinotFSSpecs:
+  - scheme: "file"
+    className: "org.apache.pinot.spi.filesystem.LocalPinotFS"
+
+jobType: "SegmentCreationAndTarPush"
+
+inputDirURI: "file:///Users/Shared/pinotExamples/inputData"
+includeFileNamePattern: "glob:**/*.csv"
+outputDirURI: "file:///Users/Shared/pinotExamples/outputData"
+overwriteOutput: true
+
+tableSpec:
+  tableName: "product_reviews"
+  schemaURI: "http://localhost:9000/schemas/product_reviews"
+  tableConfigURI: "http://localhost:9000/tables/product_reviews"
+
+pinotClusterSpecs:
+  - controllerURI: "http://localhost:9000"
+
+recordReaderSpec:
+  dataFormat: "csv"
+  className: "org.apache.pinot.plugin.inputformat.csv.CSVRecordReader"
+  configClassName: "org.apache.pinot.plugin.inputformat.csv.CSVRecordReaderConfig"
+  configs:
+    header: "customerId,customerName,purchaseAmount,purchaseDate"
+    delimiter: ","
+    skipHeader: "true"
+
+pushJobSpec:
+  pushAttempts: 3
+  pushRetryIntervalMillis: 1000
+  pushParallelism: 1
