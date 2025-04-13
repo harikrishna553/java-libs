@@ -1,0 +1,22 @@
+{
+  "tableName": "country",
+  "tableName": "country_schema",
+  "tableType": "OFFLINE",
+  "segmentsConfig": {
+    "timeColumnName": "eventTime",
+    "timeType": "MILLISECONDS",
+    "retentionTimeUnit": "DAYS",
+    "retentionTimeValue": "30",
+    "schemaName": "country_schema",
+    "segmentAssignmentStrategy": "Balanced",
+    "replication": "1"
+  },
+  "tableIndexConfig": {
+    "invertedIndexColumns": ["country"]
+  },
+  "tenants": {
+    "broker": "DefaultTenant",
+    "server": "DefaultTenant"
+  },
+  "metadata": {}
+}
