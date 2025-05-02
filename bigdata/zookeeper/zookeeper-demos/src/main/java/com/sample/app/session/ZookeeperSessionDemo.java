@@ -20,14 +20,7 @@ public class ZookeeperSessionDemo {
 	}
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		ZooKeeper zk = new ZooKeeper(
-			    "observer1:2181",
-			    30000,
-			    event -> System.out.println("Event: " + event),
-			    true // readOnly if needed
-			);
 
-		
 		// Create ZooKeeper client
 		ZooKeeper zooKeeper = new ZooKeeper(ZK_ADDRESS, SESSION_TIMEOUT, event -> {
 			if (event.getState() == Watcher.Event.KeeperState.SyncConnected) {
