@@ -39,6 +39,8 @@ public class PersistentRecursiveWatchDemo {
 
 		// Add persistent recursive watch on /demo
 		zk.addWatch(ROOT_PATH, new RecursiveWatcher(), AddWatchMode.PERSISTENT_RECURSIVE);
+		
+		zk.removeWatches(ROOT_PATH, null, null, false);
 
 		// Sleep for 5 minutes to experiment with zkCLI
 		TimeUnit.MINUTES.sleep(5);
