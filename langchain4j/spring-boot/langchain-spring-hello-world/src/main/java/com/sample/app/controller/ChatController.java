@@ -1,5 +1,6 @@
 package com.sample.app.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,11 +20,8 @@ import jakarta.validation.constraints.NotEmpty;
 @Tag(name = "Chat Controller", description = "This section contains APIs related to Chat APIs Powered by Ollama")
 public class ChatController {
 
-	private final ChatService chatService;
-
-	public ChatController(ChatService chatService) {
-		this.chatService = chatService;
-	}
+	@Autowired
+	private ChatService chatService;
 
 	@PostMapping
 	public ChatResponse chat(@RequestBody @Valid ChatRequestBody chatRequestBody) {
