@@ -15,7 +15,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 
 @RestController
-@RequestMapping("/api/chat")
+@RequestMapping("/api/story-teller")
 @CrossOrigin("*")
 @Tag(name = "Chat Controller", description = "This section contains APIs related to Chat APIs Powered by Ollama")
 public class ChatController {
