@@ -45,5 +45,11 @@
 			<groupId>dev.langchain4j</groupId>
 			<artifactId>langchain4j-document-transformer-jsoup</artifactId>
 		</dependency>
+
+
+		<dependency>
+			<groupId>dev.langchain4j</groupId>
+			<artifactId>langchain4j-easy-rag</artifactId>
+		</dependency>
 	</dependencies>
 </project>
