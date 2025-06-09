@@ -5,8 +5,9 @@ import dev.langchain4j.data.document.transformer.jsoup.HtmlToTextDocumentTransfo
 
 public class HtmlTransformerExample {
 
-    public static void main(String[] args) {
-        String html = """
+  public static void main(String[] args) {
+    String html =
+        """
                 <html>
                     <head><title>Welcome</title></head>
                     <body>
@@ -17,19 +18,19 @@ public class HtmlTransformerExample {
                 </html>
                 """;
 
-        // Create a Document from raw HTML
-        Document htmlDocument = Document.from(html);
+    // Create a Document from raw HTML
+    Document htmlDocument = Document.from(html);
 
-        // Create an instance of the HTML to Text transformer
-        HtmlToTextDocumentTransformer transformer = new HtmlToTextDocumentTransformer();
+    // Create an instance of the HTML to Text transformer
+    HtmlToTextDocumentTransformer transformer = new HtmlToTextDocumentTransformer();
 
-        // Apply the transformation
-        Document transformedDocument = transformer.transform(htmlDocument);
+    // Apply the transformation
+    Document transformedDocument = transformer.transform(htmlDocument);
 
-        // Print the plain text result
-        System.out.println("Extracted Text:\n" + transformedDocument.text());
+    // Print the plain text result
+    System.out.println("Extracted Text:\n" + transformedDocument.text());
 
-        // Optionally, access metadata (if configured in transformer)
-        System.out.println("\nMetadata:\n" + transformedDocument.metadata());
-    }
+    // Optionally, access metadata (if configured in transformer)
+    System.out.println("\nMetadata:\n" + transformedDocument.metadata());
+  }
 }

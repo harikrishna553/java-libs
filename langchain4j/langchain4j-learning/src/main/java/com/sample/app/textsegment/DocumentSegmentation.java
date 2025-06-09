@@ -1,14 +1,14 @@
 package com.sample.app.textsegment;
 
+import dev.langchain4j.data.document.Document;
+import dev.langchain4j.data.segment.TextSegment;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import dev.langchain4j.data.document.Document;
-import dev.langchain4j.data.segment.TextSegment;
-
 public class DocumentSegmentation {
-	private static final String CONTENT = """
+  private static final String CONTENT =
+      """
 			LangChain4j is a powerful Java framework that helps developers integrate Large Language Models (LLMs) into their applications. It offers components like document loaders, text segmenters, retrievers, and chat interfaces, making it easy to build LLM-powered apps in Java.
 			Text segmentation is a crucial step in building scalable and efficient LLM solutions. Rather than sending an entire document to the LLM, which might exceed token limits or introduce irrelevant noise, it's more practical to split the content into meaningful segments.
 			For instance, if you’re building a document search engine, you want the LLM to search through relevant pieces instead of parsing a 100-page document at once. Segments can be paragraphs, sentences, or even semantically meaningful sections, depending on your use case.
@@ -18,22 +18,20 @@ public class DocumentSegmentation {
 
 						""";
 
-	private static List<TextSegment> splitIntoSegments(Document document) {
-		String[] paragraphs = document.text().split("\n");
-		return Arrays.stream(paragraphs).map(TextSegment::from).collect(Collectors.toList());
-	}
+  private static List<TextSegment> splitIntoSegments(Document document) {
+    String[] paragraphs = document.text().split("\n");
+    return Arrays.stream(paragraphs).map(TextSegment::from).collect(Collectors.toList());
+  }
 
-	public static void main(String[] args) {
-		Document doc = Document.from(CONTENT);
+  public static void main(String[] args) {
+    Document doc = Document.from(CONTENT);
 
-		List<TextSegment> segments = splitIntoSegments(doc);
+    List<TextSegment> segments = splitIntoSegments(doc);
 
-		int sNo = 1;
-		for (TextSegment textSegment : segments) {
-			System.out.println(sNo + " : " + textSegment.text() + "\n");
-			sNo++;
-		}
-	}
-
+    int sNo = 1;
+    for (TextSegment textSegment : segments) {
+      System.out.println(sNo + " : " + textSegment.text() + "\n");
+      sNo++;
+    }
+  }
 }
-
