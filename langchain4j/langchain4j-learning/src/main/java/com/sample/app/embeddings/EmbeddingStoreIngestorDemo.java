@@ -20,8 +20,6 @@ public class EmbeddingStoreIngestorDemo {
   }
 
   public static void main(String[] args) {
-
-    // Load all the Documents
     List<Document> documents = new ArrayList<>();
     Document doc1 =
         Document.from("The stock market surged as tech companies reported strong earnings.");
@@ -37,8 +35,13 @@ public class EmbeddingStoreIngestorDemo {
     EmbeddingStoreIngestor ingestor =
         EmbeddingStoreIngestor.builder()
             .embeddingModel(new BgeSmallEnV15QuantizedEmbeddingModel())
+            .documentTransformer(
+                document -> Document.from(document.text().toUpperCase(), document.metadata()))
+            .textSegmentTransformer(
+                segment -> TextSegment.from(segment.text().toUpperCase(), segment.metadata()))
             .embeddingStore(embeddingStore)
             .build();
+
     IngestionResult ingestionResult = ingestor.ingest(documents);
     TokenUsage tokenUsage = ingestionResult.tokenUsage();
     System.out.println("Input Token Count : " + tokenUsage.inputTokenCount());
