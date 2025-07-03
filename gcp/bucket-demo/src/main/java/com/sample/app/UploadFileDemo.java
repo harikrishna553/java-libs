@@ -18,7 +18,7 @@ public class UploadFileDemo {
 
 		BucketUtil bucketUtil = new BucketUtil(bucketName, credentialsPath);
 
-		String localFilePath = "/Users/h0g01ex/Desktop/demo.png";
+		String localFilePath = "/Users/krishna/Desktop/demo.png";
 		Blob blob = null;
 		try (InputStream inputStream = new FileInputStream(localFilePath)) {
 			blob = bucketUtil.uploadFile("images/personal/demo.png", inputStream);

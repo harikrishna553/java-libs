@@ -42,7 +42,7 @@ import com.sample.app.util.JsonUtil;
 		"newFieldName": "DOMAIN_NM_REVERSE"
 	}]
 }
- * @author h0g01ex
+ * @author krishna
  *
  */
 public class QueryServiceImplTest {

@@ -12,6 +12,7 @@ import dev.langchain4j.model.embedding.onnx.bgesmallenv15q.BgeSmallEnV15Quantize
 import dev.langchain4j.store.embedding.EmbeddingSearchRequest;
 import dev.langchain4j.store.embedding.EmbeddingSearchResult;
 import dev.langchain4j.store.embedding.EmbeddingStore;
+import dev.langchain4j.store.embedding.inmemory.HybridEmbeddingStore;
 
 public class HybridEmbeddingStoreDemo {
 
@@ -72,7 +73,7 @@ public class HybridEmbeddingStoreDemo {
 
 		// Step 3: Create and store embeddings
 		try {
-			EmbeddingStore<TextSegment> embeddingStore = new HybridEmbeddingStore<>(
+			HybridEmbeddingStore<TextSegment> embeddingStore = new HybridEmbeddingStore<>(
 					Path.of("/Users/Shared/chunks_dir"));
 
 			for (int i = 0; i < sentences.size(); i++) {
@@ -97,6 +98,9 @@ public class HybridEmbeddingStoreDemo {
 			System.out.println("\nTop Matches for Query: \"" + query + "\"");
 			result.matches().forEach(match -> System.out.printf("Score: %.3f | Text: %s | Metadata: %s%n",
 					match.score(), match.embedded().text(), match.embedded().metadata()));
+
+			//String json = embeddingStore.serializeToJson();
+			//System.out.println(json);
 
 		} catch (Exception e) {
 			System.err.println("Error occurred: " + e.getMessage());

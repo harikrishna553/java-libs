@@ -8,7 +8,7 @@ import com.sample.app.exception.TransformationPayloadException;
 /**
  * {"sourceField" : "sourceField", "newFieldName" : "newFieldName"}
  * 
- * @author h0g01ex
+ * @author krishna
  *
  */
 public class ReverseTransformationImpl extends TransformationImpl {
