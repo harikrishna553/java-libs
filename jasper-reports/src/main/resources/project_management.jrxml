@@ -1,0 +1,342 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="ProjectManagement" pageWidth="842" pageHeight="595" orientation="Landscape"
+              columnWidth="802" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30">
+
+    <parameter name="REPORT_TITLE" class="java.lang.String"/>
+    <parameter name="REPORT_DATE" class="java.util.Date"/>
+    <parameter name="PROJECT_MANAGER" class="java.lang.String"/>
+    <parameter name="TOTAL_PROJECTS" class="java.lang.Integer"/>
+    <parameter name="COMPLETION_RATE" class="java.lang.Double"/>
+
+    <field name="projectId" class="java.lang.String"/>
+    <field name="projectName" class="java.lang.String"/>
+    <field name="taskId" class="java.lang.String"/>
+    <field name="taskName" class="java.lang.String"/>
+    <field name="assignedTo" class="java.lang.String"/>
+    <field name="status" class="java.lang.String"/>
+    <field name="startDate" class="java.util.Date"/>
+    <field name="dueDate" class="java.util.Date"/>
+    <field name="progressPercent" class="java.lang.Integer"/>
+    <field name="priority" class="java.lang.String"/>
+    <field name="estimatedHours" class="java.math.BigDecimal"/>
+    <field name="actualHours" class="java.math.BigDecimal"/>
+    <field name="budget" class="java.math.BigDecimal"/>
+    <field name="spent" class="java.math.BigDecimal"/>
+    <field name="healthStatus" class="java.lang.String"/>
+
+    <variable name="PROJECT_TOTAL_BUDGET" class="java.math.BigDecimal" resetType="Group" resetGroup="ProjectGroup" calculation="Sum">
+        <variableExpression><![CDATA[$F{budget}]]></variableExpression>
+    </variable>
+
+    <variable name="PROJECT_TOTAL_SPENT" class="java.math.BigDecimal" resetType="Group" resetGroup="ProjectGroup" calculation="Sum">
+        <variableExpression><![CDATA[$F{spent}]]></variableExpression>
+    </variable>
+
+    <group name="ProjectGroup">
+        <groupExpression><![CDATA[$F{projectId}]]></groupExpression>
+        <groupHeader>
+            <band height="30">
+                <textField>
+                    <reportElement x="0" y="5" width="400" height="20" mode="Opaque" backcolor="#4169E1" />
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font size="12" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{projectId} + " - " + $F{projectName}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="25">
+                <textField pattern="$#,##0.00">
+                    <reportElement x="620" y="5" width="80" height="15" mode="Opaque" backcolor="#E0E0E0"/>
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font isBold="true" size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$V{PROJECT_TOTAL_BUDGET}]]></textFieldExpression>
+                </textField>
+                <textField pattern="$#,##0.00">
+                    <reportElement x="705" y="5" width="80" height="15" mode="Opaque" backcolor="#E0E0E0"/>
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font isBold="true" size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$V{PROJECT_TOTAL_SPENT}]]></textFieldExpression>
+                </textField>
+                <staticText>
+                    <reportElement x="500" y="5" width="120" height="15" mode="Opaque" backcolor="#E0E0E0"/>
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font isBold="true" size="9"/>
+                    </textElement>
+                    <text><![CDATA[Project Totals:]]></text>
+                </staticText>
+            </band>
+        </groupFooter>
+    </group>
+
+    <title>
+        <band height="80">
+            <textField>
+                <reportElement x="0" y="10" width="802" height="25"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="18" isBold="true" />
+                </textElement>
+                <textFieldExpression><![CDATA[$P{REPORT_TITLE}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="45" width="200" height="15"/>
+                <textElement textAlignment="Left">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Manager: " + $P{PROJECT_MANAGER}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="250" y="45" width="150" height="15"/>
+                <textElement textAlignment="Left">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Active Projects: " + $P{TOTAL_PROJECTS}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.0%">
+                <reportElement x="450" y="45" width="150" height="15"/>
+                <textElement textAlignment="Left">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Overall Completion: " + ($P{COMPLETION_RATE} / 100)]]></textFieldExpression>
+            </textField>
+            <textField pattern="MMMMM dd, yyyy">
+                <reportElement x="650" y="60" width="152" height="15"/>
+                <textElement textAlignment="Right">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Generated: " + $P{REPORT_DATE}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="30">
+            <rectangle>
+                <reportElement x="0" y="5" width="802" height="25" backcolor="#4169E1"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="5" y="10" width="60" height="15" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Task ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="70" y="10" width="150" height="15" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Task Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="225" y="10" width="80" height="15" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Assigned To]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="310" y="10" width="60" height="15" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Status]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="375" y="10" width="50" height="15" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Progress]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="430" y="10" width="50" height="15" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Priority]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="485" y="10" width="60" height="15" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Due Date]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="550" y="10" width="65" height="15" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Est. Hours]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="620" y="10" width="80" height="15" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Budget]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="705" y="10" width="80" height="15" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Spent]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="20" splitType="Stretch">
+            <textField>
+                <reportElement x="5" y="2" width="60" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{taskId}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="70" y="2" width="150" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{taskName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="225" y="2" width="80" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{assignedTo}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="310" y="2" width="60" height="16">
+                </reportElement>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0%">
+                <reportElement x="375" y="2" width="50" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{progressPercent} / 100.0]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="430" y="2" width="50" height="16">
+                </reportElement>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{priority}]]></textFieldExpression>
+            </textField>
+            <textField pattern="MM/dd/yy">
+                <reportElement x="485" y="2" width="60" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{dueDate}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.0">
+                <reportElement x="550" y="2" width="65" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{estimatedHours}]]></textFieldExpression>
+            </textField>
+            <textField pattern="$#,##0.00">
+                <reportElement x="620" y="2" width="80" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{budget}]]></textFieldExpression>
+            </textField>
+            <textField pattern="$#,##0.00">
+                <reportElement x="705" y="2" width="80" height="16">
+                </reportElement>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{spent}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <pageFooter>
+        <band height="20">
+            <textField>
+                <reportElement x="0" y="5" width="100" height="15"/>
+                <textElement textAlignment="Left">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement x="702" y="5" width="100" height="15"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+
+    <summary>
+        <band height="60">
+            <rectangle>
+                <reportElement x="0" y="10" width="802" height="40" backcolor="#F0F8FF"/>
+                <graphicElement><pen lineWidth="1.0"/></graphicElement>
+            </rectangle>
+            <staticText>
+                <reportElement x="10" y="20" width="100" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Project Summary:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="120" y="20" width="150" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Total Tasks: " + $V{REPORT_COUNT}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.0%">
+                <reportElement x="300" y="20" width="200" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Average Completion: " + ($P{COMPLETION_RATE} / 100)]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="550" y="20" width="200" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                </textElement>
+                <text><![CDATA[Legend: Green=Complete, Yellow=In Progress, Pink=On Hold]]></text>
+            </staticText>
+        </band>
+    </summary>
+</jasperReport>
