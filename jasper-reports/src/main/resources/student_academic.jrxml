@@ -1,0 +1,487 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports 
+              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" 
+              name="student_academic" pageWidth="595" pageHeight="842"
+              columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+
+    <!-- Parameters -->
+    <parameter name="REPORT_TITLE" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="SCHOOL_NAME" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="SEMESTER" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="REPORT_DATE" class="java.util.Date" isForPrompting="false"/>
+    <parameter name="PRINCIPAL" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="TOTAL_STUDENTS" class="java.lang.Integer" isForPrompting="false"/>
+    <parameter name="CLASS_AVERAGE" class="java.math.BigDecimal" isForPrompting="false"/>
+
+    <!-- Fields -->
+    <field name="studentId" class="java.lang.String"/>
+    <field name="studentName" class="java.lang.String"/>
+    <field name="grade" class="java.lang.String"/>
+    <field name="subject" class="java.lang.String"/>
+    <field name="teacher" class="java.lang.String"/>
+    <field name="semester" class="java.lang.Integer"/>
+    <field name="quiz1" class="java.math.BigDecimal"/>
+    <field name="quiz2" class="java.math.BigDecimal"/>
+    <field name="midterm" class="java.math.BigDecimal"/>
+    <field name="finalExam" class="java.math.BigDecimal"/>
+    <field name="homework" class="java.math.BigDecimal"/>
+    <field name="participation" class="java.math.BigDecimal"/>
+    <field name="finalGrade" class="java.math.BigDecimal"/>
+    <field name="letterGrade" class="java.lang.String"/>
+    <field name="status" class="java.lang.String"/>
+    <field name="parentContact" class="java.lang.String"/>
+    <field name="absences" class="java.lang.Integer"/>
+    <field name="comments" class="java.lang.String"/>
+
+    <!-- Variables -->
+    <variable name="TotalStudents" class="java.lang.Integer" calculation="Count">
+        <variableExpression><![CDATA[$F{studentId}]]></variableExpression>
+    </variable>
+    
+    <variable name="AverageGrade" class="java.math.BigDecimal" calculation="Average">
+        <variableExpression><![CDATA[$F{finalGrade}]]></variableExpression>
+    </variable>
+
+    <!-- Group by Grade Level -->
+    <group name="GradeGroup" isStartNewPage="false" isStartNewColumn="false" isResetPageNumber="false" isReprintHeaderOnEachPage="false">
+        <groupExpression><![CDATA[$F{grade}]]></groupExpression>
+        <groupHeader>
+            <band height="30">
+                <rectangle>
+                    <reportElement x="0" y="5" width="535" height="20"  backcolor="#E0E0E0"/>
+                </rectangle>
+                <textField>
+                    <reportElement x="10" y="8" width="200" height="15" />
+                    <textElement>
+                        <font fontName="Arial" size="11" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Grade Level: " + $F{grade}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="10"/>
+        </groupFooter>
+    </group>
+
+    <!-- Page Header -->
+    <pageHeader>
+        <band height="120">
+            <!-- Header Rectangle -->
+            <rectangle>
+                <reportElement x="0" y="0" width="535" height="80"  backcolor="#003366"/>
+            </rectangle>
+            
+            <!-- School Name -->
+            <textField>
+                <reportElement x="20" y="10" width="495" height="20" />
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="16" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{SCHOOL_NAME}]]></textFieldExpression>
+            </textField>
+            
+            <!-- Report Title -->
+            <textField>
+                <reportElement x="20" y="35" width="495" height="20" />
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="14" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{REPORT_TITLE}]]></textFieldExpression>
+            </textField>
+            
+            <!-- Semester -->
+            <textField>
+                <reportElement x="20" y="55" width="495" height="15" />
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Semester: " + $P{SEMESTER}]]></textFieldExpression>
+            </textField>
+            
+            <!-- Report Info -->
+            <textField>
+                <reportElement x="0" y="90" width="200" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Principal: " + $P{PRINCIPAL}]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="335" y="90" width="200" height="15"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Arial" size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Generated: " + new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm").format($P{REPORT_DATE})]]></textFieldExpression>
+            </textField>
+            
+            <!-- Summary Stats -->
+            <textField>
+                <reportElement x="0" y="105" width="150" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="9" isBold="true" isUnderline="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Total Students: " + $P{TOTAL_STUDENTS}]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="170" y="105" width="200" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="9" isBold="true" isUnderline="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Class Average: " + new java.text.DecimalFormat("#0.00").format($P{CLASS_AVERAGE}) + "%"]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+
+    <!-- Column Header -->
+    <columnHeader>
+        <band height="30">
+            <rectangle>
+                <reportElement x="0" y="5" width="535" height="20"  backcolor="#CCCCCC"/>
+            </rectangle>
+            
+            <staticText>
+                <reportElement x="5" y="8" width="60" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Student ID]]></text>
+            </staticText>
+            
+            <staticText>
+                <reportElement x="70" y="8" width="80" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Name]]></text>
+            </staticText>
+            
+            <staticText>
+                <reportElement x="155" y="8" width="60" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Subject]]></text>
+            </staticText>
+            
+            <staticText>
+                <reportElement x="220" y="8" width="60" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Teacher]]></text>
+            </staticText>
+            
+            <staticText>
+                <reportElement x="285" y="8" width="40" height="15"/>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Final%]]></text>
+            </staticText>
+            
+            <staticText>
+                <reportElement x="330" y="8" width="30" height="15"/>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Grade]]></text>
+            </staticText>
+            
+            <staticText>
+                <reportElement x="365" y="8" width="50" height="15"/>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Status]]></text>
+            </staticText>
+            
+            <staticText>
+                <reportElement x="420" y="8" width="30" height="15"/>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Absent]]></text>
+            </staticText>
+            
+            <staticText>
+                <reportElement x="455" y="8" width="80" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Parent Contact]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <!-- Detail Band -->
+    <detail>
+        <band height="50">
+            <!-- Conditional Row Coloring -->
+            <rectangle>
+                <reportElement x="0" y="0" width="535" height="45">
+                    <printWhenExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></printWhenExpression>
+                </reportElement>
+                <graphicElement>
+                    <pen lineColor="#F5F5F5"/>
+                </graphicElement>
+            </rectangle>
+            
+            <!-- Student Information -->
+            <textField>
+                <reportElement x="5" y="2" width="60" height="12"/>
+                <textElement>
+                    <font fontName="Arial" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{studentId}]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="70" y="2" width="80" height="12"/>
+                <textElement>
+                    <font fontName="Arial" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{studentName}]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="155" y="2" width="60" height="12"/>
+                <textElement>
+                    <font fontName="Arial" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{subject}]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="220" y="2" width="60" height="12"/>
+                <textElement>
+                    <font fontName="Arial" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{teacher}]]></textFieldExpression>
+            </textField>
+            
+            <!-- Final Grade with Conditional Formatting -->
+            <textField>
+                <reportElement x="285" y="2" width="40" height="12">
+                    <!-- Green for A grades -->
+                    <printWhenExpression><![CDATA[$F{letterGrade}.startsWith("A")]]></printWhenExpression>
+                </reportElement>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="8" isBold="true" isUnderline="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new java.text.DecimalFormat("#0.0").format($F{finalGrade})]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="285" y="2" width="40" height="12">
+                    <!-- Blue for B grades -->
+                    <printWhenExpression><![CDATA[$F{letterGrade}.startsWith("B")]]></printWhenExpression>
+                </reportElement>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new java.text.DecimalFormat("#0.0").format($F{finalGrade})]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="285" y="2" width="40" height="12" >
+                    <!-- Orange for C grades -->
+                    <printWhenExpression><![CDATA[$F{letterGrade}.startsWith("C")]]></printWhenExpression>
+                </reportElement>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new java.text.DecimalFormat("#0.0").format($F{finalGrade})]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="285" y="2" width="40" height="12" >
+                    <!-- Red for D/F grades -->
+                    <printWhenExpression><![CDATA[$F{letterGrade}.equals("D") || $F{letterGrade}.equals("F")]]></printWhenExpression>
+                </reportElement>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new java.text.DecimalFormat("#0.0").format($F{finalGrade})]]></textFieldExpression>
+            </textField>
+            
+            <!-- Letter Grade -->
+            <textField>
+                <reportElement x="330" y="2" width="30" height="12"/>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{letterGrade}]]></textFieldExpression>
+            </textField>
+            
+            <!-- Status with Color Coding -->
+            <textField>
+                <reportElement x="365" y="2" width="50" height="12" >
+                    <printWhenExpression><![CDATA[$F{status}.equals("Excellent") || $F{status}.equals("Very Good")]]></printWhenExpression>
+                </reportElement>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="7" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="365" y="2" width="50" height="12" >
+                    <printWhenExpression><![CDATA[$F{status}.equals("Good") || $F{status}.equals("Satisfactory")]]></printWhenExpression>
+                </reportElement>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="365" y="2" width="50" height="12" >
+                    <printWhenExpression><![CDATA[$F{status}.equals("At Risk") || $F{status}.equals("Failing")]]></printWhenExpression>
+                </reportElement>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="7" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+            </textField>
+            
+            <!-- Absences with Alert -->
+            <textField>
+                <reportElement x="420" y="2" width="30" height="12" >
+                    <printWhenExpression><![CDATA[$F{absences} > 5]]></printWhenExpression>
+                </reportElement>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{absences}]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="420" y="2" width="30" height="12">
+                    <printWhenExpression><![CDATA[$F{absences} <= 5]]></printWhenExpression>
+                </reportElement>
+                <textElement textAlignment="Center">
+                    <font fontName="Arial" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{absences}]]></textFieldExpression>
+            </textField>
+            
+            <!-- Parent Contact -->
+            <textField>
+                <reportElement x="455" y="2" width="80" height="12"/>
+                <textElement>
+                    <font fontName="Arial" size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{parentContact}]]></textFieldExpression>
+            </textField>
+            
+            <!-- Grade Details -->
+            <textField>
+                <reportElement x="5" y="16" width="400" height="10"/>
+                <textElement>
+                    <font fontName="Arial" size="7" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Quiz 1: " + $F{quiz1} + "%, Quiz 2: " + $F{quiz2} + "%, Midterm: " + $F{midterm} + "%, Final: " + $F{finalExam} + "%, HW: " + $F{homework} + "%, Part: " + $F{participation} + "%"]]></textFieldExpression>
+            </textField>
+            
+            <!-- Comments -->
+            <textField isStretchWithOverflow="true">
+                <reportElement x="5" y="28" width="525" height="15" isRemoveLineWhenBlank="true"/>
+                <textElement>
+                    <font fontName="Arial" size="7" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Comments: " + $F{comments}]]></textFieldExpression>
+            </textField>
+            
+            <line>
+                <reportElement x="0" y="45" width="535" height="1" />
+            </line>
+        </band>
+    </detail>
+
+    <!-- Summary Footer -->
+    <summary>
+        <band height="60">
+            <rectangle>
+                <reportElement x="0" y="10" width="535" height="40"  backcolor="#F0F0F0"/>
+            </rectangle>
+            
+            <staticText>
+                <reportElement x="10" y="15" width="100" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[SUMMARY STATISTICS]]></text>
+            </staticText>
+            
+            <textField>
+                <reportElement x="10" y="32" width="150" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Total Records: " + $V{TotalStudents}]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="170" y="32" width="200" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Average Grade: " + new java.text.DecimalFormat("#0.00").format($V{AverageGrade}) + "%"]]></textFieldExpression>
+            </textField>
+            
+            <staticText>
+                <reportElement x="380" y="32" width="150" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="9" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[Generated by Academic System]]></text>
+            </staticText>
+        </band>
+    </summary>
+
+    <!-- No Data Section -->
+    <noData>
+        <band height="50">
+            <staticText>
+                <reportElement x="0" y="20" width="555" height="20"/>
+                <textElement textAlignment="Center">
+                    <font size="12"/>
+                </textElement>
+                <text><![CDATA[No academic data available for this student]]></text>
+            </staticText>
+        </band>
+    </noData>
+
+    <!-- Page Footer -->
+    <pageFooter>
+        <band height="20">
+            <textField>
+                <reportElement x="0" y="5" width="200" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Riverside High School - Academic Report"]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="400" y="5" width="100" height="15"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Arial" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+            </textField>
+            
+            <textField evaluationTime="Report">
+                <reportElement x="500" y="5" width="35" height="15"/>
+                <textElement>
+                    <font fontName="Arial" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+</jasperReport>

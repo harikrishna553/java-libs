@@ -1,0 +1,371 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="HospitalPatient" pageWidth="842" pageHeight="595" orientation="Landscape"
+              columnWidth="802" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30">
+
+    <parameter name="REPORT_TITLE" class="java.lang.String"/>
+    <parameter name="HOSPITAL_NAME" class="java.lang.String"/>
+    <parameter name="REPORT_DATE" class="java.util.Date"/>
+    <parameter name="CHIEF_MEDICAL_OFFICER" class="java.lang.String"/>
+    <parameter name="TOTAL_PATIENTS" class="java.lang.Integer"/>
+    <parameter name="OCCUPANCY_RATE" class="java.lang.Double"/>
+
+    <field name="patientId" class="java.lang.String"/>
+    <field name="patientName" class="java.lang.String"/>
+    <field name="age" class="java.lang.Integer"/>
+    <field name="gender" class="java.lang.String"/>
+    <field name="admissionDate" class="java.util.Date"/>
+    <field name="department" class="java.lang.String"/>
+    <field name="roomNumber" class="java.lang.String"/>
+    <field name="attendingPhysician" class="java.lang.String"/>
+    <field name="diagnosis" class="java.lang.String"/>
+    <field name="status" class="java.lang.String"/>
+    <field name="insurance" class="java.lang.String"/>
+    <field name="lengthOfStay" class="java.lang.Integer"/>
+    <field name="totalCharges" class="java.math.BigDecimal"/>
+    <field name="bloodType" class="java.lang.String"/>
+    <field name="allergies" class="java.lang.String"/>
+
+    <variable name="DEPT_PATIENT_COUNT" class="java.lang.Integer" resetType="Group" resetGroup="DepartmentGroup" calculation="Count">
+        <variableExpression><![CDATA[$F{patientId}]]></variableExpression>
+    </variable>
+
+    <variable name="DEPT_TOTAL_CHARGES" class="java.math.BigDecimal" resetType="Group" resetGroup="DepartmentGroup" calculation="Sum">
+        <variableExpression><![CDATA[$F{totalCharges}]]></variableExpression>
+    </variable>
+
+    <group name="DepartmentGroup">
+        <groupExpression><![CDATA[$F{department}]]></groupExpression>
+        <groupHeader>
+            <band height="25">
+                <textField>
+                    <reportElement x="0" y="5" width="200" height="15" mode="Opaque" backcolor="#4682B4" />
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font size="11" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Department: " + $F{department}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="20">
+                <textField>
+                    <reportElement x="600" y="2" width="100" height="15" mode="Opaque" backcolor="#E0E0E0"/>
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font isBold="true" size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$V{DEPT_PATIENT_COUNT} + " patients"]]></textFieldExpression>
+                </textField>
+                <textField pattern="$#,##0.00">
+                    <reportElement x="705" y="2" width="80" height="15" mode="Opaque" backcolor="#E0E0E0"/>
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font isBold="true" size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$V{DEPT_TOTAL_CHARGES}]]></textFieldExpression>
+                </textField>
+                <staticText>
+                    <reportElement x="500" y="2" width="100" height="15" mode="Opaque" backcolor="#E0E0E0"/>
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font isBold="true" size="9"/>
+                    </textElement>
+                    <text><![CDATA[Dept. Total:]]></text>
+                </staticText>
+            </band>
+        </groupFooter>
+    </group>
+
+    <title>
+        <band height="90">
+            <textField>
+                <reportElement x="0" y="10" width="802" height="25"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="18" isBold="true" />
+                </textElement>
+                <textFieldExpression><![CDATA[$P{REPORT_TITLE}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="35" width="802" height="15"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{HOSPITAL_NAME}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="60" width="200" height="15"/>
+                <textElement textAlignment="Left">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA["CMO: " + $P{CHIEF_MEDICAL_OFFICER}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="250" y="60" width="150" height="15"/>
+                <textElement textAlignment="Left">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Total Patients: " + $P{TOTAL_PATIENTS}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.0%">
+                <reportElement x="450" y="60" width="150" height="15"/>
+                <textElement textAlignment="Left">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Occupancy: " + ($P{OCCUPANCY_RATE} / 100)]]></textFieldExpression>
+            </textField>
+            <textField pattern="MMMMM dd, yyyy HH:mm">
+                <reportElement x="650" y="75" width="152" height="15"/>
+                <textElement textAlignment="Right">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Generated: " + $P{REPORT_DATE}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="35">
+            <rectangle>
+                <reportElement x="0" y="5" width="802" height="25" backcolor="#4682B4"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="5" y="10" width="60" height="15" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Patient ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="70" y="10" width="100" height="15" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Patient Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="175" y="10" width="35" height="15" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Age]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="215" y="10" width="50" height="15" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Room]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="270" y="10" width="80" height="15" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Physician]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="355" y="10" width="90" height="15" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Diagnosis]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="450" y="10" width="60" height="15" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Status]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="515" y="10" width="40" height="15" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[LOS]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="560" y="10" width="70" height="15" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Charges]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="635" y="10" width="40" height="15" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Blood]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="680" y="10" width="115" height="15" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Allergies]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="20" splitType="Stretch">
+            <textField>
+                <reportElement x="5" y="2" width="60" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{patientId}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="70" y="2" width="100" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{patientName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="175" y="2" width="35" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="215" y="2" width="50" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{roomNumber}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="270" y="2" width="80" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{attendingPhysician}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="355" y="2" width="90" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{diagnosis}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="450" y="2" width="60" height="16">
+                </reportElement>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="515" y="2" width="40" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{lengthOfStay} + "d"]]></textFieldExpression>
+            </textField>
+            <textField pattern="$#,##0">
+                <reportElement x="560" y="2" width="70" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{totalCharges}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="635" y="2" width="40" height="16"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{bloodType}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="680" y="2" width="115" height="16">
+                </reportElement>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{allergies}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <pageFooter>
+        <band height="20">
+            <textField>
+                <reportElement x="0" y="5" width="100" height="15"/>
+                <textElement textAlignment="Left">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement x="702" y="5" width="100" height="15"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="300" y="5" width="200" height="15"/>
+                <textElement textAlignment="Center">
+                    <font size="8" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[CONFIDENTIAL MEDICAL INFORMATION]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
+
+    <summary>
+        <band height="60">
+            <rectangle>
+                <reportElement x="0" y="10" width="802" height="40" backcolor="#E6F3FF"/>
+                <graphicElement><pen lineWidth="1.0"/></graphicElement>
+            </rectangle>
+            <staticText>
+                <reportElement x="10" y="20" width="120" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Hospital Summary:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="20" width="150" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Total Patients: " + $V{REPORT_COUNT}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.0%">
+                <reportElement x="320" y="20" width="180" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Hospital Occupancy Rate: " + ($P{OCCUPANCY_RATE} / 100)]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="10" y="35" width="780" height="10"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <text><![CDATA[Status Legend: Red=Critical, Green=Stable, Purple=Discharged | Allergy Alert: Yellow highlight indicates known allergies | LOS=Length of Stay in days]]></text>
+            </staticText>
+        </band>
+    </summary>
+</jasperReport>

@@ -1,0 +1,79 @@
+<jasperReport name="PayslipReport" language="java" pageWidth="595" pageHeight="842"
+    columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+
+    <!-- Fields -->
+    <field name="employeeName" class="java.lang.String"/>
+    <field name="employeeId" class="java.lang.String"/>
+    <field name="designation" class="java.lang.String"/>
+    <field name="department" class="java.lang.String"/>
+    <field name="basicPay" class="java.lang.Float"/>
+    <field name="hra" class="java.lang.Float"/>
+    <field name="allowances" class="java.lang.Float"/>
+    <field name="tax" class="java.lang.Float"/>
+    <field name="pf" class="java.lang.Float"/>
+    <field name="otherDeductions" class="java.lang.Float"/>
+    <field name="netPay" class="java.lang.Float"/>
+    <field name="month" class="java.lang.String"/>
+    <field name="year" class="java.lang.Integer"/>
+
+    <!-- Title -->
+    <title>
+        <band height="60">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Company XYZ Pvt Ltd]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="30" width="555" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Payslip for $F{month} $F{year}]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <!-- Detail -->
+    <detail>
+        <band height="180">
+
+            <!-- Employee Details -->
+            <staticText><reportElement x="0" y="0" width="100" height="20"/><text><![CDATA[Employee ID]]></text></staticText>
+            <textField><reportElement x="110" y="0" width="150" height="20"/><textFieldExpression><![CDATA[$F{employeeId}]]></textFieldExpression></textField>
+            <staticText><reportElement x="280" y="0" width="100" height="20"/><text><![CDATA[Employee Name]]></text></staticText>
+            <textField><reportElement x="390" y="0" width="165" height="20"/><textFieldExpression><![CDATA[$F{employeeName}]]></textFieldExpression></textField>
+
+            <staticText><reportElement x="0" y="25" width="100" height="20"/><text><![CDATA[Designation]]></text></staticText>
+            <textField><reportElement x="110" y="25" width="150" height="20"/><textFieldExpression><![CDATA[$F{designation}]]></textFieldExpression></textField>
+            <staticText><reportElement x="280" y="25" width="100" height="20"/><text><![CDATA[Department]]></text></staticText>
+            <textField><reportElement x="390" y="25" width="165" height="20"/><textFieldExpression><![CDATA[$F{department}]]></textFieldExpression></textField>
+
+            <!-- Earnings -->
+            <staticText><reportElement x="0" y="60" width="150" height="20" /><text><![CDATA[Earnings]]></text></staticText>
+            <staticText><reportElement x="0" y="80" width="100" height="20"/><text><![CDATA[Basic]]></text></staticText>
+            <textField><reportElement x="110" y="80" width="100" height="20"/><textFieldExpression><![CDATA[$F{basicPay}]]></textFieldExpression></textField>
+            <staticText><reportElement x="0" y="105" width="100" height="20"/><text><![CDATA[HRA]]></text></staticText>
+            <textField><reportElement x="110" y="105" width="100" height="20"/><textFieldExpression><![CDATA[$F{hra}]]></textFieldExpression></textField>
+            <staticText><reportElement x="0" y="130" width="100" height="20"/><text><![CDATA[Allowances]]></text></staticText>
+            <textField><reportElement x="110" y="130" width="100" height="20"/><textFieldExpression><![CDATA[$F{allowances}]]></textFieldExpression></textField>
+
+            <!-- Deductions -->
+            <staticText><reportElement x="280" y="60" width="150" height="20" /><text><![CDATA[Deductions]]></text></staticText>
+            <staticText><reportElement x="280" y="80" width="100" height="20"/><text><![CDATA[Tax]]></text></staticText>
+            <textField><reportElement x="390" y="80" width="100" height="20"/><textFieldExpression><![CDATA[$F{tax}]]></textFieldExpression></textField>
+            <staticText><reportElement x="280" y="105" width="100" height="20"/><text><![CDATA[PF]]></text></staticText>
+            <textField><reportElement x="390" y="105" width="100" height="20"/><textFieldExpression><![CDATA[$F{pf}]]></textFieldExpression></textField>
+            <staticText><reportElement x="280" y="130" width="100" height="20"/><text><![CDATA[Other]]></text></staticText>
+            <textField><reportElement x="390" y="130" width="100" height="20"/><textFieldExpression><![CDATA[$F{otherDeductions}]]></textFieldExpression></textField>
+
+            <!-- Net Pay -->
+            <staticText><reportElement x="0" y="160" width="150" height="20"/><text><![CDATA[Net Pay]]></text></staticText>
+            <textField><reportElement x="110" y="160" width="100" height="20"/><textFieldExpression><![CDATA[$F{netPay}]]></textFieldExpression></textField>
+
+        </band>
+    </detail>
+
+</jasperReport>

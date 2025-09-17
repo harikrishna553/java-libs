@@ -1,0 +1,388 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="EmployeePerformance" pageWidth="842" pageHeight="595" orientation="Landscape"
+              columnWidth="802" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30">
+
+    <parameter name="REPORT_TITLE" class="java.lang.String"/>
+    <parameter name="REVIEW_PERIOD" class="java.lang.String"/>
+    <parameter name="REPORT_DATE" class="java.util.Date"/>
+    <parameter name="HR_MANAGER" class="java.lang.String"/>
+    <parameter name="TOTAL_EMPLOYEES" class="java.lang.Integer"/>
+    <parameter name="AVG_PERFORMANCE" class="java.lang.Double"/>
+
+    <field name="employeeId" class="java.lang.String"/>
+    <field name="employeeName" class="java.lang.String"/>
+    <field name="department" class="java.lang.String"/>
+    <field name="position" class="java.lang.String"/>
+    <field name="manager" class="java.lang.String"/>
+    <field name="hireDate" class="java.util.Date"/>
+    <field name="currentSalary" class="java.math.BigDecimal"/>
+    <field name="performanceScore" class="java.lang.Integer"/>
+    <field name="performanceRating" class="java.lang.String"/>
+    <field name="goalsAchieved" class="java.lang.Integer"/>
+    <field name="totalGoals" class="java.lang.Integer"/>
+    <field name="strengths" class="java.lang.String"/>
+    <field name="areasForImprovement" class="java.lang.String"/>
+    <field name="careerGoals" class="java.lang.String"/>
+    <field name="salaryRecommendation" class="java.math.BigDecimal"/>
+    <field name="goalCompletionRate" class="java.lang.Double"/>
+    <field name="salaryIncrease" class="java.math.BigDecimal"/>
+
+    <variable name="DEPT_AVG_SCORE" class="java.lang.Double" resetType="Group" resetGroup="DepartmentGroup" calculation="Average">
+        <variableExpression><![CDATA[$F{performanceScore}]]></variableExpression>
+    </variable>
+
+    <group name="DepartmentGroup">
+        <groupExpression><![CDATA[$F{department}]]></groupExpression>
+        <groupHeader>
+            <band height="30">
+                <textField>
+                    <reportElement x="0" y="5" width="200" height="20" mode="Opaque" backcolor="#2E8B57" />
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font size="12" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Department: " + $F{department}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="25">
+                <textField pattern="#,##0.0">
+                    <reportElement x="650" y="5" width="80" height="15" mode="Opaque" backcolor="#F0F0F0"/>
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font isBold="true" size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$V{DEPT_AVG_SCORE}]]></textFieldExpression>
+                </textField>
+                <staticText>
+                    <reportElement x="530" y="5" width="120" height="15" mode="Opaque" backcolor="#F0F0F0"/>
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font isBold="true" size="9"/>
+                    </textElement>
+                    <text><![CDATA[Department Average:]]></text>
+                </staticText>
+            </band>
+        </groupFooter>
+    </group>
+
+    <title>
+        <band height="100">
+            <textField>
+                <reportElement x="0" y="10" width="802" height="25"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="18" isBold="true" />
+                </textElement>
+                <textFieldExpression><![CDATA[$P{REPORT_TITLE}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="35" width="802" height="15"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{REVIEW_PERIOD}]]></textFieldExpression>
+            </textField>
+            <textField pattern="MMMMM dd, yyyy">
+                <reportElement x="650" y="70" width="152" height="15"/>
+                <textElement textAlignment="Right">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Generated: " + $P{REPORT_DATE}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="60" width="150" height="15"/>
+                <textElement textAlignment="Left">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Prepared by: " + $P{HR_MANAGER}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="75" width="120" height="15"/>
+                <textElement textAlignment="Left">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Total Employees: " + $P{TOTAL_EMPLOYEES}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.0">
+                <reportElement x="150" y="75" width="150" height="15"/>
+                <textElement textAlignment="Left">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Average Score: " + $P{AVG_PERFORMANCE}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="40">
+            <rectangle>
+                <reportElement x="0" y="5" width="802" height="30" backcolor="#2E8B57"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="5" y="10" width="50" height="20" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="60" y="10" width="100" height="20" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Employee Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="165" y="10" width="80" height="20" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Position]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="250" y="10" width="70" height="20" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Manager]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="325" y="10" width="40" height="20" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Score]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="370" y="10" width="70" height="20" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Rating]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="445" y="10" width="50" height="20" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Goals %]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="500" y="10" width="70" height="20" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Current Salary]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="575" y="10" width="70" height="20" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Recommended]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="650" y="10" width="50" height="20" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Increase]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="705" y="10" width="90" height="20" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Career Goals]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="35" splitType="Stretch">
+            <textField>
+                <reportElement x="5" y="2" width="50" height="30"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{employeeId}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="60" y="2" width="100" height="30"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{employeeName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="165" y="2" width="80" height="30"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{position}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="250" y="2" width="70" height="30"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{manager}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="325" y="2" width="40" height="30">
+                </reportElement>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{performanceScore}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="370" y="2" width="70" height="30"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{performanceRating}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.0%">
+                <reportElement x="445" y="2" width="50" height="30"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{goalCompletionRate} / 100]]></textFieldExpression>
+            </textField>
+            <textField pattern="$#,##0">
+                <reportElement x="500" y="2" width="70" height="30"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{currentSalary}]]></textFieldExpression>
+            </textField>
+            <textField pattern="$#,##0">
+                <reportElement x="575" y="2" width="70" height="30"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{salaryRecommendation}]]></textFieldExpression>
+            </textField>
+            <textField pattern="$#,##0">
+                <reportElement x="650" y="2" width="50" height="30">
+                </reportElement>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{salaryIncrease}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="705" y="2" width="90" height="30"/>
+                <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{careerGoals}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <pageFooter>
+        <band height="25">
+            <textField>
+                <reportElement x="0" y="5" width="100" height="15"/>
+                <textElement textAlignment="Left">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement x="702" y="5" width="100" height="15"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="300" y="5" width="200" height="15"/>
+                <textElement textAlignment="Center">
+                    <font size="8" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[Confidential HR Document]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
+
+    <summary>
+        <band height="120">
+            <rectangle>
+                <reportElement x="0" y="10" width="802" height="100" backcolor="#F0F8FF"/>
+                <graphicElement><pen lineWidth="1.0"/></graphicElement>
+            </rectangle>
+            <staticText>
+                <reportElement x="10" y="20" width="150" height="20"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Performance Summary]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="10" y="45" width="180" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Total Employees Reviewed: " + $V{REPORT_COUNT}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.0">
+                <reportElement x="10" y="65" width="180" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Company Average Score: " + $P{AVG_PERFORMANCE}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="250" y="45" width="200" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                </textElement>
+                <text><![CDATA[Rating Distribution:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="250" y="60" width="250" height="30"/>
+                <textElement verticalAlignment="Top">
+                    <font size="8"/>
+                </textElement>
+                <text><![CDATA[• Outstanding (90+): Green highlight
+• Exceeds Expectations (80-89): Yellow highlight  
+• Meets Expectations (70-79): No highlight
+• Below Expectations (<70): Red highlight]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="550" y="45" width="200" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Next Steps:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="550" y="60" width="240" height="30"/>
+                <textElement verticalAlignment="Top">
+                    <font size="8"/>
+                </textElement>
+                <text><![CDATA[1. Schedule one-on-one meetings with underperformers
+2. Implement development plans for career growth
+3. Process salary adjustments by end of quarter
+4. Update performance tracking systems]]></text>
+            </staticText>
+        </band>
+    </summary>
+</jasperReport>

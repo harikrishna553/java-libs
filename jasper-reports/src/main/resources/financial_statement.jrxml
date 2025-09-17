@@ -1,0 +1,285 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="FinancialStatement" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+
+    <parameter name="COMPANY_NAME" class="java.lang.String"/>
+    <parameter name="STATEMENT_PERIOD" class="java.lang.String"/>
+    <parameter name="REPORT_DATE" class="java.util.Date"/>
+    <parameter name="TOTAL_ASSETS" class="java.math.BigDecimal"/>
+    <parameter name="TOTAL_LIABILITIES" class="java.math.BigDecimal"/>
+    <parameter name="TOTAL_EQUITY" class="java.math.BigDecimal"/>
+
+    <field name="accountCode" class="java.lang.String"/>
+    <field name="accountName" class="java.lang.String"/>
+    <field name="accountType" class="java.lang.String"/>
+    <field name="category" class="java.lang.String"/>
+    <field name="currentBalance" class="java.math.BigDecimal"/>
+    <field name="previousBalance" class="java.math.BigDecimal"/>
+    <field name="variance" class="java.math.BigDecimal"/>
+    <field name="description" class="java.lang.String"/>
+
+    <variable name="CATEGORY_TOTAL" class="java.math.BigDecimal" resetType="Group" resetGroup="CategoryGroup" calculation="Sum">
+        <variableExpression><![CDATA[$F{currentBalance}]]></variableExpression>
+    </variable>
+
+    <variable name="TYPE_TOTAL" class="java.math.BigDecimal" resetType="Group" resetGroup="TypeGroup" calculation="Sum">
+        <variableExpression><![CDATA[$F{currentBalance}]]></variableExpression>
+    </variable>
+
+    <group name="TypeGroup">
+        <groupExpression><![CDATA[$F{accountType}]]></groupExpression>
+        <groupHeader>
+            <band height="35">
+                <textField>
+                    <reportElement x="0" y="10" width="555" height="20" mode="Opaque" backcolor="#4682B4" />
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="14" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{accountType}.toUpperCase() + "S"]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="25">
+                <textField>
+                    <reportElement x="0" y="5" width="350" height="15" mode="Opaque" backcolor="#E0E0E0"/>
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Total " + $F{accountType} + "s:"]]></textFieldExpression>
+                </textField>
+                <textField pattern="$#,##0.00">
+                    <reportElement x="350" y="5" width="100" height="15" mode="Opaque" backcolor="#E0E0E0"/>
+                    <box><pen lineWidth="1.0"/></box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$V{TYPE_TOTAL}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupFooter>
+    </group>
+
+    <group name="CategoryGroup">
+        <groupExpression><![CDATA[$F{category}]]></groupExpression>
+        <groupHeader>
+            <band height="25">
+                <textField>
+                    <reportElement x="20" y="5" width="330" height="15" mode="Opaque" backcolor="#F0F0F0"/>
+                    <box><pen lineWidth="0.5"/></box>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font size="11" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="20">
+                <textField>
+                    <reportElement x="20" y="2" width="330" height="15" mode="Opaque" backcolor="#F5F5F5"/>
+                    <box><pen lineWidth="0.5"/></box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="9" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Subtotal:"]]></textFieldExpression>
+                </textField>
+                <textField pattern="$#,##0.00">
+                    <reportElement x="350" y="2" width="100" height="15" mode="Opaque" backcolor="#F5F5F5"/>
+                    <box><pen lineWidth="0.5"/></box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="9" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$V{CATEGORY_TOTAL}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupFooter>
+    </group>
+
+    <title>
+        <band height="100">
+            <textField>
+                <reportElement x="0" y="10" width="555" height="25"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{COMPANY_NAME}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="35" width="555" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[BALANCE SHEET]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="0" y="55" width="555" height="15"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{STATEMENT_PERIOD}]]></textFieldExpression>
+            </textField>
+            <textField pattern="MMMMM dd, yyyy">
+                <reportElement x="450" y="80" width="105" height="15"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Prepared: " + $P{REPORT_DATE}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="30">
+            <rectangle>
+                <reportElement x="0" y="5" width="555" height="20" backcolor="#708090"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="40" y="10" width="60" height="15" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Code]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="100" y="10" width="150" height="15" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Account Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="250" y="10" width="100" height="15" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Current Balance]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="350" y="10" width="100" height="15" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Previous Balance]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="450" y="10" width="100" height="15" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Variance]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="18">
+            <textField>
+                <reportElement x="40" y="2" width="60" height="14"/>
+                <box><pen lineWidth="0.25" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{accountCode}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="100" y="2" width="150" height="14"/>
+                <box><pen lineWidth="0.25" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{accountName}]]></textFieldExpression>
+            </textField>
+            <textField pattern="$#,##0.00">
+                <reportElement x="250" y="2" width="100" height="14"/>
+                <box><pen lineWidth="0.25" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{currentBalance}]]></textFieldExpression>
+            </textField>
+            <textField pattern="$#,##0.00">
+                <reportElement x="350" y="2" width="100" height="14"/>
+                <box><pen lineWidth="0.25" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{previousBalance}]]></textFieldExpression>
+            </textField>
+            <textField pattern="$#,##0.00">
+                <reportElement x="450" y="2" width="100" height="14"/>
+                <box><pen lineWidth="0.25" lineColor="#CCCCCC"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{variance}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <pageFooter>
+        <band height="15">
+            <textField>
+                <reportElement x="0" y="0" width="100" height="15"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement x="455" y="0" width="100" height="15"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+
+    <summary>
+        <band height="80">
+            <rectangle>
+                <reportElement x="0" y="10" width="555" height="60" backcolor="#F8F8FF"/>
+                <graphicElement><pen lineWidth="2.0"/></graphicElement>
+            </rectangle>
+            <staticText>
+                <reportElement x="10" y="20" width="200" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[FINANCIAL POSITION SUMMARY]]></text>
+            </staticText>
+            <textField pattern="$#,##0.00">
+                <reportElement x="10" y="40" width="150" height="12"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Total Assets: " + $P{TOTAL_ASSETS}]]></textFieldExpression>
+            </textField>
+            <textField pattern="$#,##0.00">
+                <reportElement x="200" y="40" width="150" height="12"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Total Liabilities: " + $P{TOTAL_LIABILITIES}]]></textFieldExpression>
+            </textField>
+            <textField pattern="$#,##0.00">
+                <reportElement x="380" y="40" width="150" height="12"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Total Equity: " + $P{TOTAL_EQUITY}]]></textFieldExpression>
+            </textField>
+            <textField pattern="$#,##0.00">
+                <reportElement x="10" y="55" width="200" height="12"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Balance Check: " + ($P{TOTAL_LIABILITIES}.add($P{TOTAL_EQUITY}))]]></textFieldExpression>
+            </textField>
+        </band>
+    </summary>
+</jasperReport>
