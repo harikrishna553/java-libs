@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sample.app</groupId>
+	<artifactId>open-telemetry-demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<otel.version>1.54.1</otel.version>
+		<maven.compiler.release>24</maven.compiler.release>
+	</properties>
+
+	<dependencies>
+		<!-- OpenTelemetry API -->
+		<dependency>
+			<groupId>io.opentelemetry</groupId>
+			<artifactId>opentelemetry-api</artifactId>
+			<version>${otel.version}</version>
+		</dependency>
+
+		<!-- OpenTelemetry SDK -->
+		<dependency>
+			<groupId>io.opentelemetry</groupId>
+			<artifactId>opentelemetry-sdk</artifactId>
+			<version>${otel.version}</version>
+		</dependency>
+
+		<!-- Console Exporter (for simplicity) -->
+		<dependency>
+			<groupId>io.opentelemetry</groupId>
+			<artifactId>opentelemetry-exporter-logging</artifactId>
+			<version>${otel.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>
