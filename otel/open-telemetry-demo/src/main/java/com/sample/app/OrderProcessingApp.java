@@ -1,6 +1,7 @@
 package com.sample.app;
 
 import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.StatusCode;
 import io.opentelemetry.api.trace.Tracer;
 import io.opentelemetry.context.Scope;
 import io.opentelemetry.api.GlobalOpenTelemetry;
@@ -75,6 +76,7 @@ public class OrderProcessingApp {
 			// Simulate payment success/failure
 			if ("ORD-123".equals(orderId)) {
 				span.setAttribute("payment.status", "success");
+				span.setStatus(StatusCode.OK);
 				System.out.println("Payment successful for " + orderId);
 			} else {
 				throw new RuntimeException("Payment gateway declined");
