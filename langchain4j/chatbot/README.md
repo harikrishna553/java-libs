@@ -1,4 +1,4 @@
-# TimeMachine Corp — AI Chatbot API
+qwen3.5# TimeMachine Corp — AI Chatbot API
 
 A LangChain4j + Spring Boot chatbot powered by Ollama (llama3.2) with:
 - **Agentic tool use** — business metric tools (revenue, price, headcount, etc.)
@@ -19,7 +19,7 @@ A LangChain4j + Spring Boot chatbot powered by Ollama (llama3.2) with:
 ### Pull required Ollama models
 
 ```bash
-ollama pull llama3.2
+ollama pull qwen3.5
 ```
 
 ---
@@ -296,7 +296,7 @@ Edit `src/main/resources/application.properties`:
 
 ```properties
 ollama.base-url=http://localhost:11434
-ollama.chat-model=llama3.2       # swap to any model pulled in Ollama
+ollama.chat-model=qwen3.5      # swap to any model pulled in Ollama
 ollama.temperature=0.1
 ollama.timeout-seconds=120
 
