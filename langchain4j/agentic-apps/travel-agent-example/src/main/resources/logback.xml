@@ -1,0 +1,20 @@
+<configuration>
+
+    <!-- Suppress verbose HTTP and LangChain4j internals; keep console clean -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <encoder>
+            <pattern>%d{HH:mm:ss} [%level] %logger{20} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Silence noisy third-party libraries -->
+    <logger name="dev.langchain4j" level="WARN"/>
+    <logger name="okhttp3" level="WARN"/>
+    <logger name="okio" level="WARN"/>
+
+    <root level="WARN">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>
