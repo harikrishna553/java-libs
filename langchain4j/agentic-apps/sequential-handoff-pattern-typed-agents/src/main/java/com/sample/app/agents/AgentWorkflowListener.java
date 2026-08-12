@@ -1,0 +1,131 @@
+package com.sample.app.agents;
+
+import com.sample.app.console.ConsoleRenderer;
+import dev.langchain4j.agentic.observability.AgentListener;
+import dev.langchain4j.agentic.observability.AgentRequest;
+import dev.langchain4j.agentic.observability.AgentResponse;
+import dev.langchain4j.agentic.scope.AgenticScope;
+
+public class AgentWorkflowListener implements AgentListener {
+
+  @Override
+  public void beforeAgentInvocation(AgentRequest request) {
+    if (!request.agent().leaf()) {
+      return;
+    }
+
+    printInitialStateIfNeeded(request);
+
+    ConsoleRenderer.info(nodeTitle(request.agent().outputKey()));
+    ConsoleRenderer.thinking();
+  }
+
+  @Override
+  public void afterAgentInvocation(AgentResponse response) {
+    if (!response.agent().leaf()) {
+      return;
+    }
+
+    String outputKey = response.agent().outputKey();
+    AgenticScope scope = response.agenticScope();
+
+    // Store the agent output in the shared workflow state.
+    scope.writeState(outputKey, response.output());
+
+    // Render the agent output.
+    ConsoleRenderer.agent(outputLabel(outputKey) + "\n\n" + response.output());
+
+    // Show the state update.
+    ConsoleRenderer.info("State updated: " + outputKey);
+
+    System.out.println("  " + outputKey + " = " + scope.readState(outputKey, null));
+    System.out.println();
+  }
+
+  @Override
+  public boolean inheritedBySubagents() {
+    return true;
+  }
+
+  private void printInitialStateIfNeeded(AgentRequest request) {
+    AgenticScope scope = request.agenticScope();
+
+    if (scope.executionContext("initialStatePrinted") != null) {
+      return;
+    }
+
+    /*
+     * The workflow starts with storyIdea as the initial state. Store it in the
+     * shared AgenticScope so that subsequent agents can build on the state produced
+     * by previous agents.
+     */
+    if (!scope.hasState("storyIdea") && request.inputs().containsKey("storyIdea")) {
+
+      scope.writeState("storyIdea", request.inputs().get("storyIdea"));
+    }
+
+    scope.writeExecutionContext("initialStatePrinted", Boolean.TRUE);
+
+    ConsoleRenderer.info("Initial workflow state");
+
+    printState(scope);
+
+    System.out.println();
+  }
+
+  private void printState(AgenticScope scope) {
+    printStateValue(scope, "storyIdea");
+    printStateValue(scope, "plot");
+    printStateValue(scope, "characters");
+    printStateValue(scope, "draft");
+    printStateValue(scope, "finalStory");
+  }
+
+  private void printStateValue(AgenticScope scope, String key) {
+    Object value = scope.readState(key, null);
+
+    String displayValue = value == null ? "<not set>" : value.toString();
+
+    System.out.println("  " + key + " = " + displayValue);
+  }
+
+  private String nodeTitle(String outputKey) {
+    if ("plot".equals(outputKey)) {
+      return "NODE 1 · Story Planner";
+    }
+
+    if ("characters".equals(outputKey)) {
+      return "NODE 2 · Character Designer";
+    }
+
+    if ("draft".equals(outputKey)) {
+      return "NODE 3 · Story Writer";
+    }
+
+    if ("finalStory".equals(outputKey)) {
+      return "NODE 4 · Story Editor";
+    }
+
+    return "NODE · " + outputKey;
+  }
+
+  private String outputLabel(String outputKey) {
+    if ("plot".equals(outputKey)) {
+      return "Story Planner Output";
+    }
+
+    if ("characters".equals(outputKey)) {
+      return "Character Designer Output";
+    }
+
+    if ("draft".equals(outputKey)) {
+      return "Story Writer Output";
+    }
+
+    if ("finalStory".equals(outputKey)) {
+      return "Story Editor Output";
+    }
+
+    return "Agent Output";
+  }
+}
