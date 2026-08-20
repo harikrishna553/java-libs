@@ -12,4 +12,4 @@ java -jar ./target/optional-agents-demo-1.0.0.jar
 ```
 
 Enter a topic when prompted. 
-For example: Please draft an email to all engineers asking them to reset their passwords immediately as a precautionary measure following a potential password leak.
+For example: Tell me a Story
