@@ -9,9 +9,12 @@ import com.sample.app.model.StoryReview;
 import dev.langchain4j.agentic.AgenticServices;
 import dev.langchain4j.agentic.UntypedAgent;
 import dev.langchain4j.agentic.observability.AgentMonitor;
+import dev.langchain4j.agentic.observability.HtmlReportGenerator;
 import dev.langchain4j.agentic.observability.MonitoredExecution;
 import dev.langchain4j.agentic.scope.ResultWithAgenticScope;
 import dev.langchain4j.model.chat.ChatModel;
+
+import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -89,5 +92,8 @@ public class App {
 
     MonitoredExecution successfulExecution = monitor.successfulExecutions().get(0);
     System.out.println(successfulExecution);
+    
+    HtmlReportGenerator.generateReport(monitor, Path.of("review-loop.html"));
+    HtmlReportGenerator.generateExecution(monitor, Path.of("execution.html"));
   }
 }
