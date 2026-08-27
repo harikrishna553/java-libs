@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LangChain4j Agentic System Execution</title>
+<style>
+:root {
+    --green: #2e8555;
+    --green-dk: #205d3b;
+    --green-lt: #3cad6e;
+    --teal: #25c2a0;
+    --c-ai: #2e8555;
+    --c-nonai: #6b7280;
+    --c-human: #d97706;
+    --c-seq: #0891b2;
+    --c-par: #3b82f6;
+    --c-loop: #7c3aed;
+    --c-rtr: #dc2626;
+    --c-star: #ca8a04;
+    --c-tool: #e74694;
+    --bg: #f8faf9;
+    --bg2: #f0f4f2;
+    --fg: #1a1a2e;
+    --fg2: #4a5568;
+    --fg3: #718096;
+    --brd: #e2e8f0;
+    --conn: #cbd5e1;
+    --rad: 8px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+       background:var(--bg); color:var(--fg); line-height:1.6; }
+
+/* ---- Navbar ---- */
+.navbar { background:linear-gradient(135deg,var(--green-dk),var(--green));
+          color:#fff; padding:14px 32px; display:flex; align-items:center; gap:14px;
+          box-shadow:0 2px 8px rgba(0,0,0,.15); position:sticky; top:0; z-index:100; }
+.navbar-logo { display:flex; align-items:center; justify-content:center; }
+.navbar-title { font-size:20px; font-weight:600; letter-spacing:-.3px; }
+.navbar-subtitle { font-size:13px; opacity:.75; margin-left:auto; }
+
+/* ---- Container ---- */
+.container { width:100%; margin:0 auto; padding:32px; }
+
+/* ---- Section ---- */
+.section { margin-bottom:40px; }
+.section-header { display:flex; align-items:center; gap:12px; margin-bottom:16px;
+                  padding-bottom:10px; border-bottom:2px solid var(--green); }
+.section-icon { width:30px; height:30px; background:var(--green); border-radius:var(--rad);
+                display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.section-title { font-size:21px; font-weight:600; }
+.section-count { font-size:12px; color:var(--fg3); background:var(--bg2);
+                 padding:2px 10px; border-radius:12px; }
+
+/* ---- Legend ---- */
+.legend { display:flex; flex-wrap:wrap; gap:14px; margin-bottom:18px;
+          padding:10px 16px; background:#fff; border:1px solid var(--brd); border-radius:var(--rad); }
+.legend-item { display:flex; align-items:center; gap:5px; font-size:12px; color:var(--fg2); }
+.legend-dot { width:12px; height:12px; border-radius:3px; }
+
+/* ---- Org tree (top-down CSS connector chart) ---- */
+.topology-scroll { overflow-x:auto; padding:16px 0; }
+.org-tree { text-align:center; }
+.org-tree ul { display:flex; justify-content:center; padding-top:24px;
+               position:relative; list-style:none; }
+.org-tree > ul { padding-top:0; }
+.org-tree li { display:flex; flex-direction:column; align-items:center;
+               position:relative; padding:24px 10px 0; }
+.org-tree > ul > li { padding-top:0; }
+
+/* vertical line from parent ul down to horizontal bar */
+.org-tree ul::before { content:''; position:absolute; top:0; left:50%;
+                       border-left:2px solid var(--conn); height:24px; }
+.org-tree > ul::before { display:none; }
+
+/* horizontal bar + vertical drop per child */
+.org-tree li::before, .org-tree li::after {
+    content:''; position:absolute; top:0; width:50%; height:24px;
+    border-top:2px solid var(--conn); }
+.org-tree li::before { right:50%; }
+.org-tree li::after  { left:50%; border-left:2px solid var(--conn); }
+.org-tree > ul > li::before, .org-tree > ul > li::after { display:none; }
+.org-tree li:first-child::before { border-top:none; }
+.org-tree li:last-child::after   { border-top:none; }
+.org-tree li:only-child::before  { display:none; }
+.org-tree li:only-child::after   { border-top:none; }
+
+/* ---- Node card ---- */
+.node-card { position:relative; background:#fff; border:1px solid var(--brd);
+             border-radius:var(--rad); padding:10px 14px; min-width:140px; max-width:260px;
+             box-shadow:0 1px 3px rgba(0,0,0,.06); transition:box-shadow .2s,transform .2s; text-align:left; }
+.node-card:hover { box-shadow:0 4px 14px rgba(0,0,0,.1); transform:translateY(-2px); }
+.node-card-header { display:flex; align-items:center; gap:6px; margin-bottom:4px; flex-wrap:wrap; }
+.agent-name { font-size:14px; font-weight:600; }
+
+.topology-badge { display:inline-block; padding:1px 7px; border-radius:4px;
+                  font-size:10px; font-weight:700; text-transform:uppercase;
+                  letter-spacing:.4px; color:#fff; }
+.topology-badge.sm { font-size:9px; padding:0 5px; }
+.topology-badge.ai    { background:var(--c-ai); }
+.topology-badge.nonai { background:var(--c-nonai); }
+.topology-badge.human { background:var(--c-human); }
+.topology-badge.seq   { background:var(--c-seq); }
+.topology-badge.par   { background:var(--c-par); }
+.topology-badge.loop  { background:var(--c-loop); }
+.topology-badge.rtr   { background:var(--c-rtr); }
+.topology-badge.star  { background:var(--c-star); }
+.topology-badge.tool  { background:var(--c-tool); }
+
+.node-border-ai    { border-left:3px solid var(--c-ai); }
+.node-border-nonai { border-left:3px solid var(--c-nonai); }
+.node-border-human { border-left:3px solid var(--c-human); }
+.node-border-seq   { border-left:3px solid var(--c-seq); }
+.node-border-par   { border-left:3px solid var(--c-par); }
+.node-border-loop  { border-left:3px solid var(--c-loop); }
+.node-border-rtr   { border-left:3px solid var(--c-rtr); }
+.node-border-star  { border-left:3px solid var(--c-star); }
+
+.async-badge { font-size:9px; background:#fef3c7; color:#92400e; padding:0 5px;
+               border-radius:3px; border:1px solid #fcd34d; }
+
+.node-details { font-size:11px; }
+.node-detail { display:flex; gap:4px; margin-top:1px; }
+.nd-label { color:var(--fg3); font-weight:500; }
+.nd-value { color:var(--fg2); }
+
+.condition-label { font-size:9px; background:#fef3c7; color:#92400e;
+                   padding:1px 8px; border-radius:3px; border:1px solid #fcd34d;
+                   margin-bottom:4px; white-space:nowrap; }
+
+.loop-info { display:flex; gap:6px; margin-top:4px; flex-wrap:wrap; }
+.loop-tag { font-size:10px; background:#ede9fe; color:#5b21b6;
+            padding:0 6px; border-radius:3px; border:1px solid #c4b5fd; }
+
+/* ---- Data-flow key badges ---- */
+.key-flow { display:flex; flex-wrap:wrap; gap:3px; margin-top:5px;
+            padding-top:5px; border-top:1px dashed var(--brd); }
+.key-pill { font-size:9px; font-weight:600; padding:0 6px; border-radius:3px;
+            border:1px solid var(--kc);
+            background:#fff; color:var(--kc); white-space:nowrap;
+            opacity:.85; }
+
+/* ---- Tool toggle ---- */
+.tool-toggle { font-size:11px; padding:3px 12px; border-radius:4px;
+               border:1px solid var(--brd); background:var(--bg2); color:var(--fg2);
+               cursor:pointer; transition:background .15s; margin-left:auto; }
+.tool-toggle:hover { background:var(--brd); }
+.tool-row.tool-hidden { display:none; }
+.row-toggle { cursor:pointer; font-size:10px; margin-right:4px; display:inline-block;
+              transition:transform .2s; color:var(--fg3); user-select:none; }
+.row-toggle.collapsed { transform:rotate(-90deg); }
+.row-hidden { display:none; }
+
+/* ---- Data-flow SVG overlay ---- */
+.df-svg { position:absolute; top:0; left:0; pointer-events:none; z-index:2; overflow:visible; }
+.df-svg.df-hidden { display:none; }
+
+/* ---- Data-flow legend ---- */
+.df-legend { align-items:center; }
+.df-legend-title { font-size:12px; font-weight:600; color:var(--fg); margin-right:4px; }
+.df-toggle { margin-left:auto; font-size:11px; padding:3px 12px; border-radius:4px;
+             border:1px solid var(--brd); background:var(--bg2); color:var(--fg2);
+             cursor:pointer; transition:background .15s; }
+.df-toggle:hover { background:var(--brd); }
+
+/* ---- Execution groups ---- */
+.execution-group { margin-bottom:12px; }
+.execution-header { display:flex; align-items:center; gap:10px; padding:10px 16px;
+                    background:#fff; border:1px solid var(--brd);
+                    border-radius:var(--rad) var(--rad) 0 0;
+                    cursor:pointer; user-select:none; transition:background .15s; }
+.execution-header:hover { background:var(--bg2); }
+.execution-header.collapsed { border-radius:var(--rad); }
+.chevron { transition:transform .2s; color:var(--fg3); font-size:11px; }
+.execution-header.collapsed .chevron { transform:rotate(-90deg); }
+.execution-memory-id { font-weight:600; font-size:14px; }
+.execution-meta { margin-left:auto; display:flex; gap:8px; align-items:center; }
+
+.status-badge { padding:2px 10px; border-radius:12px; font-size:11px; font-weight:600; }
+.st-ok   { background:#d1fae5; color:#065f46; }
+.st-fail { background:#fee2e2; color:#991b1b; }
+.st-run  { background:#dbeafe; color:#1e40af; }
+
+.execution-body { border:1px solid var(--brd); border-top:none;
+                  border-radius:0 0 var(--rad) var(--rad); background:#fff; overflow:hidden; }
+.execution-body.collapsed { display:none; }
+
+/* ---- Single execution ---- */
+.single-exec { padding:12px 16px; border-bottom:1px solid var(--brd); }
+.single-exec:last-child { border-bottom:none; }
+.exec-summary { display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
+.status-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.st-dot-ok   { background:#10b981; }
+.st-dot-fail { background:#ef4444; }
+.st-dot-run  { background:#3b82f6; animation:pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.exec-agent { font-weight:600; font-size:14px; }
+.dur-badge { font-size:12px; color:var(--fg3); font-family:'SF Mono','Fira Code',monospace; }
+.exec-time { font-size:11px; color:var(--fg3); }
+
+.error-box { background:#fef2f2; border:1px solid #fecaca; border-radius:var(--rad);
+             padding:8px 12px; margin-bottom:8px; font-size:12px; color:#991b1b; }
+.error-box code { font-size:11px; word-break:break-all; }
+
+/* ---- Waterfall table ---- */
+.wf-table { width:100%; border-collapse:collapse; font-size:13px; }
+.wf-table th { text-align:left; padding:6px 10px; background:var(--bg2); color:var(--fg3);
+               font-size:10px; font-weight:600; text-transform:uppercase;
+               letter-spacing:.5px; border-bottom:1px solid var(--brd); }
+.wf-table td { padding:5px 10px; border-bottom:1px solid var(--brd); vertical-align:middle; }
+.wf-table tr:last-child td { border-bottom:none; }
+.wf-table tr:hover { background:var(--bg); }
+.wf-timeline-col { width:35%; }
+
+.wf-agent { display:flex; align-items:center; gap:4px; white-space:nowrap; }
+.wf-indent { display:inline-block; width:18px; }
+.wf-connector { color:var(--conn); font-family:monospace; margin-right:2px; font-size:12px; }
+.wf-dur { font-family:'SF Mono','Fira Code',monospace; font-size:12px; color:var(--fg2); white-space:nowrap; }
+
+.wf-bar-track { position:relative; height:18px; background:var(--bg2); border-radius:3px; min-width:120px; }
+.wf-bar { position:absolute; top:2px; height:14px; border-radius:3px; opacity:.8; min-width:2px;
+          transition:opacity .15s; }
+.wf-bar:hover { opacity:1; }
+.bar-ai    { background:var(--c-ai); }
+.bar-nonai { background:var(--c-nonai); }
+.bar-human { background:var(--c-human); }
+.bar-seq   { background:var(--c-seq); }
+.bar-par   { background:var(--c-par); }
+.bar-loop  { background:var(--c-loop); }
+.bar-rtr   { background:var(--c-rtr); }
+.bar-star  { background:var(--c-star); }
+.bar-tool  { background:var(--c-tool); }
+
+.wf-io { font-size:11px; color:var(--fg3); white-space:nowrap; }
+
+.iter-tag { font-size:9px; background:#ede9fe; color:#5b21b6;
+            padding:0 5px; border-radius:3px; border:1px solid #c4b5fd;
+            font-weight:600; white-space:nowrap; }
+
+/* ---- Tooltip ---- */
+.tt-trigger { position:relative; cursor:help; }
+.tt-trigger .tt-content { display:none; position:absolute; bottom:calc(100% + 4px); left:0;
+                          background:var(--fg); color:#fff; padding:6px 10px; border-radius:6px;
+                          font-size:11px; white-space:pre-wrap; max-width:400px; z-index:10;
+                          box-shadow:0 4px 12px rgba(0,0,0,.2); word-break:break-all; }
+.tt-trigger:hover .tt-content { display:block; }
+
+/* ---- Footer ---- */
+.footer { text-align:center; padding:24px 0 8px; font-size:12px; color:var(--fg3);
+          border-top:1px solid var(--brd); margin-top:20px; }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar-logo"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="white" fill-opacity="0.2"/><path d="M7 8h14M7 14h14M7 20h10" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+  <div class="navbar-title">LangChain4j Agentic System Execution</div>
+  <div class="navbar-subtitle">LangChain4j Agentic System</div>
+</nav>
+<main class="container">
+<section class="section">
+<div class="section-header">
+  <div class="section-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" rx="1" fill="white"/><rect x="1" y="7" width="10" height="2" rx="1" fill="white"/><rect x="1" y="11" width="12" height="2" rx="1" fill="white"/></svg></div>
+  <h2 class="section-title">Execution History</h2>
+  <span class="section-count">1 session(s)</span>
+  <button class="tool-toggle" onclick="toggleTools()">Toggle Tools</button>
+</div>
+<div class="execution-group">
+<div class="execution-header" onclick="toggle('g0')">
+  <span class="chevron">&#9660;</span>  <span class="execution-memory-id">Session: 0ba8d4cf-2526-4197-9794-39aeddecf227</span>  <div class="execution-meta">    <span class="section-count">1 run(s)</span><span class="status-badge st-ok">1 success</span>  </div>
+</div>
+<div id="g0" class="execution-body">
+<div class="single-exec">
+<div class="exec-summary"><span class="status-dot st-dot-ok"></span><span class="exec-agent">sequentialStoryWorkflow</span><span class="dur-badge">59.0s</span><span class="exec-time">12:17:13.608 &#8594; 12:18:12.637</span></div>
+<table class="wf-table">
+<thead><tr><th>Agent</th><th>Duration</th><th>Tokens</th><th class="wf-timeline-col">Timeline</th><th>Input</th><th>Output</th></tr></thead>
+<tbody>
+<tr data-row-id="0"><td><div class="wf-agent"><span class="row-toggle" onclick="toggleRow(0)">&#9660;</span><span class="topology-badge sm seq">Sequence</span> sequentialStoryWorkflow</div></td><td class="wf-dur">59.0s</td><td class="wf-dur"></td><td><div class="wf-bar-track"><div class="wf-bar bar-seq" style="left:0.0%;width:100.0%;" title="sequentialStoryWorkflow: 59.0s"></div></div></td><td class="wf-io"><span class="tt-trigger">{storyIdea=Tell me story about a sage lived in India}</span></td><td class="wf-io"><span class="tt-trigger">The Little Sage of Mysore
+
+In the vibrant village of Mysore, India, where the wa...<span class="tt-content">The Little Sage of Mysore
+
+In the vibrant village of Mysore, India, where the warm sun shone brightly and the air was filled with the sweet scent of incense, the fragrance of blooming flowers, and the gentle hum of bees collecting nectar, a little sage named Rohan lived amidst the bustling streets and colorful markets. The vibrant hues of the murals on the temple walls seemed to dance in the sunlight, and the sound of temple bells, the rustle of colorful fabrics, and the chirping of birds filled the air.
+
+Rohan&#39;s bright smile stood out from the crowd, and his eyes sparkled with a special gift – the ability to communicate with animals and plants. The scent of cardamom and cinnamon wafted from the nearby spice shops, mingling with the earthy smell of freshly cut grass that filled the air. The aroma of steaming chai and freshly baked naan bread wafted from the nearby tea stalls, enticing passersby to stop and sample a warm cup.
+
+One sunny afternoon, a hungry monkey named Mango wandered into the village, his fur fluffed up with worry. He had lost his way from the forest and didn&#39;t know how to find his way back. Rohan noticed Mango&#39;s sad eyes and decided to lend a helping hand. He asked Mango, &quot;What do you love most about the forest?&quot; The sound of the wind rustling through the trees and the chirping of birds in the distance filled the air as Mango thought for a moment, his tail twitching with excitement.
+
+Mango&#39;s voice filled with excitement, &quot;I love chasing after the butterflies in the meadow, feeling the warmth of the sun on my back, and the soft grass beneath my feet! It&#39;s like my own special magic exists in those woods!&quot; Rohan&#39;s eyes sparkled with understanding, and he said, &quot;I know just the place. Follow me!&quot; The sound of Rohan&#39;s sandals clicking on the pavement accompanied them as they walked.
+
+Rohan led Mango to a beautiful garden filled with a kaleidoscope of flowers – marigolds, sunflowers, and zinnias – their petals swaying gently in the breeze like a dance. The air was filled with the sweet fragrance of blooming jasmine, and the soft chirping of birds could be heard in the distance. Mango&#39;s eyes widened with joy as he spotted the butterflies flitting about the flowers. The warm sun beat down on their heads as they played a game of hide-and-seek among the blooms, laughing and chasing each other through the vibrant colors.
+
+As they played, the scent of sandalwood and turmeric wafted from the nearby temple, filling the air with a sense of peace. Rohan pointed to a patch of bright orange marigolds, &quot;Look, Mango! These are the ones that bring good luck to the village.&quot; Mango&#39;s eyes lit up, and he gently touched one of the marigolds. The petals felt soft and delicate, like silk.
+
+As the sun began to set, casting a warm orange glow over the garden, Rohan said, &quot;It&#39;s time for you to find your way back home, Mango. But remember, you&#39;re not alone. You have friends in the forest, and they&#39;ll always be here to help you.&quot; The sound of the temple bells grew fainter as they walked, replaced by the chirping of crickets and the distant howling of wolves. The air filled with the scent of evening flowers, a mix of roses and lavender, as the stars began to twinkle in the night sky.
+
+Mango thanked Rohan and promised to never forget his new friend. From that day on, whenever Mango visited the garden, Rohan would be waiting, ready to play and help his new friend find his way home. As the villagers watched the scene unfold, they too were reminded of the importance of kindness and generosity. The little sage&#39;s selfless act had brought joy not only to Mango, but also to their own lives. And Rohan, the little sage, lived happily ever after, spreading joy and friendship wherever he went.</span></span></td></tr>
+<tr data-row-id="1" data-parent-row="0"><td><div class="wf-agent"><span class="wf-indent"></span><span class="wf-connector">&#x2514;</span><span class="topology-badge sm ai">AI</span> storyWriter</div></td><td class="wf-dur">8.3s</td><td class="wf-dur">498</td><td><div class="wf-bar-track"><div class="wf-bar bar-ai" style="left:0.0%;width:14.0%;" title="storyWriter: 8.3s"></div></div></td><td class="wf-io"><span class="tt-trigger">{storyIdea=Tell me story about a sage lived in India}</span></td><td class="wf-io"><span class="tt-trigger">&quot;The Little Sage of Mysore&quot;
+
+In a small village in India, where the sun shone br...<span class="tt-content">&quot;The Little Sage of Mysore&quot;
+
+In a small village in India, where the sun shone bright and the air was sweet with incense, there lived a little sage named Rohan. Rohan was different from the other villagers. He had a special gift – the ability to talk to animals and plants.
+
+One day, a hungry monkey named Mango wandered into the village. He had lost his way from the forest and didn&#39;t know how to find his way back. Rohan saw Mango&#39;s sad eyes and decided to help him. He asked Mango, &quot;What do you love most in the forest?&quot;
+
+Mango thought for a moment and said, &quot;I love playing with the butterflies!&quot; Rohan smiled and said, &quot;I know just the place. Follow me!&quot;
+
+Rohan took Mango to a beautiful garden filled with colorful flowers and fluttering butterflies. Mango&#39;s eyes widened with joy. Together, they played hide-and-seek among the flowers, laughing and chasing each other.
+
+As the sun began to set, Rohan said, &quot;It&#39;s time for you to find your way back home, Mango. But remember, you&#39;re not alone. You have friends in the forest, and they&#39;ll always be here to help you.&quot;
+
+Mango thanked Rohan and promised to never forget his new friend. From that day on, whenever Mango visited the garden, Rohan would be waiting, ready to play and help his new friend find his way home.
+
+The villagers learned from Rohan&#39;s kindness and generosity. They realized that even the smallest actions can make a big difference in someone&#39;s life. And Rohan, the little sage, lived happily ever after, spreading joy and friendship wherever he went.</span></span></td></tr>
+<tr data-row-id="2" data-parent-row="0"><td><div class="wf-agent"><span class="wf-indent"></span><span class="wf-connector">&#x2514;</span><span class="row-toggle" onclick="toggleRow(2)">&#9660;</span><span class="topology-badge sm loop">Loop</span> Loop</div></td><td class="wf-dur">50.8s</td><td class="wf-dur"></td><td><div class="wf-bar-track"><div class="wf-bar bar-loop" style="left:14.0%;width:86.0%;" title="Loop: 50.8s"></div></div></td><td class="wf-io"><span class="tt-trigger">{storyIdea=Tell me story about a sage lived in India, __planner_state_sequential...<span class="tt-content">{storyIdea=Tell me story about a sage lived in India, __planner_state_sequentialStoryWorkflow={cursor=1, __completedAgents=[storyWriter$0]}, story=&quot;The Little Sage of Mysore&quot;
+
+In a small village in India, wh...}</span></span></td><td class="wf-io"><span class="tt-trigger">The Little Sage of Mysore
+
+In the vibrant village of Mysore, India, where the wa...<span class="tt-content">The Little Sage of Mysore
+
+In the vibrant village of Mysore, India, where the warm sun shone brightly and the air was filled with the sweet scent of incense, the fragrance of blooming flowers, and the gentle hum of bees collecting nectar, a little sage named Rohan lived amidst the bustling streets and colorful markets. The vibrant hues of the murals on the temple walls seemed to dance in the sunlight, and the sound of temple bells, the rustle of colorful fabrics, and the chirping of birds filled the air.
+
+Rohan&#39;s bright smile stood out from the crowd, and his eyes sparkled with a special gift – the ability to communicate with animals and plants. The scent of cardamom and cinnamon wafted from the nearby spice shops, mingling with the earthy smell of freshly cut grass that filled the air. The aroma of steaming chai and freshly baked naan bread wafted from the nearby tea stalls, enticing passersby to stop and sample a warm cup.
+
+One sunny afternoon, a hungry monkey named Mango wandered into the village, his fur fluffed up with worry. He had lost his way from the forest and didn&#39;t know how to find his way back. Rohan noticed Mango&#39;s sad eyes and decided to lend a helping hand. He asked Mango, &quot;What do you love most about the forest?&quot; The sound of the wind rustling through the trees and the chirping of birds in the distance filled the air as Mango thought for a moment, his tail twitching with excitement.
+
+Mango&#39;s voice filled with excitement, &quot;I love chasing after the butterflies in the meadow, feeling the warmth of the sun on my back, and the soft grass beneath my feet! It&#39;s like my own special magic exists in those woods!&quot; Rohan&#39;s eyes sparkled with understanding, and he said, &quot;I know just the place. Follow me!&quot; The sound of Rohan&#39;s sandals clicking on the pavement accompanied them as they walked.
+
+Rohan led Mango to a beautiful garden filled with a kaleidoscope of flowers – marigolds, sunflowers, and zinnias – their petals swaying gently in the breeze like a dance. The air was filled with the sweet fragrance of blooming jasmine, and the soft chirping of birds could be heard in the distance. Mango&#39;s eyes widened with joy as he spotted the butterflies flitting about the flowers. The warm sun beat down on their heads as they played a game of hide-and-seek among the blooms, laughing and chasing each other through the vibrant colors.
+
+As they played, the scent of sandalwood and turmeric wafted from the nearby temple, filling the air with a sense of peace. Rohan pointed to a patch of bright orange marigolds, &quot;Look, Mango! These are the ones that bring good luck to the village.&quot; Mango&#39;s eyes lit up, and he gently touched one of the marigolds. The petals felt soft and delicate, like silk.
+
+As the sun began to set, casting a warm orange glow over the garden, Rohan said, &quot;It&#39;s time for you to find your way back home, Mango. But remember, you&#39;re not alone. You have friends in the forest, and they&#39;ll always be here to help you.&quot; The sound of the temple bells grew fainter as they walked, replaced by the chirping of crickets and the distant howling of wolves. The air filled with the scent of evening flowers, a mix of roses and lavender, as the stars began to twinkle in the night sky.
+
+Mango thanked Rohan and promised to never forget his new friend. From that day on, whenever Mango visited the garden, Rohan would be waiting, ready to play and help his new friend find his way home. As the villagers watched the scene unfold, they too were reminded of the importance of kindness and generosity. The little sage&#39;s selfless act had brought joy not only to Mango, but also to their own lives. And Rohan, the little sage, lived happily ever after, spreading joy and friendship wherever he went.</span></span></td></tr>
+<tr data-row-id="3" data-parent-row="2"><td><div class="wf-agent"><span class="wf-indent"></span><span class="wf-indent"></span><span class="wf-connector">&#x2514;</span><span class="topology-badge sm ai">AI</span> storyReviewer <span class="iter-tag">iter 0</span></div></td><td class="wf-dur">1.9s</td><td class="wf-dur">779</td><td><div class="wf-bar-track"><div class="wf-bar bar-ai" style="left:14.0%;width:3.3%;" title="storyReviewer: 1.9s"></div></div></td><td class="wf-io"><span class="tt-trigger">{story=&quot;The Little Sage of Mysore&quot;
+
+In a small village in India, wh...}</span></td><td class="wf-io"><span class="tt-trigger">Quality rating: 8/10
+Feedback: Consider adding more sensory details to help chil...<span class="tt-content">Quality rating: 8/10
+Feedback: Consider adding more sensory details to help children visualize the setting and characters, and refine the pacing by removing repetitive phrases like &#39;Together, they played hide-and-seek among the flowers&#39; to create a smoother flow.</span></span></td></tr>
+<tr data-row-id="4" data-parent-row="2"><td><div class="wf-agent"><span class="wf-indent"></span><span class="wf-indent"></span><span class="wf-connector">&#x2514;</span><span class="topology-badge sm ai">AI</span> storyImprover <span class="iter-tag">iter 0</span></div></td><td class="wf-dur">7.9s</td><td class="wf-dur">1.2k</td><td><div class="wf-bar-track"><div class="wf-bar bar-ai" style="left:17.3%;width:13.4%;" title="storyImprover: 7.9s"></div></div></td><td class="wf-io"><span class="tt-trigger">{storyReview=Quality rating: 8/10
+Feedback: Consider adding more sensory ..., st...<span class="tt-content">{storyReview=Quality rating: 8/10
+Feedback: Consider adding more sensory ..., story=&quot;The Little Sage of Mysore&quot;
+
+In a small village in India, wh...}</span></span></td><td class="wf-io"><span class="tt-trigger">&quot;The Little Sage of Mysore&quot;
+
+In the small village of Mysore, India, where the su...<span class="tt-content">&quot;The Little Sage of Mysore&quot;
+
+In the small village of Mysore, India, where the sun shone brightly and the air was filled with the sweet scent of incense, a little sage named Rohan lived amidst the vibrant streets and colorful markets. Rohan stood out from the other villagers, not just because of his bright smile, but also because he possessed a special gift – the ability to communicate with animals and plants.
+
+One sunny afternoon, a hungry monkey named Mango wandered into the village, his fur fluffed up with worry. He had lost his way from the forest and didn&#39;t know how to find his way back. Rohan noticed Mango&#39;s sad eyes and decided to lend a helping hand. He asked Mango, &quot;What do you love most about the forest?&quot;
+
+Mango thought for a moment, his tail twitching with excitement, before responding, &quot;I love chasing after the butterflies in the meadow!&quot; Rohan&#39;s eyes sparkled with understanding, and he said, &quot;I know just the place. Follow me!&quot;
+
+Rohan led Mango to a beautiful garden filled with a kaleidoscope of flowers, their petals swaying gently in the breeze. The air was filled with the sweet fragrance of blooming jasmine, and the soft chirping of birds could be heard in the distance. Mango&#39;s eyes widened with joy as he spotted the butterflies flitting about the flowers. Together, they played a game of hide-and-seek among the blooms, laughing and chasing each other through the vibrant colors.
+
+As the sun began to set, casting a warm orange glow over the garden, Rohan said, &quot;It&#39;s time for you to find your way back home, Mango. But remember, you&#39;re not alone. You have friends in the forest, and they&#39;ll always be here to help you.&quot;
+
+Mango thanked Rohan and promised to never forget his new friend. From that day on, whenever Mango visited the garden, Rohan would be waiting, ready to play and help his new friend find his way home.
+
+As the villagers watched the scene unfold, they too were reminded of the importance of kindness and generosity. The little sage&#39;s selfless act had brought joy not only to Mango, but also to their own lives. And Rohan, the little sage, lived happily ever after, spreading joy and friendship wherever he went.</span></span></td></tr>
+<tr data-row-id="5" data-parent-row="2"><td><div class="wf-agent"><span class="wf-indent"></span><span class="wf-indent"></span><span class="wf-connector">&#x2514;</span><span class="topology-badge sm ai">AI</span> storyReviewer <span class="iter-tag">iter 1</span></div></td><td class="wf-dur">1.8s</td><td class="wf-dur">916</td><td><div class="wf-bar-track"><div class="wf-bar bar-ai" style="left:30.7%;width:3.1%;" title="storyReviewer: 1.8s"></div></div></td><td class="wf-io"><span class="tt-trigger">{story=&quot;The Little Sage of Mysore&quot;
+
+In the small village of Mysore,...}</span></td><td class="wf-io"><span class="tt-trigger">Quality rating: 8/10
+Feedback: Consider adding more sensory details to help chil...<span class="tt-content">Quality rating: 8/10
+Feedback: Consider adding more sensory details to help children vividly imagine the setting and characters, and refine the pacing by removing repetitive phrases like &#39;Together, they played a game of hide-and-seek among the blooms&#39; to create a more streamlined narrative.</span></span></td></tr>
+<tr data-row-id="6" data-parent-row="2"><td><div class="wf-agent"><span class="wf-indent"></span><span class="wf-indent"></span><span class="wf-connector">&#x2514;</span><span class="topology-badge sm ai">AI</span> storyImprover <span class="iter-tag">iter 1</span></div></td><td class="wf-dur">9.3s</td><td class="wf-dur">1.4k</td><td><div class="wf-bar-track"><div class="wf-bar bar-ai" style="left:33.8%;width:15.7%;" title="storyImprover: 9.3s"></div></div></td><td class="wf-io"><span class="tt-trigger">{storyReview=Quality rating: 8/10
+Feedback: Consider adding more sensory ..., st...<span class="tt-content">{storyReview=Quality rating: 8/10
+Feedback: Consider adding more sensory ..., story=&quot;The Little Sage of Mysore&quot;
+
+In the small village of Mysore,...}</span></span></td><td class="wf-io"><span class="tt-trigger">The Little Sage of Mysore
+
+In the small village of Mysore, India, where the sun ...<span class="tt-content">The Little Sage of Mysore
+
+In the small village of Mysore, India, where the sun shone brightly and the air was filled with the sweet scent of incense and the sound of temple bells, a little sage named Rohan lived amidst the vibrant streets and colorful markets. Rohan stood out from the other villagers, not just because of his bright smile, but also because he possessed a special gift – the ability to communicate with animals and plants. The scent of cardamom and cinnamon wafted from the nearby spice shops, mingling with the fragrance of blooming jasmine that filled the air.
+
+One sunny afternoon, a hungry monkey named Mango wandered into the village, his fur fluffed up with worry. He had lost his way from the forest and didn&#39;t know how to find his way back. Rohan noticed Mango&#39;s sad eyes and decided to lend a helping hand. He asked Mango, &quot;What do you love most about the forest?&quot;
+
+Mango thought for a moment, his tail twitching with excitement, before responding, &quot;I love chasing after the butterflies in the meadow, feeling the warmth of the sun on my back, and the soft grass beneath my feet!&quot; Rohan&#39;s eyes sparkled with understanding, and he said, &quot;I know just the place. Follow me!&quot;
+
+Rohan led Mango to a beautiful garden filled with a kaleidoscope of flowers – marigolds, sunflowers, and zinnias – their petals swaying gently in the breeze. The air was filled with the sweet fragrance of blooming jasmine, and the soft chirping of birds could be heard in the distance. Mango&#39;s eyes widened with joy as he spotted the butterflies flitting about the flowers. The warm sun beat down on their heads as they played a game of hide-and-seek among the blooms, laughing and chasing each other through the vibrant colors.
+
+As the sun began to set, casting a warm orange glow over the garden, Rohan said, &quot;It&#39;s time for you to find your way back home, Mango. But remember, you&#39;re not alone. You have friends in the forest, and they&#39;ll always be here to help you.&quot; The scent of sandalwood and turmeric wafted from the nearby temple, filling the air with a sense of peace.
+
+Mango thanked Rohan and promised to never forget his new friend. From that day on, whenever Mango visited the garden, Rohan would be waiting, ready to play and help his new friend find his way home. As the villagers watched the scene unfold, they too were reminded of the importance of kindness and generosity. The little sage&#39;s selfless act had brought joy not only to Mango, but also to their own lives. And Rohan, the little sage, lived happily ever after, spreading joy and friendship wherever he went.</span></span></td></tr>
+<tr data-row-id="7" data-parent-row="2"><td><div class="wf-agent"><span class="wf-indent"></span><span class="wf-indent"></span><span class="wf-connector">&#x2514;</span><span class="topology-badge sm ai">AI</span> storyReviewer <span class="iter-tag">iter 2</span></div></td><td class="wf-dur">1.7s</td><td class="wf-dur">996</td><td><div class="wf-bar-track"><div class="wf-bar bar-ai" style="left:49.5%;width:2.9%;" title="storyReviewer: 1.7s"></div></div></td><td class="wf-io"><span class="tt-trigger">{story=The Little Sage of Mysore
+
+In the small village of Mysore, I...}</span></td><td class="wf-io"><span class="tt-trigger">Quality rating: 8/10
+Feedback: Consider adding more sensory details to help chil...<span class="tt-content">Quality rating: 8/10
+Feedback: Consider adding more sensory details to help children visualize the setting and characters, and refine the pacing to avoid repetitive descriptions of the garden&#39;s beauty.</span></span></td></tr>
+<tr data-row-id="8" data-parent-row="2"><td><div class="wf-agent"><span class="wf-indent"></span><span class="wf-indent"></span><span class="wf-connector">&#x2514;</span><span class="topology-badge sm ai">AI</span> storyImprover <span class="iter-tag">iter 2</span></div></td><td class="wf-dur">11.9s</td><td class="wf-dur">1.6k</td><td><div class="wf-bar-track"><div class="wf-bar bar-ai" style="left:52.4%;width:20.1%;" title="storyImprover: 11.9s"></div></div></td><td class="wf-io"><span class="tt-trigger">{storyReview=Quality rating: 8/10
+Feedback: Consider adding more sensory ..., st...<span class="tt-content">{storyReview=Quality rating: 8/10
+Feedback: Consider adding more sensory ..., story=The Little Sage of Mysore
+
+In the small village of Mysore, I...}</span></span></td><td class="wf-io"><span class="tt-trigger">The Little Sage of Mysore
+
+In the vibrant village of Mysore, India, where the su...<span class="tt-content">The Little Sage of Mysore
+
+In the vibrant village of Mysore, India, where the sun shone brightly and the air was filled with the sweet scent of incense, the sound of temple bells, and the fragrance of blooming flowers, a little sage named Rohan lived amidst the bustling streets and colorful markets. Rohan&#39;s bright smile stood out from the crowd, and his eyes sparkled with a special gift – the ability to communicate with animals and plants. The scent of cardamom and cinnamon wafted from the nearby spice shops, mingling with the earthy smell of freshly cut grass that filled the air.
+
+One sunny afternoon, a hungry monkey named Mango wandered into the village, his fur fluffed up with worry. He had lost his way from the forest and didn&#39;t know how to find his way back. Rohan noticed Mango&#39;s sad eyes and decided to lend a helping hand. He asked Mango, &quot;What do you love most about the forest?&quot; The sound of the wind rustling through the trees and the chirping of birds in the distance filled the air as Mango thought for a moment, his tail twitching with excitement.
+
+Mango&#39;s voice filled with excitement, &quot;I love chasing after the butterflies in the meadow, feeling the warmth of the sun on my back, and the soft grass beneath my feet! It&#39;s like my own special magic exists in those woods!&quot; Rohan&#39;s eyes sparkled with understanding, and he said, &quot;I know just the place. Follow me!&quot; The sound of Rohan&#39;s sandals clicking on the pavement accompanied them as they walked.
+
+Rohan led Mango to a beautiful garden filled with a kaleidoscope of flowers – marigolds, sunflowers, and zinnias – their petals swaying gently in the breeze like a dance. The air was filled with the sweet fragrance of blooming jasmine, and the soft chirping of birds could be heard in the distance. Mango&#39;s eyes widened with joy as he spotted the butterflies flitting about the flowers. The warm sun beat down on their heads as they played a game of hide-and-seek among the blooms, laughing and chasing each other through the vibrant colors.
+
+As they played, the scent of sandalwood and turmeric wafted from the nearby temple, filling the air with a sense of peace. Rohan pointed to a patch of bright orange marigolds, &quot;Look, Mango! These are the ones that bring good luck to the village.&quot; Mango&#39;s eyes lit up, and he gently touched one of the marigolds. The petals felt soft and delicate, like silk.
+
+As the sun began to set, casting a warm orange glow over the garden, Rohan said, &quot;It&#39;s time for you to find your way back home, Mango. But remember, you&#39;re not alone. You have friends in the forest, and they&#39;ll always be here to help you.&quot; The sound of the temple bells grew fainter as they walked, replaced by the chirping of crickets and the distant howling of wolves.
+
+Mango thanked Rohan and promised to never forget his new friend. From that day on, whenever Mango visited the garden, Rohan would be waiting, ready to play and help his new friend find his way home. As the villagers watched the scene unfold, they too were reminded of the importance of kindness and generosity. The little sage&#39;s selfless act had brought joy not only to Mango, but also to their own lives. And Rohan, the little sage, lived happily ever after, spreading joy and friendship wherever he went.</span></span></td></tr>
+<tr data-row-id="9" data-parent-row="2"><td><div class="wf-agent"><span class="wf-indent"></span><span class="wf-indent"></span><span class="wf-connector">&#x2514;</span><span class="topology-badge sm ai">AI</span> storyReviewer <span class="iter-tag">iter 3</span></div></td><td class="wf-dur">1.9s</td><td class="wf-dur">1.2k</td><td><div class="wf-bar-track"><div class="wf-bar bar-ai" style="left:72.4%;width:3.2%;" title="storyReviewer: 1.9s"></div></div></td><td class="wf-io"><span class="tt-trigger">{story=The Little Sage of Mysore
+
+In the vibrant village of Mysore,...}</span></td><td class="wf-io"><span class="tt-trigger">Quality rating: 8/10
+Feedback: Consider adding more sensory details to help chil...<span class="tt-content">Quality rating: 8/10
+Feedback: Consider adding more sensory details to help children fully immerse themselves in the story&#39;s vibrant setting, and refine the pacing to ensure a smoother flow between scenes.</span></span></td></tr>
+<tr data-row-id="10" data-parent-row="2"><td><div class="wf-agent"><span class="wf-indent"></span><span class="wf-indent"></span><span class="wf-connector">&#x2514;</span><span class="topology-badge sm ai">AI</span> storyImprover <span class="iter-tag">iter 3</span></div></td><td class="wf-dur">14.3s</td><td class="wf-dur">1.9k</td><td><div class="wf-bar-track"><div class="wf-bar bar-ai" style="left:75.7%;width:24.3%;" title="storyImprover: 14.3s"></div></div></td><td class="wf-io"><span class="tt-trigger">{storyReview=Quality rating: 8/10
+Feedback: Consider adding more sensory ..., st...<span class="tt-content">{storyReview=Quality rating: 8/10
+Feedback: Consider adding more sensory ..., story=The Little Sage of Mysore
+
+In the vibrant village of Mysore,...}</span></span></td><td class="wf-io"><span class="tt-trigger">The Little Sage of Mysore
+
+In the vibrant village of Mysore, India, where the wa...<span class="tt-content">The Little Sage of Mysore
+
+In the vibrant village of Mysore, India, where the warm sun shone brightly and the air was filled with the sweet scent of incense, the fragrance of blooming flowers, and the gentle hum of bees collecting nectar, a little sage named Rohan lived amidst the bustling streets and colorful markets. The vibrant hues of the murals on the temple walls seemed to dance in the sunlight, and the sound of temple bells, the rustle of colorful fabrics, and the chirping of birds filled the air.
+
+Rohan&#39;s bright smile stood out from the crowd, and his eyes sparkled with a special gift – the ability to communicate with animals and plants. The scent of cardamom and cinnamon wafted from the nearby spice shops, mingling with the earthy smell of freshly cut grass that filled the air. The aroma of steaming chai and freshly baked naan bread wafted from the nearby tea stalls, enticing passersby to stop and sample a warm cup.
+
+One sunny afternoon, a hungry monkey named Mango wandered into the village, his fur fluffed up with worry. He had lost his way from the forest and didn&#39;t know how to find his way back. Rohan noticed Mango&#39;s sad eyes and decided to lend a helping hand. He asked Mango, &quot;What do you love most about the forest?&quot; The sound of the wind rustling through the trees and the chirping of birds in the distance filled the air as Mango thought for a moment, his tail twitching with excitement.
+
+Mango&#39;s voice filled with excitement, &quot;I love chasing after the butterflies in the meadow, feeling the warmth of the sun on my back, and the soft grass beneath my feet! It&#39;s like my own special magic exists in those woods!&quot; Rohan&#39;s eyes sparkled with understanding, and he said, &quot;I know just the place. Follow me!&quot; The sound of Rohan&#39;s sandals clicking on the pavement accompanied them as they walked.
+
+Rohan led Mango to a beautiful garden filled with a kaleidoscope of flowers – marigolds, sunflowers, and zinnias – their petals swaying gently in the breeze like a dance. The air was filled with the sweet fragrance of blooming jasmine, and the soft chirping of birds could be heard in the distance. Mango&#39;s eyes widened with joy as he spotted the butterflies flitting about the flowers. The warm sun beat down on their heads as they played a game of hide-and-seek among the blooms, laughing and chasing each other through the vibrant colors.
+
+As they played, the scent of sandalwood and turmeric wafted from the nearby temple, filling the air with a sense of peace. Rohan pointed to a patch of bright orange marigolds, &quot;Look, Mango! These are the ones that bring good luck to the village.&quot; Mango&#39;s eyes lit up, and he gently touched one of the marigolds. The petals felt soft and delicate, like silk.
+
+As the sun began to set, casting a warm orange glow over the garden, Rohan said, &quot;It&#39;s time for you to find your way back home, Mango. But remember, you&#39;re not alone. You have friends in the forest, and they&#39;ll always be here to help you.&quot; The sound of the temple bells grew fainter as they walked, replaced by the chirping of crickets and the distant howling of wolves. The air filled with the scent of evening flowers, a mix of roses and lavender, as the stars began to twinkle in the night sky.
+
+Mango thanked Rohan and promised to never forget his new friend. From that day on, whenever Mango visited the garden, Rohan would be waiting, ready to play and help his new friend find his way home. As the villagers watched the scene unfold, they too were reminded of the importance of kindness and generosity. The little sage&#39;s selfless act had brought joy not only to Mango, but also to their own lives. And Rohan, the little sage, lived happily ever after, spreading joy and friendship wherever he went.</span></span></td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</section>
+<footer class="footer">Generated by LangChain4j at 2026-08-27 12:18:12</footer>
+</main>
+<script>
+function toggle(id) {
+    var body = document.getElementById(id);
+    body.classList.toggle('collapsed');
+    body.previousElementSibling.classList.toggle('collapsed');
+}
+
+function toggleTools() {
+    document.querySelectorAll('.tool-row').forEach(function(row) {
+        row.classList.toggle('tool-hidden');
+    });
+}
+
+function toggleRow(rowId) {
+    var trigger = document.querySelector('[data-row-id="' + rowId + '"]');
+    var arrow = trigger ? trigger.querySelector('.row-toggle') : null;
+    var collapsing = arrow && !arrow.classList.contains('collapsed');
+    if (arrow) arrow.classList.toggle('collapsed');
+    var children = document.querySelectorAll('[data-parent-row="' + rowId + '"]');
+    children.forEach(function(row) {
+        if (collapsing) {
+            row.classList.add('row-hidden');
+            hideDescendants(row.getAttribute('data-row-id'));
+        } else {
+            row.classList.remove('row-hidden');
+        }
+    });
+}
+
+function hideDescendants(rowId) {
+    document.querySelectorAll('[data-parent-row="' + rowId + '"]').forEach(function(row) {
+        row.classList.add('row-hidden');
+        hideDescendants(row.getAttribute('data-row-id'));
+    });
+}
+
+function toggleDataFlow() {
+    var svg = document.getElementById('df-svg');
+    if (!svg) return;
+    svg.classList.toggle('df-hidden');
+}
+
+function drawDataFlow() {
+    var svg = document.getElementById('df-svg');
+    var tree = svg ? svg.parentElement : null;
+    if (!svg || !tree) return;
+
+    // Size SVG to match tree
+    svg.style.width = tree.scrollWidth + 'px';
+    svg.style.height = tree.scrollHeight + 'px';
+
+    // Remove old paths
+    svg.querySelectorAll('.df-path').forEach(function(p) { p.remove(); });
+
+    var treeRect = tree.getBoundingClientRect();
+
+    // Build producer map: outputKey -> [node, ...]
+    var prodMap = {};
+    tree.querySelectorAll('.node-card[data-output-key]').forEach(function(n) {
+        var k = n.getAttribute('data-output-key');
+        if (!prodMap[k]) prodMap[k] = [];
+        prodMap[k].push(n);
+    });
+
+    // For each consumer node, draw edges from matching producers
+    tree.querySelectorAll('.node-card[data-input-keys]').forEach(function(consumer) {
+        var keys = consumer.getAttribute('data-input-keys').split(',');
+        var cRect = consumer.getBoundingClientRect();
+        var cx = cRect.left + cRect.width / 2 - treeRect.left;
+        var cy = cRect.top - treeRect.top;
+
+        keys.forEach(function(key) {
+            var producers = prodMap[key];
+            if (!producers) return;
+            producers.forEach(function(producer) {
+                if (producer === consumer) return;
+                // Skip if producer is an ancestor or descendant (structural edge)
+                if (producer.contains(consumer) || consumer.contains(producer)) return;
+
+                var color = producer.getAttribute('data-output-color') || '#999';
+                var pRect = producer.getBoundingClientRect();
+                var px = pRect.left + pRect.width / 2 - treeRect.left;
+                var py = pRect.bottom - treeRect.top;
+
+                var markerId = 'ah-' + Math.abs(hashCode(key));
+                drawEdge(svg, px, py, cx, cy, color, markerId);
+            });
+        });
+    });
+}
+
+function drawEdge(svg, x1, y1, x2, y2, color, markerId) {
+    var dx = x2 - x1;
+    var dy = y2 - y1;
+    var dist = Math.sqrt(dx*dx + dy*dy);
+    // Control point offset perpendicular to the line
+    var bend = Math.min(60, dist * 0.3);
+    // Offset to the right of the direction vector
+    var nx = -dy / (dist || 1) * bend;
+    var ny =  dx / (dist || 1) * bend;
+    var cpx = (x1 + x2) / 2 + nx;
+    var cpy = (y1 + y2) / 2 + ny;
+
+    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', 'M' + x1 + ',' + y1 + ' Q' + cpx + ',' + cpy + ' ' + x2 + ',' + y2);
+    path.setAttribute('stroke', color);
+    path.setAttribute('stroke-width', '1.8');
+    path.setAttribute('stroke-dasharray', '6,4');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('opacity', '0.55');
+    path.setAttribute('class', 'df-path');
+    path.setAttribute('marker-end', 'url(#' + markerId + ')');
+    svg.appendChild(path);
+}
+
+function hashCode(s) {
+    var h = 0;
+    for (var i = 0; i < s.length; i++) {
+        h = ((h << 5) - h) + s.charCodeAt(i);
+        h |= 0;
+    }
+    return h;
+}
+
+document.addEventListener('DOMContentLoaded', drawDataFlow);
+window.addEventListener('resize', drawDataFlow);
+</script>
+</body>
+</html>
